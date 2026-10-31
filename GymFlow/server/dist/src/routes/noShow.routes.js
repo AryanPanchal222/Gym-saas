@@ -1,0 +1,9 @@
+import { Router } from "express";
+import { getNoShows, resolveNoShowCase, } from "../controllers/noShow.controller.js";
+import { requireAuth, requireGymAccess, } from "../middleware/auth.middleware.js";
+const router = Router({ mergeParams: true });
+router.use(requireAuth);
+router.use(requireGymAccess);
+router.get("/", getNoShows);
+router.patch("/:noShowCaseId/resolve", resolveNoShowCase);
+export default router;

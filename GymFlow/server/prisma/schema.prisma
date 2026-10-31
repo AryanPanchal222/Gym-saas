@@ -1,0 +1,280 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  OWNER
+  STAFF
+  TRAINER
+  MEMBER
+}
+
+enum MembershipStatus {
+  ACTIVE
+  PAUSED
+  EXPIRED
+  CANCELLED
+}
+
+enum AttendanceMethod {
+  QR
+  MANUAL
+  ASSISTED
+}
+
+enum NoShowStatus {
+  OPEN
+  RESOLVED
+  CANCELLED
+}
+
+enum FollowUpOutcome {
+  WILL_RETURN
+  INJURED
+  TRAVELLING
+  TIMING_ISSUE
+  UNHAPPY
+  NO_RESPONSE
+  CANCELLED
+}
+
+enum RenewalOrderStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+model RenewalOrder {
+  id           Int               @id @default(autoincrement())
+  gymId        Int
+  memberId     Int
+  membershipId Int
+  amount       Decimal           @db.Decimal(10, 2)
+  status       RenewalOrderStatus @default(PENDING)
+  provider     String?
+  providerOrderId String?        @unique
+  expiresAt    DateTime?
+  paidAt       DateTime?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  gym        Gym        @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  membership Membership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+  payments   Payment[]
+
+  @@index([gymId])
+  @@index([memberId])
+  @@index([membershipId])
+  @@index([status])
+  @@index([expiresAt])
+}
+
+model Payment {
+  id                Int           @id @default(autoincrement())
+  gymId             Int
+  memberId          Int
+  renewalOrderId    Int
+  amount            Decimal       @db.Decimal(10, 2)
+  status            PaymentStatus @default(PENDING)
+  provider          String?
+  providerPaymentId String?       @unique
+  paidAt            DateTime?
+  metadata          Json?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  gym         Gym          @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member      Member       @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  renewalOrder RenewalOrder @relation(fields: [renewalOrderId], references: [id], onDelete: Cascade)
+
+  @@index([gymId])
+  @@index([memberId])
+  @@index([renewalOrderId])
+  @@index([status])
+}
+
+model Gym {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String?
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+
+  users        User[]
+  members      Member[]
+  plans        Plan[]
+  memberships  Membership[]
+  attendances  Attendance[]
+  noShowCases  NoShowCase[]
+  followUps    FollowUp[]
+  qrSessions   QrSession[]
+  renewalOrders RenewalOrder[]
+  payments      Payment[]
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  gymId        Int
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(OWNER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  gym Gym @relation(fields: [gymId], references: [id], onDelete: Cascade)
+
+  @@index([gymId])
+}
+
+model Member {
+  id        Int      @id @default(autoincrement())
+  gymId     Int
+  name      String
+  email     String?
+  phone     String?
+  role      UserRole @default(MEMBER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  gym          Gym          @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  memberships  Membership[]
+  attendances  Attendance[]
+  noShowCases  NoShowCase[]
+  followUps    FollowUp[]
+  renewalOrders RenewalOrder[]
+  payments      Payment[]
+
+  @@index([gymId])
+  @@index([phone])
+}
+
+model Plan {
+  id           Int      @id @default(autoincrement())
+  gymId        Int
+  name         String
+  durationDays Int
+  price        Decimal  @db.Decimal(10, 2)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  gym          Gym          @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  memberships  Membership[]
+
+  @@index([gymId])
+}
+
+model QrSession {
+  id        Int      @id @default(autoincrement())
+  gymId     Int
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  gym Gym @relation(fields: [gymId], references: [id], onDelete: Cascade)
+
+  @@index([gymId])
+  @@index([expiresAt])
+}
+
+model Membership {
+  id        Int              @id @default(autoincrement())
+  gymId     Int
+  memberId  Int
+  planId    Int
+  startDate DateTime
+  endDate   DateTime
+  status    MembershipStatus @default(ACTIVE)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  gym         Gym          @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member      Member       @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  plan        Plan         @relation(fields: [planId], references: [id], onDelete: Restrict)
+  attendances Attendance[]
+  renewalOrders RenewalOrder[]
+
+  @@index([gymId])
+  @@index([memberId])
+  @@index([planId])
+  @@index([status])
+}
+
+model Attendance {
+  id             Int              @id @default(autoincrement())
+  gymId          Int
+  memberId       Int
+  membershipId   Int
+  checkedInAt    DateTime         @default(now())
+  method         AttendanceMethod @default(QR)
+  assistedReason String?
+
+  gym        Gym        @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  membership Membership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+
+  @@index([gymId])
+  @@index([memberId])
+  @@index([membershipId])
+  @@index([checkedInAt])
+}
+
+model NoShowCase {
+  id             Int          @id @default(autoincrement())
+  gymId          Int
+  memberId       Int
+  detectedAt     DateTime     @default(now())
+  lastAttendance DateTime?
+  inactiveDays   Int
+  status         NoShowStatus @default(OPEN)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  gym        Gym        @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  followUps  FollowUp[]
+
+  @@index([gymId])
+  @@index([memberId])
+  @@index([status])
+  @@index([detectedAt])
+}
+
+model FollowUp {
+  id           Int            @id @default(autoincrement())
+  gymId        Int
+  noShowCaseId Int
+  memberId     Int
+  outcome      FollowUpOutcome
+  notes        String?
+  nextActionAt DateTime?
+  createdAt    DateTime       @default(now())
+
+  gym        Gym        @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  noShowCase NoShowCase @relation(fields: [noShowCaseId], references: [id], onDelete: Cascade)
+  member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([gymId])
+  @@index([noShowCaseId])
+  @@index([memberId])
+  @@index([nextActionAt])
+}
