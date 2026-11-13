@@ -106,3 +106,37 @@ export async function getPlans(req: Request, res: Response) {
     });
   }
 }
+
+export async function deletePlan(req: Request, res: Response) {
+  const gymId = Number(req.params.gymId);
+  const planId = Number(req.params.planId);
+
+  if (!Number.isInteger(gymId) || gymId <= 0 || !Number.isInteger(planId) || planId <= 0) {
+    return res.status(400).json({ success: false, message: "Invalid gym or plan ID" });
+  }
+
+  try {
+    const plan = await prisma.plan.findFirst({ where: { id: planId, gymId } });
+    if (!plan) return res.status(404).json({ success: false, message: "Plan not found in this gym" });
+
+    const membershipCount = await prisma.membership.count({ where: { gymId, planId } });
+    if (membershipCount > 0) {
+      const archivedPlan = await prisma.plan.update({
+        where: { id: planId },
+        data: { isActive: false },
+      });
+      return res.json({
+        success: true,
+        action: "archived",
+        message: `“${plan.name}” is used by existing memberships, so it was archived and cannot be assigned to new members.`,
+        plan: archivedPlan,
+      });
+    }
+
+    await prisma.plan.delete({ where: { id: planId } });
+    return res.json({ success: true, action: "deleted", message: `“${plan.name}” was deleted.` });
+  } catch (error) {
+    console.error("Delete plan error:", error);
+    return res.status(500).json({ success: false, message: "Failed to delete plan" });
+  }
+}

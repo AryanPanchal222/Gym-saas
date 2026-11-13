@@ -4,14 +4,13 @@ import "./App.css";
 
 import Auth from "./pages/Auth";
 import Members from "./pages/Members";
-import QRCheckin from "./pages/QRCheckin";
 import Attendance from "./pages/Attendance";
 import NoShowRedList from "./pages/NoShowRedList";
 import Memberships from "./pages/Memberships";
 import Plans from "./pages/Plans";
 import Settings from "./pages/Settings";
+import RetentionAnalytics from "./pages/RetentionAnalytics";
 import { apiFetch, getGymId } from "./services/api";
-import MemberCheckIn from "./pages/MemberCheckIn";
 
 type UserData = {
   id: number;
@@ -42,7 +41,7 @@ type Attendance = {
   id: number;
   checkedInAt: string;
 
-  method: "QR" | "MANUAL" | "ASSISTED";
+  method: "FACE" | "MANUAL" | "ASSISTED";
 
   member: {
     id: number;
@@ -59,12 +58,12 @@ type Attendance = {
 type Page =
   | "dashboard"
   | "members"
-  | "qr-checkin"
   | "attendance"
   | "no-shows"
   | "memberships"
   | "plans"
-  | "settings";
+  | "settings"
+  | "retention";
 
 function getInitials(name: string) {
   return name
@@ -92,9 +91,6 @@ function formatRole(role: string) {
 }
 
 function App() {
-
-  const isMemberCheckIn =
-    window.location.pathname === "/check-in";
 
   /* ================= AUTH ================= */
 
@@ -295,12 +291,6 @@ function App() {
       );
     };
   }, [dashboard]);
-
-  /* ================= PUBLIC MEMBER CHECK-IN ================= */
-
-  if (isMemberCheckIn) {
-    return <MemberCheckIn />;
-  }
 
   /* ================= LOGIN SCREEN ================= */
 
@@ -503,23 +493,6 @@ function App() {
             No-Show Red List
           </button>
 
-          {/* QR CHECK-IN */}
-
-          <button
-            type="button"
-            className={
-              currentPage === "qr-checkin"
-                ? "nav-item active"
-                : "nav-item"
-            }
-            onClick={() =>
-              setCurrentPage("qr-checkin")
-            }
-          >
-            <span>📱</span>
-            QR Check-in
-          </button>
-
           {/* MEMBERSHIPS */}
 
           <button
@@ -552,6 +525,15 @@ function App() {
           >
             <span>📋</span>
             Plans
+          </button>
+
+          <button
+            type="button"
+            className={currentPage === "retention" ? "nav-item active" : "nav-item"}
+            onClick={() => setCurrentPage("retention")}
+          >
+            <span>📈</span>
+            Retention Analytics
           </button>
 
         </nav>
@@ -636,15 +618,6 @@ function App() {
           <small>Attendance</small>
         </button>
 
-        <button
-          type="button"
-          className={currentPage === "qr-checkin" ? "mobile-nav-item active" : "mobile-nav-item"}
-          onClick={() => setCurrentPage("qr-checkin")}
-          aria-label="QR Check-in"
-        >
-          <span>📱</span>
-          <small>QR</small>
-        </button>
 
         <button
           type="button"
@@ -674,6 +647,16 @@ function App() {
         >
           <span>📋</span>
           <small>Plans</small>
+        </button>
+
+        <button
+          type="button"
+          className={currentPage === "retention" ? "mobile-nav-item active" : "mobile-nav-item"}
+          onClick={() => setCurrentPage("retention")}
+          aria-label="Retention analytics"
+        >
+          <span>📈</span>
+          <small>Retention</small>
         </button>
 
         <button
@@ -714,11 +697,7 @@ function App() {
                   : currentPage ===
                       "attendance"
                     ? "Attendance"
-                    : currentPage ===
-                        "qr-checkin"
-                      ? "QR Check-in"
-                      : currentPage ===
-                          "no-shows"
+                    : currentPage === "no-shows"
                         ? "No-Show Red List"
                         : currentPage ===
                             "memberships"
@@ -729,6 +708,8 @@ function App() {
                             : currentPage ===
                                 "settings"
                               ? "Settings"
+                              : currentPage === "retention"
+                                ? "Retention Analytics"
                               : "Management"}
             </h2>
 
@@ -775,12 +756,6 @@ function App() {
           <Members />
         )}
 
-        {/* ================= QR ================= */}
-
-        {currentPage === "qr-checkin" && (
-          <QRCheckin />
-        )}
-
         {/* ================= ATTENDANCE ================= */}
 
         {currentPage === "attendance" && (
@@ -810,6 +785,8 @@ function App() {
         {currentPage === "settings" && (
           <Settings />
         )}
+
+        {currentPage === "retention" && <RetentionAnalytics />}
 
         {/* ================= DASHBOARD ================= */}
 
@@ -1081,9 +1058,9 @@ function App() {
 
                                 {attendance
                                   .method ===
-                                "QR" ? (
-                                  <span className="qr-badge">
-                                    QR
+                                "FACE" ? (
+                                  <span className="attendance-face-badge">
+                                    FACE
                                   </span>
                                 ) : (
                                   <span className="manual-badge">

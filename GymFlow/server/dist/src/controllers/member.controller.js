@@ -104,7 +104,10 @@ export async function getMembers(req, res) {
         });
         return res.json({
             success: true,
-            members,
+            members: members.map(({ faceDescriptor, ...member }) => ({
+                ...member,
+                hasFaceEnrollment: Array.isArray(faceDescriptor),
+            })),
         });
     }
     catch (error) {
@@ -165,9 +168,10 @@ export async function getMemberById(req, res) {
                 message: "Member not found in this gym",
             });
         }
+        const { faceDescriptor, ...safeMember } = member;
         return res.json({
             success: true,
-            member,
+            member: { ...safeMember, hasFaceEnrollment: Array.isArray(faceDescriptor) },
         });
     }
     catch (error) {
@@ -176,5 +180,42 @@ export async function getMemberById(req, res) {
             success: false,
             message: "Failed to fetch member profile",
         });
+    }
+}
+export async function saveMemberFace(req, res) {
+    const gymId = Number(req.params.gymId);
+    const memberId = Number(req.params.memberId);
+    const descriptor = req.body?.descriptor;
+    if (!Number.isInteger(gymId) || !Number.isInteger(memberId) ||
+        !Array.isArray(descriptor) || descriptor.length !== 128 ||
+        !descriptor.every((value) => typeof value === "number" && Number.isFinite(value))) {
+        return res.status(400).json({ success: false, message: "A valid 128-value face descriptor is required" });
+    }
+    try {
+        const member = await prisma.member.findFirst({ where: { id: memberId, gymId } });
+        if (!member)
+            return res.status(404).json({ success: false, message: "Member not found in this gym" });
+        await prisma.member.update({ where: { id: memberId }, data: { faceDescriptor: descriptor } });
+        return res.json({ success: true, message: "Face enrollment saved" });
+    }
+    catch (error) {
+        console.error("Save face enrollment error:", error);
+        return res.status(500).json({ success: false, message: "Failed to save face enrollment" });
+    }
+}
+export async function getFaceTemplates(req, res) {
+    const gymId = Number(req.params.gymId);
+    if (!Number.isInteger(gymId) || gymId <= 0)
+        return res.status(400).json({ success: false, message: "Invalid gym ID" });
+    try {
+        const members = await prisma.member.findMany({
+            where: { gymId, faceDescriptor: { not: null } },
+            select: { id: true, name: true, faceDescriptor: true },
+        });
+        return res.json({ success: true, members });
+    }
+    catch (error) {
+        console.error("Get face templates error:", error);
+        return res.status(500).json({ success: false, message: "Failed to load face enrollments" });
     }
 }

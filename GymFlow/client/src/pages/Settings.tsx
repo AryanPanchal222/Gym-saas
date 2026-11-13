@@ -259,7 +259,7 @@ function Settings() {
             style={{
               display: "grid",
               gridTemplateColumns:
-                "repeat(auto-fit, minmax(260px, 1fr))",
+                "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
               gap: "18px",
               padding: "20px",
             }}
@@ -409,7 +409,7 @@ function Settings() {
               padding: "20px",
               display: "grid",
               gridTemplateColumns:
-                "repeat(auto-fit, minmax(180px, 1fr))",
+                "repeat(auto-fit, minmax(min(100%, 180px), 1fr))",
               gap: "12px",
             }}
           >

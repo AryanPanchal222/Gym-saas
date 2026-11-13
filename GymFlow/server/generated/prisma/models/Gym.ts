@@ -239,7 +239,6 @@ export type GymWhereInput = {
   attendances?: Prisma.AttendanceListRelationFilter
   noShowCases?: Prisma.NoShowCaseListRelationFilter
   followUps?: Prisma.FollowUpListRelationFilter
-  qrSessions?: Prisma.QrSessionListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
 }
@@ -259,7 +258,6 @@ export type GymOrderByWithRelationInput = {
   attendances?: Prisma.AttendanceOrderByRelationAggregateInput
   noShowCases?: Prisma.NoShowCaseOrderByRelationAggregateInput
   followUps?: Prisma.FollowUpOrderByRelationAggregateInput
-  qrSessions?: Prisma.QrSessionOrderByRelationAggregateInput
   renewalOrders?: Prisma.RenewalOrderOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
 }
@@ -282,7 +280,6 @@ export type GymWhereUniqueInput = Prisma.AtLeast<{
   attendances?: Prisma.AttendanceListRelationFilter
   noShowCases?: Prisma.NoShowCaseListRelationFilter
   followUps?: Prisma.FollowUpListRelationFilter
-  qrSessions?: Prisma.QrSessionListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
 }, "id">
@@ -329,7 +326,6 @@ export type GymCreateInput = {
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -349,7 +345,6 @@ export type GymUncheckedCreateInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -368,7 +363,6 @@ export type GymUpdateInput = {
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -388,7 +382,6 @@ export type GymUncheckedUpdateInput = {
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
@@ -539,20 +532,6 @@ export type GymUpdateOneRequiredWithoutPlansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutPlansInput, Prisma.GymUpdateWithoutPlansInput>, Prisma.GymUncheckedUpdateWithoutPlansInput>
 }
 
-export type GymCreateNestedOneWithoutQrSessionsInput = {
-  create?: Prisma.XOR<Prisma.GymCreateWithoutQrSessionsInput, Prisma.GymUncheckedCreateWithoutQrSessionsInput>
-  connectOrCreate?: Prisma.GymCreateOrConnectWithoutQrSessionsInput
-  connect?: Prisma.GymWhereUniqueInput
-}
-
-export type GymUpdateOneRequiredWithoutQrSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.GymCreateWithoutQrSessionsInput, Prisma.GymUncheckedCreateWithoutQrSessionsInput>
-  connectOrCreate?: Prisma.GymCreateOrConnectWithoutQrSessionsInput
-  upsert?: Prisma.GymUpsertWithoutQrSessionsInput
-  connect?: Prisma.GymWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutQrSessionsInput, Prisma.GymUpdateWithoutQrSessionsInput>, Prisma.GymUncheckedUpdateWithoutQrSessionsInput>
-}
-
 export type GymCreateNestedOneWithoutMembershipsInput = {
   create?: Prisma.XOR<Prisma.GymCreateWithoutMembershipsInput, Prisma.GymUncheckedCreateWithoutMembershipsInput>
   connectOrCreate?: Prisma.GymCreateOrConnectWithoutMembershipsInput
@@ -623,7 +602,6 @@ export type GymCreateWithoutRenewalOrdersInput = {
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
 
@@ -642,7 +620,6 @@ export type GymUncheckedCreateWithoutRenewalOrdersInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
 
@@ -676,7 +653,6 @@ export type GymUpdateWithoutRenewalOrdersInput = {
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
 
@@ -695,7 +671,6 @@ export type GymUncheckedUpdateWithoutRenewalOrdersInput = {
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
 
@@ -713,7 +688,6 @@ export type GymCreateWithoutPaymentsInput = {
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
 }
 
@@ -732,7 +706,6 @@ export type GymUncheckedCreateWithoutPaymentsInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
 }
 
@@ -766,7 +739,6 @@ export type GymUpdateWithoutPaymentsInput = {
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
 }
 
@@ -785,7 +757,6 @@ export type GymUncheckedUpdateWithoutPaymentsInput = {
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
 }
 
@@ -802,7 +773,6 @@ export type GymCreateWithoutUsersInput = {
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -821,7 +791,6 @@ export type GymUncheckedCreateWithoutUsersInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -855,7 +824,6 @@ export type GymUpdateWithoutUsersInput = {
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -874,7 +842,6 @@ export type GymUncheckedUpdateWithoutUsersInput = {
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
@@ -892,7 +859,6 @@ export type GymCreateWithoutMembersInput = {
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -911,7 +877,6 @@ export type GymUncheckedCreateWithoutMembersInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -945,7 +910,6 @@ export type GymUpdateWithoutMembersInput = {
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -964,7 +928,6 @@ export type GymUncheckedUpdateWithoutMembersInput = {
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
@@ -982,7 +945,6 @@ export type GymCreateWithoutPlansInput = {
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -1001,7 +963,6 @@ export type GymUncheckedCreateWithoutPlansInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -1035,7 +996,6 @@ export type GymUpdateWithoutPlansInput = {
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -1050,97 +1010,6 @@ export type GymUncheckedUpdateWithoutPlansInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
-  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
-  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
-  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
-  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
-  payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
-}
-
-export type GymCreateWithoutQrSessionsInput = {
-  name: string
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutGymInput
-  members?: Prisma.MemberCreateNestedManyWithoutGymInput
-  plans?: Prisma.PlanCreateNestedManyWithoutGymInput
-  memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
-  attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
-  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
-  payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
-}
-
-export type GymUncheckedCreateWithoutQrSessionsInput = {
-  id?: number
-  name: string
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
-  members?: Prisma.MemberUncheckedCreateNestedManyWithoutGymInput
-  plans?: Prisma.PlanUncheckedCreateNestedManyWithoutGymInput
-  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
-  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
-  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
-  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
-}
-
-export type GymCreateOrConnectWithoutQrSessionsInput = {
-  where: Prisma.GymWhereUniqueInput
-  create: Prisma.XOR<Prisma.GymCreateWithoutQrSessionsInput, Prisma.GymUncheckedCreateWithoutQrSessionsInput>
-}
-
-export type GymUpsertWithoutQrSessionsInput = {
-  update: Prisma.XOR<Prisma.GymUpdateWithoutQrSessionsInput, Prisma.GymUncheckedUpdateWithoutQrSessionsInput>
-  create: Prisma.XOR<Prisma.GymCreateWithoutQrSessionsInput, Prisma.GymUncheckedCreateWithoutQrSessionsInput>
-  where?: Prisma.GymWhereInput
-}
-
-export type GymUpdateToOneWithWhereWithoutQrSessionsInput = {
-  where?: Prisma.GymWhereInput
-  data: Prisma.XOR<Prisma.GymUpdateWithoutQrSessionsInput, Prisma.GymUncheckedUpdateWithoutQrSessionsInput>
-}
-
-export type GymUpdateWithoutQrSessionsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutGymNestedInput
-  members?: Prisma.MemberUpdateManyWithoutGymNestedInput
-  plans?: Prisma.PlanUpdateManyWithoutGymNestedInput
-  memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
-  attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
-  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
-  payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
-}
-
-export type GymUncheckedUpdateWithoutQrSessionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
-  members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
-  plans?: Prisma.PlanUncheckedUpdateManyWithoutGymNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
@@ -1162,7 +1031,6 @@ export type GymCreateWithoutMembershipsInput = {
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -1181,7 +1049,6 @@ export type GymUncheckedCreateWithoutMembershipsInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -1215,7 +1082,6 @@ export type GymUpdateWithoutMembershipsInput = {
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -1234,7 +1100,6 @@ export type GymUncheckedUpdateWithoutMembershipsInput = {
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
@@ -1252,7 +1117,6 @@ export type GymCreateWithoutAttendancesInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -1271,7 +1135,6 @@ export type GymUncheckedCreateWithoutAttendancesInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -1305,7 +1168,6 @@ export type GymUpdateWithoutAttendancesInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -1324,7 +1186,6 @@ export type GymUncheckedUpdateWithoutAttendancesInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
@@ -1342,7 +1203,6 @@ export type GymCreateWithoutNoShowCasesInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -1361,7 +1221,6 @@ export type GymUncheckedCreateWithoutNoShowCasesInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -1395,7 +1254,6 @@ export type GymUpdateWithoutNoShowCasesInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -1414,7 +1272,6 @@ export type GymUncheckedUpdateWithoutNoShowCasesInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
@@ -1432,7 +1289,6 @@ export type GymCreateWithoutFollowUpsInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
 }
@@ -1451,7 +1307,6 @@ export type GymUncheckedCreateWithoutFollowUpsInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
-  qrSessions?: Prisma.QrSessionUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
 }
@@ -1485,7 +1340,6 @@ export type GymUpdateWithoutFollowUpsInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
 }
@@ -1504,7 +1358,6 @@ export type GymUncheckedUpdateWithoutFollowUpsInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
-  qrSessions?: Prisma.QrSessionUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
 }
@@ -1522,7 +1375,6 @@ export type GymCountOutputType = {
   attendances: number
   noShowCases: number
   followUps: number
-  qrSessions: number
   renewalOrders: number
   payments: number
 }
@@ -1535,7 +1387,6 @@ export type GymCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.In
   attendances?: boolean | GymCountOutputTypeCountAttendancesArgs
   noShowCases?: boolean | GymCountOutputTypeCountNoShowCasesArgs
   followUps?: boolean | GymCountOutputTypeCountFollowUpsArgs
-  qrSessions?: boolean | GymCountOutputTypeCountQrSessionsArgs
   renewalOrders?: boolean | GymCountOutputTypeCountRenewalOrdersArgs
   payments?: boolean | GymCountOutputTypeCountPaymentsArgs
 }
@@ -1602,13 +1453,6 @@ export type GymCountOutputTypeCountFollowUpsArgs<ExtArgs extends runtime.Types.E
 /**
  * GymCountOutputType without action
  */
-export type GymCountOutputTypeCountQrSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.QrSessionWhereInput
-}
-
-/**
- * GymCountOutputType without action
- */
 export type GymCountOutputTypeCountRenewalOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RenewalOrderWhereInput
 }
@@ -1636,7 +1480,6 @@ export type GymSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   attendances?: boolean | Prisma.Gym$attendancesArgs<ExtArgs>
   noShowCases?: boolean | Prisma.Gym$noShowCasesArgs<ExtArgs>
   followUps?: boolean | Prisma.Gym$followUpsArgs<ExtArgs>
-  qrSessions?: boolean | Prisma.Gym$qrSessionsArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Gym$renewalOrdersArgs<ExtArgs>
   payments?: boolean | Prisma.Gym$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.GymCountOutputTypeDefaultArgs<ExtArgs>
@@ -1681,7 +1524,6 @@ export type GymInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   attendances?: boolean | Prisma.Gym$attendancesArgs<ExtArgs>
   noShowCases?: boolean | Prisma.Gym$noShowCasesArgs<ExtArgs>
   followUps?: boolean | Prisma.Gym$followUpsArgs<ExtArgs>
-  qrSessions?: boolean | Prisma.Gym$qrSessionsArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Gym$renewalOrdersArgs<ExtArgs>
   payments?: boolean | Prisma.Gym$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.GymCountOutputTypeDefaultArgs<ExtArgs>
@@ -1699,7 +1541,6 @@ export type $GymPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     attendances: Prisma.$AttendancePayload<ExtArgs>[]
     noShowCases: Prisma.$NoShowCasePayload<ExtArgs>[]
     followUps: Prisma.$FollowUpPayload<ExtArgs>[]
-    qrSessions: Prisma.$QrSessionPayload<ExtArgs>[]
     renewalOrders: Prisma.$RenewalOrderPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
   }
@@ -2112,7 +1953,6 @@ export interface Prisma__GymClient<T, Null = never, ExtArgs extends runtime.Type
   attendances<T extends Prisma.Gym$attendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   noShowCases<T extends Prisma.Gym$noShowCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$noShowCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoShowCasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followUps<T extends Prisma.Gym$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  qrSessions<T extends Prisma.Gym$qrSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$qrSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QrSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   renewalOrders<T extends Prisma.Gym$renewalOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$renewalOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenewalOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.Gym$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2709,30 +2549,6 @@ export type Gym$followUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.FollowUpScalarFieldEnum | Prisma.FollowUpScalarFieldEnum[]
-}
-
-/**
- * Gym.qrSessions
- */
-export type Gym$qrSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the QrSession
-   */
-  select?: Prisma.QrSessionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the QrSession
-   */
-  omit?: Prisma.QrSessionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.QrSessionInclude<ExtArgs> | null
-  where?: Prisma.QrSessionWhereInput
-  orderBy?: Prisma.QrSessionOrderByWithRelationInput | Prisma.QrSessionOrderByWithRelationInput[]
-  cursor?: Prisma.QrSessionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.QrSessionScalarFieldEnum | Prisma.QrSessionScalarFieldEnum[]
 }
 
 /**

@@ -42,6 +42,9 @@ export type MemberMinAggregateOutputType = {
   name: string | null
   email: string | null
   phone: string | null
+  portalPasswordHash: string | null
+  portalInviteHash: string | null
+  portalInviteExpiresAt: Date | null
   role: $Enums.UserRole | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -53,6 +56,9 @@ export type MemberMaxAggregateOutputType = {
   name: string | null
   email: string | null
   phone: string | null
+  portalPasswordHash: string | null
+  portalInviteHash: string | null
+  portalInviteExpiresAt: Date | null
   role: $Enums.UserRole | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -64,6 +70,10 @@ export type MemberCountAggregateOutputType = {
   name: number
   email: number
   phone: number
+  faceDescriptor: number
+  portalPasswordHash: number
+  portalInviteHash: number
+  portalInviteExpiresAt: number
   role: number
   createdAt: number
   updatedAt: number
@@ -87,6 +97,9 @@ export type MemberMinAggregateInputType = {
   name?: true
   email?: true
   phone?: true
+  portalPasswordHash?: true
+  portalInviteHash?: true
+  portalInviteExpiresAt?: true
   role?: true
   createdAt?: true
   updatedAt?: true
@@ -98,6 +111,9 @@ export type MemberMaxAggregateInputType = {
   name?: true
   email?: true
   phone?: true
+  portalPasswordHash?: true
+  portalInviteHash?: true
+  portalInviteExpiresAt?: true
   role?: true
   createdAt?: true
   updatedAt?: true
@@ -109,6 +125,10 @@ export type MemberCountAggregateInputType = {
   name?: true
   email?: true
   phone?: true
+  faceDescriptor?: true
+  portalPasswordHash?: true
+  portalInviteHash?: true
+  portalInviteExpiresAt?: true
   role?: true
   createdAt?: true
   updatedAt?: true
@@ -207,6 +227,10 @@ export type MemberGroupByOutputType = {
   name: string
   email: string | null
   phone: string | null
+  faceDescriptor: runtime.JsonValue | null
+  portalPasswordHash: string | null
+  portalInviteHash: string | null
+  portalInviteExpiresAt: Date | null
   role: $Enums.UserRole
   createdAt: Date
   updatedAt: Date
@@ -241,6 +265,10 @@ export type MemberWhereInput = {
   name?: Prisma.StringFilter<"Member"> | string
   email?: Prisma.StringNullableFilter<"Member"> | string | null
   phone?: Prisma.StringNullableFilter<"Member"> | string | null
+  faceDescriptor?: Prisma.JsonNullableFilter<"Member">
+  portalPasswordHash?: Prisma.StringNullableFilter<"Member"> | string | null
+  portalInviteHash?: Prisma.StringNullableFilter<"Member"> | string | null
+  portalInviteExpiresAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
   role?: Prisma.EnumUserRoleFilter<"Member"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
@@ -259,6 +287,10 @@ export type MemberOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  faceDescriptor?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalPasswordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalInviteHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalInviteExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -280,6 +312,10 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Member"> | string
   email?: Prisma.StringNullableFilter<"Member"> | string | null
   phone?: Prisma.StringNullableFilter<"Member"> | string | null
+  faceDescriptor?: Prisma.JsonNullableFilter<"Member">
+  portalPasswordHash?: Prisma.StringNullableFilter<"Member"> | string | null
+  portalInviteHash?: Prisma.StringNullableFilter<"Member"> | string | null
+  portalInviteExpiresAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
   role?: Prisma.EnumUserRoleFilter<"Member"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
@@ -298,6 +334,10 @@ export type MemberOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  faceDescriptor?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalPasswordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalInviteHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalInviteExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -317,6 +357,10 @@ export type MemberScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Member"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  faceDescriptor?: Prisma.JsonNullableWithAggregatesFilter<"Member">
+  portalPasswordHash?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  portalInviteHash?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  portalInviteExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"Member"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Member"> | Date | string
@@ -326,6 +370,10 @@ export type MemberCreateInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -344,6 +392,10 @@ export type MemberUncheckedCreateInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -359,6 +411,10 @@ export type MemberUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -377,6 +433,10 @@ export type MemberUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -394,6 +454,10 @@ export type MemberCreateManyInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -403,6 +467,10 @@ export type MemberUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -414,6 +482,10 @@ export type MemberUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -440,6 +512,10 @@ export type MemberCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  faceDescriptor?: Prisma.SortOrder
+  portalPasswordHash?: Prisma.SortOrder
+  portalInviteHash?: Prisma.SortOrder
+  portalInviteExpiresAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -456,6 +532,9 @@ export type MemberMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  portalPasswordHash?: Prisma.SortOrder
+  portalInviteHash?: Prisma.SortOrder
+  portalInviteExpiresAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -467,6 +546,9 @@ export type MemberMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  portalPasswordHash?: Prisma.SortOrder
+  portalInviteHash?: Prisma.SortOrder
+  portalInviteExpiresAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -607,6 +689,10 @@ export type MemberCreateWithoutRenewalOrdersInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -624,6 +710,10 @@ export type MemberUncheckedCreateWithoutRenewalOrdersInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -654,6 +744,10 @@ export type MemberUpdateWithoutRenewalOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -671,6 +765,10 @@ export type MemberUncheckedUpdateWithoutRenewalOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -685,6 +783,10 @@ export type MemberCreateWithoutPaymentsInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -702,6 +804,10 @@ export type MemberUncheckedCreateWithoutPaymentsInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -732,6 +838,10 @@ export type MemberUpdateWithoutPaymentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -749,6 +859,10 @@ export type MemberUncheckedUpdateWithoutPaymentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -763,6 +877,10 @@ export type MemberCreateWithoutGymInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -779,6 +897,10 @@ export type MemberUncheckedCreateWithoutGymInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -825,6 +947,10 @@ export type MemberScalarWhereInput = {
   name?: Prisma.StringFilter<"Member"> | string
   email?: Prisma.StringNullableFilter<"Member"> | string | null
   phone?: Prisma.StringNullableFilter<"Member"> | string | null
+  faceDescriptor?: Prisma.JsonNullableFilter<"Member">
+  portalPasswordHash?: Prisma.StringNullableFilter<"Member"> | string | null
+  portalInviteHash?: Prisma.StringNullableFilter<"Member"> | string | null
+  portalInviteExpiresAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
   role?: Prisma.EnumUserRoleFilter<"Member"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
@@ -834,6 +960,10 @@ export type MemberCreateWithoutMembershipsInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -851,6 +981,10 @@ export type MemberUncheckedCreateWithoutMembershipsInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -881,6 +1015,10 @@ export type MemberUpdateWithoutMembershipsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -898,6 +1036,10 @@ export type MemberUncheckedUpdateWithoutMembershipsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -912,6 +1054,10 @@ export type MemberCreateWithoutAttendancesInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -929,6 +1075,10 @@ export type MemberUncheckedCreateWithoutAttendancesInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -959,6 +1109,10 @@ export type MemberUpdateWithoutAttendancesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -976,6 +1130,10 @@ export type MemberUncheckedUpdateWithoutAttendancesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -990,6 +1148,10 @@ export type MemberCreateWithoutNoShowCasesInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1007,6 +1169,10 @@ export type MemberUncheckedCreateWithoutNoShowCasesInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1037,6 +1203,10 @@ export type MemberUpdateWithoutNoShowCasesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1054,6 +1224,10 @@ export type MemberUncheckedUpdateWithoutNoShowCasesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1068,6 +1242,10 @@ export type MemberCreateWithoutFollowUpsInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1085,6 +1263,10 @@ export type MemberUncheckedCreateWithoutFollowUpsInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1115,6 +1297,10 @@ export type MemberUpdateWithoutFollowUpsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1132,6 +1318,10 @@ export type MemberUncheckedUpdateWithoutFollowUpsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1147,6 +1337,10 @@ export type MemberCreateManyGymInput = {
   name: string
   email?: string | null
   phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
   role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1156,6 +1350,10 @@ export type MemberUpdateWithoutGymInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1172,6 +1370,10 @@ export type MemberUncheckedUpdateWithoutGymInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1188,6 +1390,10 @@ export type MemberUncheckedUpdateManyWithoutGymInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1275,6 +1481,10 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name?: boolean
   email?: boolean
   phone?: boolean
+  faceDescriptor?: boolean
+  portalPasswordHash?: boolean
+  portalInviteHash?: boolean
+  portalInviteExpiresAt?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1294,6 +1504,10 @@ export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   name?: boolean
   email?: boolean
   phone?: boolean
+  faceDescriptor?: boolean
+  portalPasswordHash?: boolean
+  portalInviteHash?: boolean
+  portalInviteExpiresAt?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1306,6 +1520,10 @@ export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   name?: boolean
   email?: boolean
   phone?: boolean
+  faceDescriptor?: boolean
+  portalPasswordHash?: boolean
+  portalInviteHash?: boolean
+  portalInviteExpiresAt?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1318,12 +1536,16 @@ export type MemberSelectScalar = {
   name?: boolean
   email?: boolean
   phone?: boolean
+  faceDescriptor?: boolean
+  portalPasswordHash?: boolean
+  portalInviteHash?: boolean
+  portalInviteExpiresAt?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gymId" | "name" | "email" | "phone" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
+export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gymId" | "name" | "email" | "phone" | "faceDescriptor" | "portalPasswordHash" | "portalInviteHash" | "portalInviteExpiresAt" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
 export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   gym?: boolean | Prisma.GymDefaultArgs<ExtArgs>
   memberships?: boolean | Prisma.Member$membershipsArgs<ExtArgs>
@@ -1358,6 +1580,10 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     name: string
     email: string | null
     phone: string | null
+    faceDescriptor: runtime.JsonValue | null
+    portalPasswordHash: string | null
+    portalInviteHash: string | null
+    portalInviteExpiresAt: Date | null
     role: $Enums.UserRole
     createdAt: Date
     updatedAt: Date
@@ -1796,6 +2022,10 @@ export interface MemberFieldRefs {
   readonly name: Prisma.FieldRef<"Member", 'String'>
   readonly email: Prisma.FieldRef<"Member", 'String'>
   readonly phone: Prisma.FieldRef<"Member", 'String'>
+  readonly faceDescriptor: Prisma.FieldRef<"Member", 'Json'>
+  readonly portalPasswordHash: Prisma.FieldRef<"Member", 'String'>
+  readonly portalInviteHash: Prisma.FieldRef<"Member", 'String'>
+  readonly portalInviteExpiresAt: Prisma.FieldRef<"Member", 'DateTime'>
   readonly role: Prisma.FieldRef<"Member", 'UserRole'>
   readonly createdAt: Prisma.FieldRef<"Member", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Member", 'DateTime'>

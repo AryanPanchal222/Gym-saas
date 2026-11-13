@@ -72,11 +72,6 @@ export type Member = Prisma.MemberModel
  */
 export type Plan = Prisma.PlanModel
 /**
- * Model QrSession
- * 
- */
-export type QrSession = Prisma.QrSessionModel
-/**
  * Model Membership
  * 
  */

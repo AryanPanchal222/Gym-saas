@@ -1,7 +1,7 @@
 import prisma from "../lib/prisma.js";
 export async function checkInMember(req, res) {
     try {
-        const { memberId } = req.body;
+        const { memberId, method } = req.body;
         // Gym ID comes from the protected route:
         // /api/gyms/:gymId/attendance/check-in
         const numericGymId = Number(req.params.gymId);
@@ -41,6 +41,12 @@ export async function checkInMember(req, res) {
                 message: "Member not found in this gym",
             });
         }
+        if (method === "FACE" && !Array.isArray(member.faceDescriptor)) {
+            return res.status(409).json({
+                success: false,
+                message: "Member does not have face recognition enrolled",
+            });
+        }
         const now = new Date();
         const membership = await prisma.membership.findFirst({
             where: {
@@ -69,7 +75,7 @@ export async function checkInMember(req, res) {
                 gymId: numericGymId,
                 memberId: numericMemberId,
                 membershipId: membership.id,
-                method: "MANUAL",
+                method: method === "FACE" ? "FACE" : "MANUAL",
             },
         });
         return res.status(201).json({
@@ -83,140 +89,6 @@ export async function checkInMember(req, res) {
         return res.status(500).json({
             success: false,
             message: "Failed to check in member",
-        });
-    }
-}
-export async function qrCheckInMember(req, res) {
-    try {
-        const { token, phone } = req.body;
-        if (!token || typeof token !== "string") {
-            return res.status(400).json({
-                success: false,
-                message: "QR token is required",
-            });
-        }
-        if (!phone || typeof phone !== "string") {
-            return res.status(400).json({
-                success: false,
-                message: "Phone number is required",
-            });
-        }
-        const normalizedPhone = phone.replace(/\D/g, "");
-        if (normalizedPhone.length < 10) {
-            return res.status(400).json({
-                success: false,
-                message: "Please enter a valid phone number",
-            });
-        }
-        // Find the QR session.
-        // The QR session determines which gym this check-in belongs to.
-        const qrSession = await prisma.qrSession.findUnique({
-            where: {
-                token,
-            },
-        });
-        if (!qrSession) {
-            return res.status(404).json({
-                success: false,
-                message: "Invalid QR session",
-            });
-        }
-        const now = new Date();
-        // QR sessions are valid only until their expiry time.
-        if (qrSession.expiresAt <= now) {
-            return res.status(410).json({
-                success: false,
-                message: "QR session has expired",
-            });
-        }
-        // Find the member ONLY inside the gym that owns this QR session.
-        const members = await prisma.member.findMany({
-            where: {
-                gymId: qrSession.gymId,
-            },
-        });
-        const member = members.find((item) => {
-            const memberPhone = (item.phone || "").replace(/\D/g, "");
-            return memberPhone === normalizedPhone;
-        });
-        if (!member) {
-            return res.status(404).json({
-                success: false,
-                message: "No member found with this phone number",
-            });
-        }
-        // Find a currently active membership for this member.
-        const membership = await prisma.membership.findFirst({
-            where: {
-                gymId: qrSession.gymId,
-                memberId: member.id,
-                status: "ACTIVE",
-                startDate: {
-                    lte: now,
-                },
-                endDate: {
-                    gte: now,
-                },
-            },
-            orderBy: {
-                endDate: "desc",
-            },
-        });
-        if (!membership) {
-            return res.status(403).json({
-                success: false,
-                message: "Your membership is not currently active",
-            });
-        }
-        // Prevent duplicate check-ins during the same QR session.
-        const existingAttendance = await prisma.attendance.findFirst({
-            where: {
-                gymId: qrSession.gymId,
-                memberId: member.id,
-                checkedInAt: {
-                    gte: qrSession.createdAt,
-                },
-                method: "QR",
-            },
-            orderBy: {
-                checkedInAt: "desc",
-            },
-        });
-        if (existingAttendance) {
-            return res.status(409).json({
-                success: false,
-                message: "You have already checked in using this QR session",
-                attendance: existingAttendance,
-            });
-        }
-        // Create the attendance record.
-        const attendance = await prisma.attendance.create({
-            data: {
-                gymId: qrSession.gymId,
-                memberId: member.id,
-                membershipId: membership.id,
-                method: "QR",
-            },
-            include: {
-                member: true,
-                membership: {
-                    include: {
-                        plan: true,
-                    },
-                },
-            },
-        });
-        return res.status(201).json({
-            success: true,
-            message: "Check-in successful",
-            attendance,
-        });
-    }
-    catch (error) {
-        console.error("QR check-in error:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to process QR check-in",
         });
     }
 }

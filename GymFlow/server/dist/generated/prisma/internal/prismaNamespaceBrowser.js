@@ -45,7 +45,6 @@ export const ModelName = {
     User: 'User',
     Member: 'Member',
     Plan: 'Plan',
-    QrSession: 'QrSession',
     Membership: 'Membership',
     Attendance: 'Attendance',
     NoShowCase: 'NoShowCase',
@@ -113,6 +112,7 @@ export const MemberScalarFieldEnum = {
     name: 'name',
     email: 'email',
     phone: 'phone',
+    faceDescriptor: 'faceDescriptor',
     role: 'role',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -126,13 +126,6 @@ export const PlanScalarFieldEnum = {
     isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
-};
-export const QrSessionScalarFieldEnum = {
-    id: 'id',
-    gymId: 'gymId',
-    token: 'token',
-    expiresAt: 'expiresAt',
-    createdAt: 'createdAt'
 };
 export const MembershipScalarFieldEnum = {
     id: 'id',

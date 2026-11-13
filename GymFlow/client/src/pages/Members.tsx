@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { apiFetch, getGymId } from "../services/api";
+import FaceCheckIn from "./FaceCheckIn";
 
 type Member = {
   id: number;
   name: string;
   email: string | null;
   phone: string | null;
+  hasFaceEnrollment?: boolean;
+  hasPortalAccess?: boolean;
   role: string;
   createdAt?: string;
   memberships?: Membership[];
@@ -26,7 +29,7 @@ type Membership = {
 type Attendance = {
   id: number;
   checkedInAt: string;
-  method: "QR" | "MANUAL" | "ASSISTED";
+  method: "FACE" | "MANUAL" | "ASSISTED";
   assistedReason: string | null;
   membership?: {
     plan: {
@@ -92,6 +95,12 @@ export default function Members() {
 
   const [profileError, setProfileError] =
     useState("");
+  const [memberActionError, setMemberActionError] = useState("");
+  const [memberActionSuccess, setMemberActionSuccess] = useState("");
+  const [deletingMemberId, setDeletingMemberId] = useState<number | null>(null);
+  const [portalInvite, setPortalInvite] = useState<{ code: string; expiresAt: string; url: string } | null>(null);
+  const [portalInviteLoading, setPortalInviteLoading] = useState(false);
+  const [portalInviteError, setPortalInviteError] = useState("");
 
   const [showAddMember, setShowAddMember] = useState(false);
 
@@ -186,6 +195,8 @@ export default function Members() {
     setSelectedMemberId(memberId);
     setSelectedMember(null);
     setProfileError("");
+    setPortalInvite(null);
+    setPortalInviteError("");
     setProfileLoading(true);
 
     try {
@@ -221,10 +232,80 @@ export default function Members() {
     }
   }
 
+  async function createMemberPortalInvite() {
+    if (!selectedMember) return;
+    if (selectedMember.hasPortalAccess && !window.confirm("Reset this member's portal password? Their current password will stop working.")) return;
+
+    try {
+      setPortalInviteLoading(true);
+      setPortalInviteError("");
+      const gymId = getGymId();
+      if (!gymId) throw new Error("Gym information is missing");
+
+      const response = await apiFetch(`/api/gyms/${gymId}/members/${selectedMember.id}/portal-invite`, {
+        method: "POST",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || "Could not create member portal invite");
+
+      setSelectedMember((current) => current ? { ...current, hasPortalAccess: false } : current);
+      setPortalInvite({
+        code: data.inviteCode,
+        expiresAt: data.inviteExpiresAt,
+        url: `${window.location.origin}/member-portal?activate=1&gymId=${gymId}&memberId=${selectedMember.id}`,
+      });
+    } catch (err) {
+      setPortalInviteError(err instanceof Error ? err.message : "Could not create member portal invite");
+    } finally {
+      setPortalInviteLoading(false);
+    }
+  }
+
+  async function copyMemberPortalInvite() {
+    if (!portalInvite || !selectedMember) return;
+    try {
+      await navigator.clipboard.writeText(
+        `GymFlow Member Portal\nActivation link: ${portalInvite.url}\nGym code: ${getGymId()}\nMember number: ${selectedMember.id}\nOne-time code: ${portalInvite.code}`,
+      );
+      setMemberActionSuccess("Portal invite copied. Share it with the member using a private channel.");
+    } catch {
+      setPortalInviteError("Could not copy the invite. You can copy the link and code separately.");
+    }
+  }
+
   function closeMemberProfile() {
     setSelectedMemberId(null);
     setSelectedMember(null);
     setProfileError("");
+  }
+
+  async function deleteMember(member: Pick<Member, "id" | "name">) {
+    const confirmed = window.confirm(
+      `Permanently delete ${member.name}? This also deletes their face template, memberships, attendance, follow-ups, and payment history.`,
+    );
+    if (!confirmed) return;
+
+    try {
+      setDeletingMemberId(member.id);
+      setMemberActionError("");
+      setMemberActionSuccess("");
+      const gymId = getGymId();
+      if (!gymId) throw new Error("Gym information is missing");
+
+      const response = await apiFetch(`/api/gyms/${gymId}/members/${member.id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || "Failed to delete member");
+
+      setMembers((current) => current.filter((item) => item.id !== member.id));
+      setMemberActionSuccess(data.message || `${member.name} was deleted.`);
+      if (selectedMemberId === member.id) closeMemberProfile();
+    } catch (err) {
+      setMemberActionError(err instanceof Error ? err.message : "Failed to delete member.");
+    } finally {
+      setDeletingMemberId(null);
+    }
   }
 
   function openAddMember() {
@@ -686,6 +767,38 @@ export default function Members() {
               </div>
             </div>
 
+            <div className="profile-card portal-access-card">
+              <div className="profile-card-title">
+                <div>
+                  <h3>Member Portal</h3>
+                  <span>{selectedMember.hasPortalAccess ? "Portal access active" : "Portal access not activated"}</span>
+                </div>
+              </div>
+              <p>Give this member secure access to their membership and attendance history.</p>
+              {!selectedMember.email && <p className="portal-access-hint">Add an email address to this member first.</p>}
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => void createMemberPortalInvite()}
+                disabled={!selectedMember.email || portalInviteLoading}
+              >
+                {portalInviteLoading ? "Creating invite..." : selectedMember.hasPortalAccess ? "Reset portal access" : "Create portal invite"}
+              </button>
+              {portalInviteError && <div className="form-message error">{portalInviteError}</div>}
+              {portalInvite && <div className="portal-invite-details">
+                <strong>One-time activation code</strong>
+                <code>{portalInvite.code}</code>
+                <span>Expires {new Date(portalInvite.expiresAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</span>
+                <a href={portalInvite.url}>{portalInvite.url}</a>
+                <button type="button" className="small-button" onClick={() => void copyMemberPortalInvite()}>Copy invite details</button>
+              </div>}
+            </div>
+
+            <FaceCheckIn
+              enrollMember={selectedMember}
+              onComplete={() => openMemberProfile(selectedMember.id)}
+            />
+
             {/* Attendance */}
 
             <div className="profile-card attendance-history">
@@ -743,8 +856,8 @@ export default function Members() {
                         <span
                           className={
                             attendance.method ===
-                            "QR"
-                              ? "qr-badge"
+                            "FACE"
+                              ? "attendance-face-badge"
                               : "manual-badge"
                           }
                         >
@@ -1016,6 +1129,9 @@ export default function Members() {
           </button>
         </div>
 
+        {memberActionError && <div className="form-message error">{memberActionError}</div>}
+        {memberActionSuccess && <div className="form-message success">{memberActionSuccess}</div>}
+
         <div className="members-toolbar">
           <div className="search-box">
             <span>🔍</span>
@@ -1186,16 +1302,22 @@ export default function Members() {
                     </div>
 
                     <div className="member-cell">
-                      <button
-                        className="view-button"
-                        onClick={() =>
-                          openMemberProfile(
-                            member.id,
-                          )
-                        }
-                      >
-                        View
-                      </button>
+                      <div className="member-row-actions">
+                        <button
+                          className="view-button"
+                          onClick={() => openMemberProfile(member.id)}
+                        >
+                          View
+                        </button>
+                        <button
+                          className="danger-button compact"
+                          onClick={() => void deleteMember(member)}
+                          disabled={deletingMemberId === member.id}
+                          aria-label={`Delete ${member.name}`}
+                        >
+                          {deletingMemberId === member.id ? "Deleting..." : "Delete"}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );

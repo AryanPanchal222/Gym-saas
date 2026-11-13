@@ -9,10 +9,8 @@ import memberRoutes from "./routes/member.routes.js";
 import membershipRoutes from "./routes/membership.routes.js";
 import attendanceRoutes from "./routes/attendance.routes.js";
 import noShowRoutes from "./routes/noShow.routes.js";
-import qrSessionRoutes from "./routes/qrSession.routes.js";
 import followUpRoutes from "./routes/followUp.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
-import qrCheckInRoutes from "./routes/qrCheckIn.routes.js";
 import renewalRoutes from "./routes/renewal.routes.js";
 import { requireAuth, requireGymAccess, } from "./middleware/auth.middleware.js";
 dotenv.config();
@@ -52,16 +50,12 @@ app.use("/api/gyms/:gymId/plans", planRoutes);
 app.use("/api/gyms/:gymId/members", memberRoutes);
 app.use("/api/gyms/:gymId/members/:memberId/memberships", membershipRoutes);
 /* ================= ATTENDANCE ================= */
-// General QR attendance endpoint
-app.use("/api/attendance", qrCheckInRoutes);
 // Gym-scoped attendance endpoints
 app.use("/api/gyms/:gymId/attendance", requireAuth, requireGymAccess, attendanceRoutes);
 /* ================= NO-SHOWS ================= */
 app.use("/api/gyms/:gymId/no-shows", noShowRoutes);
 /* ================= FOLLOW-UPS ================= */
 app.use("/api/gyms/:gymId/no-shows/:noShowCaseId/follow-ups", followUpRoutes);
-/* ================= QR SESSIONS ================= */
-app.use("/api/gyms/:gymId/qr-sessions", qrSessionRoutes);
 /* ================= DASHBOARD ================= */
 app.use("/api/gyms/:gymId/dashboard", dashboardRoutes);
 /* ================= GYM PROFILE ================= */

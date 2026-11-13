@@ -30,7 +30,7 @@ export type MembershipStatus = (typeof MembershipStatus)[keyof typeof Membership
 
 
 export const AttendanceMethod = {
-  QR: 'QR',
+  FACE: 'FACE',
   MANUAL: 'MANUAL',
   ASSISTED: 'ASSISTED'
 } as const

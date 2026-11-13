@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiFetch, getGymId } from "../services/api";
+import FaceCheckIn from "./FaceCheckIn";
 
 type AttendanceRecord = {
   id: number;
   checkedInAt: string;
-  method: "QR" | "MANUAL" | "ASSISTED";
+  method: "FACE" | "MANUAL" | "ASSISTED";
   assistedReason: string | null;
   member: {
     id: number;
@@ -73,10 +74,6 @@ export default function Attendance() {
     );
   }, [attendance, search]);
 
-  const qrCount = attendance.filter(
-    (record) => record.method === "QR",
-  ).length;
-
   const manualCount = attendance.filter(
     (record) => record.method === "MANUAL",
   ).length;
@@ -84,6 +81,7 @@ export default function Attendance() {
   const assistedCount = attendance.filter(
     (record) => record.method === "ASSISTED",
   ).length;
+  const faceCount = attendance.filter((record) => record.method === "FACE").length;
 
   function formatDateTime(date: string) {
     return new Date(date).toLocaleString("en-IN", {
@@ -115,8 +113,8 @@ export default function Attendance() {
         </div>
 
         <div className="stat-card">
-          <span>QR Check-ins</span>
-          <strong>{qrCount}</strong>
+          <span>Face Check-ins</span>
+          <strong>{faceCount}</strong>
         </div>
 
         <div className="stat-card">
@@ -129,6 +127,8 @@ export default function Attendance() {
           <strong>{assistedCount}</strong>
         </div>
       </div>
+
+      <FaceCheckIn onComplete={loadAttendance} />
 
       <div className="panel">
         <div className="panel-header">
@@ -217,8 +217,8 @@ export default function Attendance() {
                       {record.method === "ASSISTED"
                         ? record.assistedReason ||
                           "Assisted check-in"
-                        : record.method === "QR"
-                          ? "QR scan"
+                        : record.method === "FACE"
+                          ? "Face recognition"
                           : "Staff entry"}
                     </td>
                   </tr>

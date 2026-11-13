@@ -22,7 +22,7 @@ enum MembershipStatus {
 }
 
 enum AttendanceMethod {
-  QR
+  FACE
   MANUAL
   ASSISTED
 }
@@ -125,7 +125,6 @@ model Gym {
   attendances  Attendance[]
   noShowCases  NoShowCase[]
   followUps    FollowUp[]
-  qrSessions   QrSession[]
   renewalOrders RenewalOrder[]
   payments      Payment[]
 }
@@ -151,6 +150,10 @@ model Member {
   name      String
   email     String?
   phone     String?
+  faceDescriptor Json?
+  portalPasswordHash String?
+  portalInviteHash String?
+  portalInviteExpiresAt DateTime?
   role      UserRole @default(MEMBER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -183,19 +186,6 @@ model Plan {
   @@index([gymId])
 }
 
-model QrSession {
-  id        Int      @id @default(autoincrement())
-  gymId     Int
-  token     String   @unique
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-
-  gym Gym @relation(fields: [gymId], references: [id], onDelete: Cascade)
-
-  @@index([gymId])
-  @@index([expiresAt])
-}
-
 model Membership {
   id        Int              @id @default(autoincrement())
   gymId     Int
@@ -225,7 +215,7 @@ model Attendance {
   memberId       Int
   membershipId   Int
   checkedInAt    DateTime         @default(now())
-  method         AttendanceMethod @default(QR)
+  method         AttendanceMethod @default(MANUAL)
   assistedReason String?
 
   gym        Gym        @relation(fields: [gymId], references: [id], onDelete: Cascade)

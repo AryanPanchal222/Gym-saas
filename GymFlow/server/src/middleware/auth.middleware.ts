@@ -7,9 +7,17 @@ import type {
 import jwt from "jsonwebtoken";
 
 type AuthPayload = {
-  userId: number;
+  userId?: number;
   gymId: number;
   role: string;
+  portal?: boolean;
+};
+
+type MemberPortalPayload = {
+  memberId: number;
+  gymId: number;
+  role: "MEMBER";
+  portal: true;
 };
 
 function getJwtSecret(): string {
@@ -47,6 +55,13 @@ export function requireAuth(
       getJwtSecret(),
     ) as AuthPayload;
 
+    if (payload.portal || !Number.isInteger(payload.userId)) {
+      return res.status(401).json({
+        success: false,
+        message: "Staff authentication required",
+      });
+    }
+
     (
       req as Request & {
         user?: AuthPayload;
@@ -60,6 +75,34 @@ export function requireAuth(
       message:
         "Invalid or expired authentication token",
     });
+  }
+}
+
+export function requireMemberAuth(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const header = req.headers.authorization;
+    if (!header?.startsWith("Bearer ")) {
+      return res.status(401).json({ success: false, message: "Member sign-in required" });
+    }
+
+    const payload = jwt.verify(header.slice(7), getJwtSecret()) as MemberPortalPayload;
+    if (
+      payload.portal !== true ||
+      payload.role !== "MEMBER" ||
+      !Number.isInteger(payload.memberId) ||
+      !Number.isInteger(payload.gymId)
+    ) {
+      return res.status(401).json({ success: false, message: "Invalid member portal session" });
+    }
+
+    (req as Request & { memberUser?: MemberPortalPayload }).memberUser = payload;
+    next();
+  } catch {
+    return res.status(401).json({ success: false, message: "Member session expired. Please sign in again." });
   }
 }
 

@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { Prisma } from "../../generated/prisma/client.js";
 import prisma from "../lib/prisma.js";
 
 export async function createMember(req: Request, res: Response) {
@@ -124,7 +125,11 @@ export async function getMembers(req: Request, res: Response) {
 
     return res.json({
       success: true,
-      members,
+      members: members.map(({ faceDescriptor, portalPasswordHash, portalInviteHash, portalInviteExpiresAt, ...member }) => ({
+        ...member,
+        hasFaceEnrollment: Array.isArray(faceDescriptor),
+        hasPortalAccess: Boolean(portalPasswordHash),
+      })),
     });
   } catch (error) {
     console.error("Get members error:", error);
@@ -194,9 +199,15 @@ export async function getMemberById(
       });
     }
 
+    const { faceDescriptor, portalPasswordHash, portalInviteHash, portalInviteExpiresAt, ...safeMember } = member;
+
     return res.json({
       success: true,
-      member,
+      member: {
+        ...safeMember,
+        hasFaceEnrollment: Array.isArray(faceDescriptor),
+        hasPortalAccess: Boolean(portalPasswordHash),
+      },
     });
   } catch (error) {
     console.error("Get member profile error:", error);
@@ -205,5 +216,65 @@ export async function getMemberById(
       success: false,
       message: "Failed to fetch member profile",
     });
+  }
+}
+
+export async function saveMemberFace(req: Request, res: Response) {
+  const gymId = Number(req.params.gymId);
+  const memberId = Number(req.params.memberId);
+  const descriptor = req.body?.descriptor;
+
+  if (!Number.isInteger(gymId) || !Number.isInteger(memberId) ||
+      !Array.isArray(descriptor) || descriptor.length !== 128 ||
+      !descriptor.every((value: unknown) => typeof value === "number" && Number.isFinite(value))) {
+    return res.status(400).json({ success: false, message: "A valid 128-value face descriptor is required" });
+  }
+
+  try {
+    const member = await prisma.member.findFirst({ where: { id: memberId, gymId } });
+    if (!member) return res.status(404).json({ success: false, message: "Member not found in this gym" });
+    await prisma.member.update({ where: { id: memberId }, data: { faceDescriptor: descriptor } });
+    return res.json({ success: true, message: "Face enrollment saved" });
+  } catch (error) {
+    console.error("Save face enrollment error:", error);
+    return res.status(500).json({ success: false, message: "Failed to save face enrollment" });
+  }
+}
+
+export async function deleteMember(req: Request, res: Response) {
+  const gymId = Number(req.params.gymId);
+  const memberId = Number(req.params.memberId);
+
+  if (!Number.isInteger(gymId) || gymId <= 0 || !Number.isInteger(memberId) || memberId <= 0) {
+    return res.status(400).json({ success: false, message: "Invalid gym or member ID" });
+  }
+
+  try {
+    const member = await prisma.member.findFirst({ where: { id: memberId, gymId } });
+    if (!member) return res.status(404).json({ success: false, message: "Member not found in this gym" });
+
+    await prisma.member.delete({ where: { id: memberId } });
+    return res.json({
+      success: true,
+      message: `${member.name} and their face template, memberships, attendance, follow-ups, and payment history were deleted.`,
+    });
+  } catch (error) {
+    console.error("Delete member error:", error);
+    return res.status(500).json({ success: false, message: "Failed to delete member" });
+  }
+}
+
+export async function getFaceTemplates(req: Request, res: Response) {
+  const gymId = Number(req.params.gymId);
+  if (!Number.isInteger(gymId) || gymId <= 0) return res.status(400).json({ success: false, message: "Invalid gym ID" });
+  try {
+    const members = await prisma.member.findMany({
+      where: { gymId, faceDescriptor: { not: Prisma.DbNull } },
+      select: { id: true, name: true, faceDescriptor: true },
+    });
+    return res.json({ success: true, members });
+  } catch (error) {
+    console.error("Get face templates error:", error);
+    return res.status(500).json({ success: false, message: "Failed to load face enrollments" });
   }
 }

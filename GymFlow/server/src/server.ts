@@ -11,11 +11,10 @@ import memberRoutes from "./routes/member.routes.js";
 import membershipRoutes from "./routes/membership.routes.js";
 import attendanceRoutes from "./routes/attendance.routes.js";
 import noShowRoutes from "./routes/noShow.routes.js";
-import qrSessionRoutes from "./routes/qrSession.routes.js";
 import followUpRoutes from "./routes/followUp.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
-import qrCheckInRoutes from "./routes/qrCheckIn.routes.js";
 import renewalRoutes from "./routes/renewal.routes.js";
+import memberPortalRoutes from "./routes/memberPortal.routes.js";
 
 import {
   requireAuth,
@@ -64,6 +63,7 @@ app.get("/api/db-test", async (_req, res) => {
 /* ================= AUTH ================= */
 
 app.use("/api/auth", authRoutes);
+app.use("/api/member-portal", memberPortalRoutes);
 
 /* ================= GYM ROUTES ================= */
 
@@ -83,12 +83,6 @@ app.use(
 );
 
 /* ================= ATTENDANCE ================= */
-
-// General QR attendance endpoint
-app.use(
-  "/api/attendance",
-  qrCheckInRoutes,
-);
 
 // Gym-scoped attendance endpoints
 app.use(
@@ -110,13 +104,6 @@ app.use(
 app.use(
   "/api/gyms/:gymId/no-shows/:noShowCaseId/follow-ups",
   followUpRoutes,
-);
-
-/* ================= QR SESSIONS ================= */
-
-app.use(
-  "/api/gyms/:gymId/qr-sessions",
-  qrSessionRoutes,
 );
 
 /* ================= DASHBOARD ================= */

@@ -18,6 +18,7 @@ export default function Plans() {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [deletingPlanId, setDeletingPlanId] = useState<number | null>(null);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -141,6 +142,38 @@ export default function Plans() {
       );
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function handleDeletePlan(plan: Plan) {
+    const confirmed = window.confirm(
+      `Delete ${plan.name}? If memberships already use this plan, it will be archived so their history stays intact.`,
+    );
+    if (!confirmed) return;
+
+    try {
+      setDeletingPlanId(plan.id);
+      setError("");
+      setSuccess("");
+      const gymId = getGymId();
+      if (!gymId) throw new Error("Gym information is missing");
+
+      const response = await apiFetch(`/api/gyms/${gymId}/plans/${plan.id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || "Failed to delete plan");
+
+      if (data.action === "archived") {
+        setPlans((current) => current.map((item) => item.id === plan.id ? data.plan : item));
+      } else {
+        setPlans((current) => current.filter((item) => item.id !== plan.id));
+      }
+      setSuccess(data.message || "Plan deleted successfully.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete plan.");
+    } finally {
+      setDeletingPlanId(null);
     }
   }
 
@@ -369,6 +402,15 @@ export default function Plans() {
                     {formatPrice(plan.price)}
                   </strong>
                 </div>
+
+                <button
+                  type="button"
+                  className="danger-button plan-delete-button"
+                  onClick={() => void handleDeletePlan(plan)}
+                  disabled={deletingPlanId === plan.id}
+                >
+                  {deletingPlanId === plan.id ? "Deleting..." : "Delete plan"}
+                </button>
 
               </div>
 

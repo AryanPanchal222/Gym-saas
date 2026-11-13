@@ -1,10 +1,7 @@
 import { Router } from "express";
 
-import {
-  checkInMember,
-  getAttendance,
-  qrCheckInMember,
-} from "../controllers/attendance.controller.js";
+import { checkInMember, getAttendance } from "../controllers/attendance.controller.js";
+import { getFaceTemplates } from "../controllers/member.controller.js";
 
 import {
   requireAuth,
@@ -18,6 +15,7 @@ router.use(requireAuth);
 router.use(requireGymAccess);
 
 router.post("/check-in", checkInMember);
+router.get("/face-templates", getFaceTemplates);
 router.get("/", getAttendance);
 
 export default router;

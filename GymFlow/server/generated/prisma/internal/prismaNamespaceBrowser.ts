@@ -57,7 +57,6 @@ export const ModelName = {
   User: 'User',
   Member: 'Member',
   Plan: 'Plan',
-  QrSession: 'QrSession',
   Membership: 'Membership',
   Attendance: 'Attendance',
   NoShowCase: 'NoShowCase',
@@ -149,6 +148,10 @@ export const MemberScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
+  faceDescriptor: 'faceDescriptor',
+  portalPasswordHash: 'portalPasswordHash',
+  portalInviteHash: 'portalInviteHash',
+  portalInviteExpiresAt: 'portalInviteExpiresAt',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -169,17 +172,6 @@ export const PlanScalarFieldEnum = {
 } as const
 
 export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
-
-
-export const QrSessionScalarFieldEnum = {
-  id: 'id',
-  gymId: 'gymId',
-  token: 'token',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt'
-} as const
-
-export type QrSessionScalarFieldEnum = (typeof QrSessionScalarFieldEnum)[keyof typeof QrSessionScalarFieldEnum]
 
 
 export const MembershipScalarFieldEnum = {

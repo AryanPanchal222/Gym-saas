@@ -20,7 +20,7 @@ export const MembershipStatus = {
     CANCELLED: 'CANCELLED'
 };
 export const AttendanceMethod = {
-    QR: 'QR',
+    FACE: 'FACE',
     MANUAL: 'MANUAL',
     ASSISTED: 'ASSISTED'
 };

@@ -403,7 +403,6 @@ export const ModelName = {
   User: 'User',
   Member: 'Member',
   Plan: 'Plan',
-  QrSession: 'QrSession',
   Membership: 'Membership',
   Attendance: 'Attendance',
   NoShowCase: 'NoShowCase',
@@ -423,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "renewalOrder" | "payment" | "gym" | "user" | "member" | "plan" | "qrSession" | "membership" | "attendance" | "noShowCase" | "followUp"
+    modelProps: "renewalOrder" | "payment" | "gym" | "user" | "member" | "plan" | "membership" | "attendance" | "noShowCase" | "followUp"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -871,80 +870,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    QrSession: {
-      payload: Prisma.$QrSessionPayload<ExtArgs>
-      fields: Prisma.QrSessionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.QrSessionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.QrSessionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>
-        }
-        findFirst: {
-          args: Prisma.QrSessionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.QrSessionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>
-        }
-        findMany: {
-          args: Prisma.QrSessionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>[]
-        }
-        create: {
-          args: Prisma.QrSessionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>
-        }
-        createMany: {
-          args: Prisma.QrSessionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.QrSessionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>[]
-        }
-        delete: {
-          args: Prisma.QrSessionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>
-        }
-        update: {
-          args: Prisma.QrSessionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>
-        }
-        deleteMany: {
-          args: Prisma.QrSessionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.QrSessionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.QrSessionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>[]
-        }
-        upsert: {
-          args: Prisma.QrSessionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrSessionPayload>
-        }
-        aggregate: {
-          args: Prisma.QrSessionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateQrSession>
-        }
-        groupBy: {
-          args: Prisma.QrSessionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.QrSessionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.QrSessionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.QrSessionCountAggregateOutputType> | number
-        }
-      }
-    }
     Membership: {
       payload: Prisma.$MembershipPayload<ExtArgs>
       fields: Prisma.MembershipFieldRefs
@@ -1349,6 +1274,10 @@ export const MemberScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
+  faceDescriptor: 'faceDescriptor',
+  portalPasswordHash: 'portalPasswordHash',
+  portalInviteHash: 'portalInviteHash',
+  portalInviteExpiresAt: 'portalInviteExpiresAt',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1369,17 +1298,6 @@ export const PlanScalarFieldEnum = {
 } as const
 
 export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
-
-
-export const QrSessionScalarFieldEnum = {
-  id: 'id',
-  gymId: 'gymId',
-  token: 'token',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt'
-} as const
-
-export type QrSessionScalarFieldEnum = (typeof QrSessionScalarFieldEnum)[keyof typeof QrSessionScalarFieldEnum]
 
 
 export const MembershipScalarFieldEnum = {
@@ -1831,7 +1749,6 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   member?: Prisma.MemberOmit
   plan?: Prisma.PlanOmit
-  qrSession?: Prisma.QrSessionOmit
   membership?: Prisma.MembershipOmit
   attendance?: Prisma.AttendanceOmit
   noShowCase?: Prisma.NoShowCaseOmit
