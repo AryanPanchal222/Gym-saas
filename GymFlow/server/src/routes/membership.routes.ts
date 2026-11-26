@@ -1,0 +1,21 @@
+import { Router } from "express";
+
+import {
+  createMembership,
+  getMemberships,
+} from "../controllers/membership.controller.js";
+
+import {
+  requireAuth,
+  requireGymAccess,
+} from "../middleware/auth.middleware.js";
+
+const router = Router({ mergeParams: true });
+
+router.use(requireAuth);
+router.use(requireGymAccess);
+
+router.post("/", createMembership);
+router.get("/", getMemberships);
+
+export default router;  
