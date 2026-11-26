@@ -43,6 +43,21 @@ type RenewalOrder = {
     | "CANCELLED"
     | "REFUNDED";
   paidAt: string | null;
+  invoice?: {
+    invoiceNumber: string;
+    status: "ISSUED" | "PAID" | "VOID" | "OVERDUE";
+    dueDate: string | null;
+  } | null;
+};
+
+type Invoice = {
+  id: number;
+  invoiceNumber: string;
+  amount: string;
+  status: "ISSUED" | "PAID" | "VOID" | "OVERDUE";
+  dueDate: string | null;
+  member: { name: string; email: string | null };
+  renewalOrder: { id: number; kind: string; status: string };
 };
 
 type Renewal = {
@@ -90,11 +105,31 @@ export default function Memberships() {
 
   const [renewalMessage, setRenewalMessage] =
     useState("");
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [invoiceLoading, setInvoiceLoading] = useState(true);
+  const [reminderLoading, setReminderLoading] = useState(false);
 
   useEffect(() => {
     loadMemberships();
     loadRenewals();
+    loadInvoices();
   }, []);
+
+  async function loadInvoices() {
+    try {
+      setInvoiceLoading(true);
+      const gymId = getGymId();
+      if (!gymId) throw new Error("Gym information is missing");
+      const response = await apiFetch(`/api/gyms/${gymId}/renewals/invoices`);
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || "Failed to load invoices");
+      setInvoices(data.invoices || []);
+    } catch (err) {
+      setRenewalError(err instanceof Error ? err.message : "Failed to load invoices");
+    } finally {
+      setInvoiceLoading(false);
+    }
+  }
 
   async function loadMemberships() {
     try {
@@ -268,6 +303,23 @@ export default function Memberships() {
     }
   }
 
+  async function markInvoicePaid(invoice: Invoice) {
+    try {
+      setRenewalActionLoading(true);
+      setRenewalError("");
+      const gymId = getGymId();
+      const response = await apiFetch(`/api/gyms/${gymId}/renewals/${invoice.renewalOrder.id}/mark-paid`, { method: "POST" });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || "Failed to record payment");
+      setRenewalMessage(`${invoice.invoiceNumber} marked as paid.`);
+      await Promise.all([loadInvoices(), loadMemberships(), loadRenewals()]);
+    } catch (err) {
+      setRenewalError(err instanceof Error ? err.message : "Failed to record payment");
+    } finally {
+      setRenewalActionLoading(false);
+    }
+  }
+
   const membershipRows = useMemo<MembershipRow[]>(
     () => {
       return members.flatMap((member) =>
@@ -424,6 +476,7 @@ export default function Memberships() {
           onClick={() => {
             loadMemberships();
             loadRenewals();
+            loadInvoices();
           }}
           disabled={loading || renewalLoading}
         >
@@ -826,6 +879,17 @@ export default function Memberships() {
         )}
       </div>
 
+      <section className="panel billing-panel">
+        <div className="panel-header">
+          <div>
+            <h3>Payments & invoices</h3>
+            <p>Track renewal invoices and payment status for your gym.</p>
+          </div>
+          <span className="billing-summary">{invoices.filter((invoice) => invoice.status === "PAID").length} paid</span>
+        </div>
+        {invoiceLoading ? <div className="page-loading">Loading invoices...</div> : invoices.length === 0 ? <div className="membership-empty compact"><strong>No invoices yet</strong><p>New memberships automatically create their first invoice.</p></div> : <div className="billing-table-wrap"><table className="billing-table"><thead><tr><th>Invoice</th><th>Member</th><th>Amount</th><th>Due</th><th>Status</th><th>Action</th></tr></thead><tbody>{invoices.map((invoice) => <tr key={invoice.id}><td><strong>{invoice.invoiceNumber}</strong><small>{invoice.renewalOrder.kind === "INITIAL" ? "First payment" : "Renewal"}</small></td><td><strong>{invoice.member.name}</strong><small>{invoice.member.email || "No email"}</small></td><td>{formatPrice(invoice.amount)}</td><td>{invoice.dueDate ? formatDate(invoice.dueDate) : "—"}</td><td><span className={`billing-status ${invoice.status.toLowerCase()}`}>{invoice.status}</span></td><td>{invoice.status !== "PAID" && invoice.renewalOrder.status === "PENDING" ? <button className="small-button" onClick={() => void markInvoicePaid(invoice)} disabled={renewalActionLoading}>Mark paid</button> : "—"}</td></tr>)}</tbody></table></div>}
+      </section>
+
       {/* ================= RENEWAL MODAL ================= */}
 
       {selectedRenewal && (
@@ -1023,6 +1087,10 @@ export default function Memberships() {
                       )}
                     </strong>
                   </div>
+
+                  {renewalOrder.invoice && <p className="invoice-reference">Invoice {renewalOrder.invoice.invoiceNumber} · Due {renewalOrder.invoice.dueDate ? formatDate(renewalOrder.invoice.dueDate) : "on renewal"}</p>}
+
+                  {selectedRenewal.member.email && <button className="secondary-button renewal-reminder-button" onClick={async () => { try { setReminderLoading(true); const gymId = getGymId(); const response = await apiFetch(`/api/gyms/${gymId}/renewals/membership/${selectedRenewal.membershipId}/send-reminder`, { method: "POST" }); const data = await response.json(); if (!response.ok || !data.success) throw new Error(data.message || "Could not send reminder"); setRenewalMessage("Renewal reminder sent by email."); } catch (err) { setRenewalError(err instanceof Error ? err.message : "Could not send reminder"); } finally { setReminderLoading(false); } }} disabled={reminderLoading}>{reminderLoading ? "Sending reminder..." : "✉ Send renewal reminder"}</button>}
 
                   <button
                     className="primary-button"

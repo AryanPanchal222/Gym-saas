@@ -53,10 +53,16 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   RenewalOrder: 'RenewalOrder',
   Payment: 'Payment',
+  Invoice: 'Invoice',
+  RenewalReminder: 'RenewalReminder',
   Gym: 'Gym',
   User: 'User',
   Member: 'Member',
   Plan: 'Plan',
+  Expense: 'Expense',
+  GymClass: 'GymClass',
+  ClassBooking: 'ClassBooking',
+  Notification: 'Notification',
   Membership: 'Membership',
   Attendance: 'Attendance',
   NoShowCase: 'NoShowCase',
@@ -84,6 +90,7 @@ export const RenewalOrderScalarFieldEnum = {
   gymId: 'gymId',
   memberId: 'memberId',
   membershipId: 'membershipId',
+  kind: 'kind',
   amount: 'amount',
   status: 'status',
   provider: 'provider',
@@ -115,12 +122,46 @@ export const PaymentScalarFieldEnum = {
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
+export const InvoiceScalarFieldEnum = {
+  id: 'id',
+  gymId: 'gymId',
+  memberId: 'memberId',
+  renewalOrderId: 'renewalOrderId',
+  invoiceNumber: 'invoiceNumber',
+  amount: 'amount',
+  status: 'status',
+  dueDate: 'dueDate',
+  issuedAt: 'issuedAt',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+
+
+export const RenewalReminderScalarFieldEnum = {
+  id: 'id',
+  gymId: 'gymId',
+  memberId: 'memberId',
+  membershipId: 'membershipId',
+  reminderType: 'reminderType',
+  sentAt: 'sentAt'
+} as const
+
+export type RenewalReminderScalarFieldEnum = (typeof RenewalReminderScalarFieldEnum)[keyof typeof RenewalReminderScalarFieldEnum]
+
+
 export const GymScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
   phone: 'phone',
   address: 'address',
+  logoUrl: 'logoUrl',
+  primaryColor: 'primaryColor',
+  accentColor: 'accentColor',
+  theme: 'theme',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -135,6 +176,12 @@ export const UserScalarFieldEnum = {
   email: 'email',
   passwordHash: 'passwordHash',
   role: 'role',
+  phone: 'phone',
+  isActive: 'isActive',
+  inviteTokenHash: 'inviteTokenHash',
+  inviteExpiresAt: 'inviteExpiresAt',
+  resetTokenHash: 'resetTokenHash',
+  resetExpiresAt: 'resetExpiresAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -172,6 +219,63 @@ export const PlanScalarFieldEnum = {
 } as const
 
 export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
+
+
+export const ExpenseScalarFieldEnum = {
+  id: 'id',
+  gymId: 'gymId',
+  title: 'title',
+  category: 'category',
+  amount: 'amount',
+  expenseDate: 'expenseDate',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const GymClassScalarFieldEnum = {
+  id: 'id',
+  gymId: 'gymId',
+  trainerId: 'trainerId',
+  name: 'name',
+  description: 'description',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  capacity: 'capacity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GymClassScalarFieldEnum = (typeof GymClassScalarFieldEnum)[keyof typeof GymClassScalarFieldEnum]
+
+
+export const ClassBookingScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  memberId: 'memberId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ClassBookingScalarFieldEnum = (typeof ClassBookingScalarFieldEnum)[keyof typeof ClassBookingScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  gymId: 'gymId',
+  memberId: 'memberId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const MembershipScalarFieldEnum = {

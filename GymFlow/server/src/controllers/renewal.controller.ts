@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import prisma from "../lib/prisma.js";
+import { invoiceIssuedEmail, paymentReceiptEmail, renewalReminderEmail } from "../services/email.service.js";
 
 const RENEWAL_WINDOW_DAYS = 14;
 
@@ -16,6 +17,27 @@ function daysUntil(date: Date) {
   return Math.ceil(
     (target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
   );
+}
+
+function invoiceNumber(gymId: number) {
+  return `INV-${gymId}-${Date.now()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
+}
+
+export async function getInvoices(req: Request, res: Response) {
+  try {
+    const gymId = Number(req.params.gymId);
+    if (!Number.isInteger(gymId) || gymId <= 0) return res.status(400).json({ success: false, message: "Invalid gym ID" });
+    const invoices = await prisma.invoice.findMany({
+      where: { gymId },
+      include: { member: true, renewalOrder: { include: { membership: { include: { plan: true } } } } },
+      orderBy: { createdAt: "desc" },
+      take: 100,
+    });
+    return res.json({ success: true, invoices });
+  } catch (error) {
+    console.error("Get invoices error:", error);
+    return res.status(500).json({ success: false, message: "Failed to fetch invoices" });
+  }
 }
 
 /**
@@ -46,10 +68,10 @@ export async function getRenewals(req: Request, res: Response) {
     const memberships = await prisma.membership.findMany({
       where: {
         gymId,
-        status: "ACTIVE",
-        endDate: {
-          lte: renewalLimit,
-        },
+        OR: [
+          { status: "EXPIRED" },
+          { status: "ACTIVE", endDate: { lte: renewalLimit } },
+        ],
       },
       include: {
         member: true,
@@ -59,6 +81,7 @@ export async function getRenewals(req: Request, res: Response) {
             createdAt: "desc",
           },
           take: 1,
+          include: { invoice: true },
         },
       },
       orderBy: {
@@ -125,6 +148,7 @@ export async function createRenewalOrder(
         gymId,
       },
       include: {
+        gym: true,
         member: true,
         plan: true,
       },
@@ -186,10 +210,26 @@ export async function createRenewalOrder(
       },
     });
 
+    const invoice = await prisma.invoice.create({
+      data: {
+        gymId,
+        memberId: membership.memberId,
+        renewalOrderId: renewalOrder.id,
+        invoiceNumber: invoiceNumber(gymId),
+        amount: membership.plan.price,
+        dueDate: membership.endDate,
+      },
+    });
+
+    const invoiceEmailSent = membership.member.email
+      ? await invoiceIssuedEmail(membership.member.email, membership.member.name, membership.gym?.name || "GymFlow gym", membership.gym?.email || null, invoice.invoiceNumber, `₹${Number(invoice.amount).toLocaleString("en-IN")}`, membership.endDate.toLocaleDateString("en-IN"), "RENEWAL")
+      : false;
+
     return res.status(201).json({
       success: true,
       message: "Renewal order created successfully",
-      renewalOrder,
+      renewalOrder: { ...renewalOrder, invoice },
+      emailSent: invoiceEmailSent,
     });
   } catch (error) {
     console.error("Create renewal order error:", error);
@@ -243,6 +283,7 @@ export async function getRenewalOrder(
             createdAt: "desc",
           },
         },
+        invoice: true,
       },
     });
 
@@ -344,24 +385,6 @@ export async function markRenewalPaid(
 
       const now = new Date();
 
-      /*
-       * If the current membership is still valid,
-       * continue from its existing end date.
-       *
-       * If already expired, start from today.
-       */
-      const currentEnd = renewalOrder.membership.endDate;
-
-      const extensionStart =
-        currentEnd > now ? currentEnd : now;
-
-      const newEndDate = new Date(extensionStart);
-
-      newEndDate.setDate(
-        newEndDate.getDate() +
-          renewalOrder.membership.plan.durationDays,
-      );
-
       const payment = await tx.payment.create({
         data: {
           gymId,
@@ -374,22 +397,18 @@ export async function markRenewalPaid(
         },
       });
 
-      const updatedMembership =
-        await tx.membership.update({
-          where: {
-            id: renewalOrder.membershipId,
-          },
-          data: {
-            startDate:
-              renewalOrder.membership.startDate,
-            endDate: newEndDate,
-            status: "ACTIVE",
-          },
-          include: {
-            member: true,
-            plan: true,
-          },
+      let updatedMembership = renewalOrder.membership;
+      if (renewalOrder.kind !== "INITIAL") {
+        const currentEnd = renewalOrder.membership.endDate;
+        const extensionStart = currentEnd > now ? currentEnd : now;
+        const newEndDate = new Date(extensionStart);
+        newEndDate.setDate(newEndDate.getDate() + renewalOrder.membership.plan.durationDays);
+        updatedMembership = await tx.membership.update({
+          where: { id: renewalOrder.membershipId },
+          data: { startDate: renewalOrder.membership.startDate, endDate: newEndDate, status: "ACTIVE" },
+          include: { member: true, plan: true },
         });
+      }
 
       const updatedRenewalOrder =
         await tx.renewalOrder.update({
@@ -408,8 +427,14 @@ export async function markRenewalPaid(
               },
             },
             payments: true,
+            invoice: true,
           },
         });
+
+      await tx.invoice.updateMany({
+        where: { renewalOrderId: renewalOrder.id },
+        data: { status: "PAID", paidAt: now },
+      });
 
       return {
         renewalOrder: updatedRenewalOrder,
@@ -419,12 +444,19 @@ export async function markRenewalPaid(
       };
     });
 
+    const gym = await prisma.gym.findUnique({ where: { id: gymId }, select: { name: true, email: true } });
+    const receiptDetails = await prisma.renewalOrder.findUnique({ where: { id: result.renewalOrder.id }, include: { member: true, invoice: true } });
+    const receiptEmailSent = receiptDetails?.member.email && receiptDetails.invoice
+      ? await paymentReceiptEmail(receiptDetails.member.email, receiptDetails.member.name, gym?.name || "GymFlow gym", gym?.email || null, receiptDetails.invoice.invoiceNumber, `₹${Number(result.payment?.amount || result.renewalOrder.amount).toLocaleString("en-IN")}`, new Date().toLocaleDateString("en-IN"))
+      : false;
+
     return res.json({
       success: true,
       message: result.alreadyProcessed
         ? "Renewal was already processed"
         : "Renewal payment recorded and membership extended",
       ...result,
+      emailSent: receiptEmailSent,
     });
   } catch (error) {
     console.error("Mark renewal paid error:", error);
@@ -449,6 +481,24 @@ export async function markRenewalPaid(
       success: false,
       message: "Failed to process renewal payment",
     });
+  }
+}
+
+export async function sendRenewalReminder(req: Request, res: Response) {
+  try {
+    const gymId = Number(req.params.gymId);
+    const membershipId = Number(req.params.membershipId);
+    if (!Number.isInteger(gymId) || !Number.isInteger(membershipId)) return res.status(400).json({ success: false, message: "Invalid renewal details" });
+    const membership = await prisma.membership.findFirst({ where: { id: membershipId, gymId, status: "ACTIVE" }, include: { gym: true, member: true, plan: true, renewalOrders: { where: { status: "PENDING" }, orderBy: { createdAt: "desc" }, take: 1, include: { invoice: true } } } });
+    if (!membership) return res.status(404).json({ success: false, message: "Active membership not found" });
+    if (!membership.member.email) return res.status(400).json({ success: false, message: "This member has no email address" });
+    const order = membership.renewalOrders[0];
+    if (!order?.invoice) return res.status(400).json({ success: false, message: "Create a renewal invoice first" });
+    const sent = await renewalReminderEmail(membership.member.email, membership.member.name, membership.gym.name, membership.plan.name, membership.endDate.toLocaleDateString("en-IN"), order.invoice.invoiceNumber, `₹${Number(order.amount).toLocaleString("en-IN")}`);
+    return res.json({ success: sent, message: sent ? "Renewal reminder sent" : "SMTP is not configured" });
+  } catch (error) {
+    console.error("Send renewal reminder error:", error);
+    return res.status(500).json({ success: false, message: "Failed to send renewal reminder" });
   }
 }
 

@@ -10,6 +10,7 @@
 */
 
 export const UserRole = {
+  SUPER_ADMIN: 'SUPER_ADMIN',
   OWNER: 'OWNER',
   STAFF: 'STAFF',
   TRAINER: 'TRAINER',
@@ -79,3 +80,45 @@ export const PaymentStatus = {
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const InvoiceStatus = {
+  ISSUED: 'ISSUED',
+  PAID: 'PAID',
+  VOID: 'VOID',
+  OVERDUE: 'OVERDUE'
+} as const
+
+export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
+
+
+export const ExpenseCategory = {
+  RENT: 'RENT',
+  SALARIES: 'SALARIES',
+  EQUIPMENT: 'EQUIPMENT',
+  UTILITIES: 'UTILITIES',
+  MARKETING: 'MARKETING',
+  OTHER: 'OTHER'
+} as const
+
+export type ExpenseCategory = (typeof ExpenseCategory)[keyof typeof ExpenseCategory]
+
+
+export const ClassBookingStatus = {
+  BOOKED: 'BOOKED',
+  ATTENDED: 'ATTENDED',
+  CANCELLED: 'CANCELLED',
+  NO_SHOW: 'NO_SHOW'
+} as const
+
+export type ClassBookingStatus = (typeof ClassBookingStatus)[keyof typeof ClassBookingStatus]
+
+
+export const NotificationType = {
+  PAYMENT: 'PAYMENT',
+  RENEWAL: 'RENEWAL',
+  ATTENDANCE: 'ATTENDANCE',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]

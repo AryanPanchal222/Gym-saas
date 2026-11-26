@@ -47,6 +47,7 @@ export type RenewalOrderMinAggregateOutputType = {
   gymId: number | null
   memberId: number | null
   membershipId: number | null
+  kind: string | null
   amount: runtime.Decimal | null
   status: $Enums.RenewalOrderStatus | null
   provider: string | null
@@ -62,6 +63,7 @@ export type RenewalOrderMaxAggregateOutputType = {
   gymId: number | null
   memberId: number | null
   membershipId: number | null
+  kind: string | null
   amount: runtime.Decimal | null
   status: $Enums.RenewalOrderStatus | null
   provider: string | null
@@ -77,6 +79,7 @@ export type RenewalOrderCountAggregateOutputType = {
   gymId: number
   memberId: number
   membershipId: number
+  kind: number
   amount: number
   status: number
   provider: number
@@ -110,6 +113,7 @@ export type RenewalOrderMinAggregateInputType = {
   gymId?: true
   memberId?: true
   membershipId?: true
+  kind?: true
   amount?: true
   status?: true
   provider?: true
@@ -125,6 +129,7 @@ export type RenewalOrderMaxAggregateInputType = {
   gymId?: true
   memberId?: true
   membershipId?: true
+  kind?: true
   amount?: true
   status?: true
   provider?: true
@@ -140,6 +145,7 @@ export type RenewalOrderCountAggregateInputType = {
   gymId?: true
   memberId?: true
   membershipId?: true
+  kind?: true
   amount?: true
   status?: true
   provider?: true
@@ -242,6 +248,7 @@ export type RenewalOrderGroupByOutputType = {
   gymId: number
   memberId: number
   membershipId: number
+  kind: string
   amount: runtime.Decimal
   status: $Enums.RenewalOrderStatus
   provider: string | null
@@ -280,6 +287,7 @@ export type RenewalOrderWhereInput = {
   gymId?: Prisma.IntFilter<"RenewalOrder"> | number
   memberId?: Prisma.IntFilter<"RenewalOrder"> | number
   membershipId?: Prisma.IntFilter<"RenewalOrder"> | number
+  kind?: Prisma.StringFilter<"RenewalOrder"> | string
   amount?: Prisma.DecimalFilter<"RenewalOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFilter<"RenewalOrder"> | $Enums.RenewalOrderStatus
   provider?: Prisma.StringNullableFilter<"RenewalOrder"> | string | null
@@ -292,6 +300,7 @@ export type RenewalOrderWhereInput = {
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   membership?: Prisma.XOR<Prisma.MembershipScalarRelationFilter, Prisma.MembershipWhereInput>
   payments?: Prisma.PaymentListRelationFilter
+  invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
 }
 
 export type RenewalOrderOrderByWithRelationInput = {
@@ -299,6 +308,7 @@ export type RenewalOrderOrderByWithRelationInput = {
   gymId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   membershipId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provider?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -311,6 +321,7 @@ export type RenewalOrderOrderByWithRelationInput = {
   member?: Prisma.MemberOrderByWithRelationInput
   membership?: Prisma.MembershipOrderByWithRelationInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  invoice?: Prisma.InvoiceOrderByWithRelationInput
 }
 
 export type RenewalOrderWhereUniqueInput = Prisma.AtLeast<{
@@ -322,6 +333,7 @@ export type RenewalOrderWhereUniqueInput = Prisma.AtLeast<{
   gymId?: Prisma.IntFilter<"RenewalOrder"> | number
   memberId?: Prisma.IntFilter<"RenewalOrder"> | number
   membershipId?: Prisma.IntFilter<"RenewalOrder"> | number
+  kind?: Prisma.StringFilter<"RenewalOrder"> | string
   amount?: Prisma.DecimalFilter<"RenewalOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFilter<"RenewalOrder"> | $Enums.RenewalOrderStatus
   provider?: Prisma.StringNullableFilter<"RenewalOrder"> | string | null
@@ -333,6 +345,7 @@ export type RenewalOrderWhereUniqueInput = Prisma.AtLeast<{
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   membership?: Prisma.XOR<Prisma.MembershipScalarRelationFilter, Prisma.MembershipWhereInput>
   payments?: Prisma.PaymentListRelationFilter
+  invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
 }, "id" | "providerOrderId">
 
 export type RenewalOrderOrderByWithAggregationInput = {
@@ -340,6 +353,7 @@ export type RenewalOrderOrderByWithAggregationInput = {
   gymId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   membershipId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provider?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -363,6 +377,7 @@ export type RenewalOrderScalarWhereWithAggregatesInput = {
   gymId?: Prisma.IntWithAggregatesFilter<"RenewalOrder"> | number
   memberId?: Prisma.IntWithAggregatesFilter<"RenewalOrder"> | number
   membershipId?: Prisma.IntWithAggregatesFilter<"RenewalOrder"> | number
+  kind?: Prisma.StringWithAggregatesFilter<"RenewalOrder"> | string
   amount?: Prisma.DecimalWithAggregatesFilter<"RenewalOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusWithAggregatesFilter<"RenewalOrder"> | $Enums.RenewalOrderStatus
   provider?: Prisma.StringNullableWithAggregatesFilter<"RenewalOrder"> | string | null
@@ -374,6 +389,7 @@ export type RenewalOrderScalarWhereWithAggregatesInput = {
 }
 
 export type RenewalOrderCreateInput = {
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -386,6 +402,7 @@ export type RenewalOrderCreateInput = {
   member: Prisma.MemberCreateNestedOneWithoutRenewalOrdersInput
   membership: Prisma.MembershipCreateNestedOneWithoutRenewalOrdersInput
   payments?: Prisma.PaymentCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderUncheckedCreateInput = {
@@ -393,6 +410,7 @@ export type RenewalOrderUncheckedCreateInput = {
   gymId: number
   memberId: number
   membershipId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -402,9 +420,11 @@ export type RenewalOrderUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderUpdateInput = {
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -417,6 +437,7 @@ export type RenewalOrderUpdateInput = {
   member?: Prisma.MemberUpdateOneRequiredWithoutRenewalOrdersNestedInput
   membership?: Prisma.MembershipUpdateOneRequiredWithoutRenewalOrdersNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateInput = {
@@ -424,6 +445,7 @@ export type RenewalOrderUncheckedUpdateInput = {
   gymId?: Prisma.IntFieldUpdateOperationsInput | number
   memberId?: Prisma.IntFieldUpdateOperationsInput | number
   membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -433,6 +455,7 @@ export type RenewalOrderUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderCreateManyInput = {
@@ -440,6 +463,7 @@ export type RenewalOrderCreateManyInput = {
   gymId: number
   memberId: number
   membershipId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -451,6 +475,7 @@ export type RenewalOrderCreateManyInput = {
 }
 
 export type RenewalOrderUpdateManyMutationInput = {
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -466,6 +491,7 @@ export type RenewalOrderUncheckedUpdateManyInput = {
   gymId?: Prisma.IntFieldUpdateOperationsInput | number
   memberId?: Prisma.IntFieldUpdateOperationsInput | number
   membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -481,6 +507,7 @@ export type RenewalOrderCountOrderByAggregateInput = {
   gymId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   membershipId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provider?: Prisma.SortOrder
@@ -504,6 +531,7 @@ export type RenewalOrderMaxOrderByAggregateInput = {
   gymId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   membershipId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provider?: Prisma.SortOrder
@@ -519,6 +547,7 @@ export type RenewalOrderMinOrderByAggregateInput = {
   gymId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   membershipId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provider?: Prisma.SortOrder
@@ -550,6 +579,10 @@ export type RenewalOrderListRelationFilter = {
 
 export type RenewalOrderOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -596,6 +629,20 @@ export type RenewalOrderUpdateOneRequiredWithoutPaymentsNestedInput = {
   upsert?: Prisma.RenewalOrderUpsertWithoutPaymentsInput
   connect?: Prisma.RenewalOrderWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.RenewalOrderUpdateToOneWithWhereWithoutPaymentsInput, Prisma.RenewalOrderUpdateWithoutPaymentsInput>, Prisma.RenewalOrderUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type RenewalOrderCreateNestedOneWithoutInvoiceInput = {
+  create?: Prisma.XOR<Prisma.RenewalOrderCreateWithoutInvoiceInput, Prisma.RenewalOrderUncheckedCreateWithoutInvoiceInput>
+  connectOrCreate?: Prisma.RenewalOrderCreateOrConnectWithoutInvoiceInput
+  connect?: Prisma.RenewalOrderWhereUniqueInput
+}
+
+export type RenewalOrderUpdateOneRequiredWithoutInvoiceNestedInput = {
+  create?: Prisma.XOR<Prisma.RenewalOrderCreateWithoutInvoiceInput, Prisma.RenewalOrderUncheckedCreateWithoutInvoiceInput>
+  connectOrCreate?: Prisma.RenewalOrderCreateOrConnectWithoutInvoiceInput
+  upsert?: Prisma.RenewalOrderUpsertWithoutInvoiceInput
+  connect?: Prisma.RenewalOrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RenewalOrderUpdateToOneWithWhereWithoutInvoiceInput, Prisma.RenewalOrderUpdateWithoutInvoiceInput>, Prisma.RenewalOrderUncheckedUpdateWithoutInvoiceInput>
 }
 
 export type RenewalOrderCreateNestedManyWithoutGymInput = {
@@ -725,6 +772,7 @@ export type RenewalOrderUncheckedUpdateManyWithoutMembershipNestedInput = {
 }
 
 export type RenewalOrderCreateWithoutPaymentsInput = {
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -736,6 +784,7 @@ export type RenewalOrderCreateWithoutPaymentsInput = {
   gym: Prisma.GymCreateNestedOneWithoutRenewalOrdersInput
   member: Prisma.MemberCreateNestedOneWithoutRenewalOrdersInput
   membership: Prisma.MembershipCreateNestedOneWithoutRenewalOrdersInput
+  invoice?: Prisma.InvoiceCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderUncheckedCreateWithoutPaymentsInput = {
@@ -743,6 +792,7 @@ export type RenewalOrderUncheckedCreateWithoutPaymentsInput = {
   gymId: number
   memberId: number
   membershipId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -751,6 +801,7 @@ export type RenewalOrderUncheckedCreateWithoutPaymentsInput = {
   paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderCreateOrConnectWithoutPaymentsInput = {
@@ -770,6 +821,7 @@ export type RenewalOrderUpdateToOneWithWhereWithoutPaymentsInput = {
 }
 
 export type RenewalOrderUpdateWithoutPaymentsInput = {
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -781,6 +833,7 @@ export type RenewalOrderUpdateWithoutPaymentsInput = {
   gym?: Prisma.GymUpdateOneRequiredWithoutRenewalOrdersNestedInput
   member?: Prisma.MemberUpdateOneRequiredWithoutRenewalOrdersNestedInput
   membership?: Prisma.MembershipUpdateOneRequiredWithoutRenewalOrdersNestedInput
+  invoice?: Prisma.InvoiceUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateWithoutPaymentsInput = {
@@ -788,6 +841,7 @@ export type RenewalOrderUncheckedUpdateWithoutPaymentsInput = {
   gymId?: Prisma.IntFieldUpdateOperationsInput | number
   memberId?: Prisma.IntFieldUpdateOperationsInput | number
   membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -796,9 +850,93 @@ export type RenewalOrderUncheckedUpdateWithoutPaymentsInput = {
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutRenewalOrderNestedInput
+}
+
+export type RenewalOrderCreateWithoutInvoiceInput = {
+  kind?: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.RenewalOrderStatus
+  provider?: string | null
+  providerOrderId?: string | null
+  expiresAt?: Date | string | null
+  paidAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gym: Prisma.GymCreateNestedOneWithoutRenewalOrdersInput
+  member: Prisma.MemberCreateNestedOneWithoutRenewalOrdersInput
+  membership: Prisma.MembershipCreateNestedOneWithoutRenewalOrdersInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutRenewalOrderInput
+}
+
+export type RenewalOrderUncheckedCreateWithoutInvoiceInput = {
+  id?: number
+  gymId: number
+  memberId: number
+  membershipId: number
+  kind?: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.RenewalOrderStatus
+  provider?: string | null
+  providerOrderId?: string | null
+  expiresAt?: Date | string | null
+  paidAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRenewalOrderInput
+}
+
+export type RenewalOrderCreateOrConnectWithoutInvoiceInput = {
+  where: Prisma.RenewalOrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.RenewalOrderCreateWithoutInvoiceInput, Prisma.RenewalOrderUncheckedCreateWithoutInvoiceInput>
+}
+
+export type RenewalOrderUpsertWithoutInvoiceInput = {
+  update: Prisma.XOR<Prisma.RenewalOrderUpdateWithoutInvoiceInput, Prisma.RenewalOrderUncheckedUpdateWithoutInvoiceInput>
+  create: Prisma.XOR<Prisma.RenewalOrderCreateWithoutInvoiceInput, Prisma.RenewalOrderUncheckedCreateWithoutInvoiceInput>
+  where?: Prisma.RenewalOrderWhereInput
+}
+
+export type RenewalOrderUpdateToOneWithWhereWithoutInvoiceInput = {
+  where?: Prisma.RenewalOrderWhereInput
+  data: Prisma.XOR<Prisma.RenewalOrderUpdateWithoutInvoiceInput, Prisma.RenewalOrderUncheckedUpdateWithoutInvoiceInput>
+}
+
+export type RenewalOrderUpdateWithoutInvoiceInput = {
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gym?: Prisma.GymUpdateOneRequiredWithoutRenewalOrdersNestedInput
+  member?: Prisma.MemberUpdateOneRequiredWithoutRenewalOrdersNestedInput
+  membership?: Prisma.MembershipUpdateOneRequiredWithoutRenewalOrdersNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutRenewalOrderNestedInput
+}
+
+export type RenewalOrderUncheckedUpdateWithoutInvoiceInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gymId?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderCreateWithoutGymInput = {
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -810,12 +948,14 @@ export type RenewalOrderCreateWithoutGymInput = {
   member: Prisma.MemberCreateNestedOneWithoutRenewalOrdersInput
   membership: Prisma.MembershipCreateNestedOneWithoutRenewalOrdersInput
   payments?: Prisma.PaymentCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderUncheckedCreateWithoutGymInput = {
   id?: number
   memberId: number
   membershipId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -825,6 +965,7 @@ export type RenewalOrderUncheckedCreateWithoutGymInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderCreateOrConnectWithoutGymInput = {
@@ -861,6 +1002,7 @@ export type RenewalOrderScalarWhereInput = {
   gymId?: Prisma.IntFilter<"RenewalOrder"> | number
   memberId?: Prisma.IntFilter<"RenewalOrder"> | number
   membershipId?: Prisma.IntFilter<"RenewalOrder"> | number
+  kind?: Prisma.StringFilter<"RenewalOrder"> | string
   amount?: Prisma.DecimalFilter<"RenewalOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFilter<"RenewalOrder"> | $Enums.RenewalOrderStatus
   provider?: Prisma.StringNullableFilter<"RenewalOrder"> | string | null
@@ -872,6 +1014,7 @@ export type RenewalOrderScalarWhereInput = {
 }
 
 export type RenewalOrderCreateWithoutMemberInput = {
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -883,12 +1026,14 @@ export type RenewalOrderCreateWithoutMemberInput = {
   gym: Prisma.GymCreateNestedOneWithoutRenewalOrdersInput
   membership: Prisma.MembershipCreateNestedOneWithoutRenewalOrdersInput
   payments?: Prisma.PaymentCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderUncheckedCreateWithoutMemberInput = {
   id?: number
   gymId: number
   membershipId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -898,6 +1043,7 @@ export type RenewalOrderUncheckedCreateWithoutMemberInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderCreateOrConnectWithoutMemberInput = {
@@ -927,6 +1073,7 @@ export type RenewalOrderUpdateManyWithWhereWithoutMemberInput = {
 }
 
 export type RenewalOrderCreateWithoutMembershipInput = {
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -938,12 +1085,14 @@ export type RenewalOrderCreateWithoutMembershipInput = {
   gym: Prisma.GymCreateNestedOneWithoutRenewalOrdersInput
   member: Prisma.MemberCreateNestedOneWithoutRenewalOrdersInput
   payments?: Prisma.PaymentCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderUncheckedCreateWithoutMembershipInput = {
   id?: number
   gymId: number
   memberId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -953,6 +1102,7 @@ export type RenewalOrderUncheckedCreateWithoutMembershipInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRenewalOrderInput
+  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutRenewalOrderInput
 }
 
 export type RenewalOrderCreateOrConnectWithoutMembershipInput = {
@@ -985,6 +1135,7 @@ export type RenewalOrderCreateManyGymInput = {
   id?: number
   memberId: number
   membershipId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -996,6 +1147,7 @@ export type RenewalOrderCreateManyGymInput = {
 }
 
 export type RenewalOrderUpdateWithoutGymInput = {
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1007,12 +1159,14 @@ export type RenewalOrderUpdateWithoutGymInput = {
   member?: Prisma.MemberUpdateOneRequiredWithoutRenewalOrdersNestedInput
   membership?: Prisma.MembershipUpdateOneRequiredWithoutRenewalOrdersNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateWithoutGymInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   memberId?: Prisma.IntFieldUpdateOperationsInput | number
   membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1022,12 +1176,14 @@ export type RenewalOrderUncheckedUpdateWithoutGymInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateManyWithoutGymInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   memberId?: Prisma.IntFieldUpdateOperationsInput | number
   membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1042,6 +1198,7 @@ export type RenewalOrderCreateManyMemberInput = {
   id?: number
   gymId: number
   membershipId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -1053,6 +1210,7 @@ export type RenewalOrderCreateManyMemberInput = {
 }
 
 export type RenewalOrderUpdateWithoutMemberInput = {
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1064,12 +1222,14 @@ export type RenewalOrderUpdateWithoutMemberInput = {
   gym?: Prisma.GymUpdateOneRequiredWithoutRenewalOrdersNestedInput
   membership?: Prisma.MembershipUpdateOneRequiredWithoutRenewalOrdersNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   gymId?: Prisma.IntFieldUpdateOperationsInput | number
   membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1079,12 +1239,14 @@ export type RenewalOrderUncheckedUpdateWithoutMemberInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateManyWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   gymId?: Prisma.IntFieldUpdateOperationsInput | number
   membershipId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1099,6 +1261,7 @@ export type RenewalOrderCreateManyMembershipInput = {
   id?: number
   gymId: number
   memberId: number
+  kind?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.RenewalOrderStatus
   provider?: string | null
@@ -1110,6 +1273,7 @@ export type RenewalOrderCreateManyMembershipInput = {
 }
 
 export type RenewalOrderUpdateWithoutMembershipInput = {
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1121,12 +1285,14 @@ export type RenewalOrderUpdateWithoutMembershipInput = {
   gym?: Prisma.GymUpdateOneRequiredWithoutRenewalOrdersNestedInput
   member?: Prisma.MemberUpdateOneRequiredWithoutRenewalOrdersNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateWithoutMembershipInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   gymId?: Prisma.IntFieldUpdateOperationsInput | number
   memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1136,12 +1302,14 @@ export type RenewalOrderUncheckedUpdateWithoutMembershipInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutRenewalOrderNestedInput
+  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutRenewalOrderNestedInput
 }
 
 export type RenewalOrderUncheckedUpdateManyWithoutMembershipInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   gymId?: Prisma.IntFieldUpdateOperationsInput | number
   memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumRenewalOrderStatusFieldUpdateOperationsInput | $Enums.RenewalOrderStatus
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1188,6 +1356,7 @@ export type RenewalOrderSelect<ExtArgs extends runtime.Types.Extensions.Internal
   gymId?: boolean
   memberId?: boolean
   membershipId?: boolean
+  kind?: boolean
   amount?: boolean
   status?: boolean
   provider?: boolean
@@ -1200,6 +1369,7 @@ export type RenewalOrderSelect<ExtArgs extends runtime.Types.Extensions.Internal
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   membership?: boolean | Prisma.MembershipDefaultArgs<ExtArgs>
   payments?: boolean | Prisma.RenewalOrder$paymentsArgs<ExtArgs>
+  invoice?: boolean | Prisma.RenewalOrder$invoiceArgs<ExtArgs>
   _count?: boolean | Prisma.RenewalOrderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["renewalOrder"]>
 
@@ -1208,6 +1378,7 @@ export type RenewalOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   gymId?: boolean
   memberId?: boolean
   membershipId?: boolean
+  kind?: boolean
   amount?: boolean
   status?: boolean
   provider?: boolean
@@ -1226,6 +1397,7 @@ export type RenewalOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   gymId?: boolean
   memberId?: boolean
   membershipId?: boolean
+  kind?: boolean
   amount?: boolean
   status?: boolean
   provider?: boolean
@@ -1244,6 +1416,7 @@ export type RenewalOrderSelectScalar = {
   gymId?: boolean
   memberId?: boolean
   membershipId?: boolean
+  kind?: boolean
   amount?: boolean
   status?: boolean
   provider?: boolean
@@ -1254,12 +1427,13 @@ export type RenewalOrderSelectScalar = {
   updatedAt?: boolean
 }
 
-export type RenewalOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gymId" | "memberId" | "membershipId" | "amount" | "status" | "provider" | "providerOrderId" | "expiresAt" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["renewalOrder"]>
+export type RenewalOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gymId" | "memberId" | "membershipId" | "kind" | "amount" | "status" | "provider" | "providerOrderId" | "expiresAt" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["renewalOrder"]>
 export type RenewalOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   gym?: boolean | Prisma.GymDefaultArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   membership?: boolean | Prisma.MembershipDefaultArgs<ExtArgs>
   payments?: boolean | Prisma.RenewalOrder$paymentsArgs<ExtArgs>
+  invoice?: boolean | Prisma.RenewalOrder$invoiceArgs<ExtArgs>
   _count?: boolean | Prisma.RenewalOrderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RenewalOrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1280,12 +1454,14 @@ export type $RenewalOrderPayload<ExtArgs extends runtime.Types.Extensions.Intern
     member: Prisma.$MemberPayload<ExtArgs>
     membership: Prisma.$MembershipPayload<ExtArgs>
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    invoice: Prisma.$InvoicePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     gymId: number
     memberId: number
     membershipId: number
+    kind: string
     amount: runtime.Decimal
     status: $Enums.RenewalOrderStatus
     provider: string | null
@@ -1692,6 +1868,7 @@ export interface Prisma__RenewalOrderClient<T, Null = never, ExtArgs extends run
   member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   membership<T extends Prisma.MembershipDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MembershipDefaultArgs<ExtArgs>>): Prisma.Prisma__MembershipClient<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.RenewalOrder$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RenewalOrder$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invoice<T extends Prisma.RenewalOrder$invoiceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RenewalOrder$invoiceArgs<ExtArgs>>): Prisma.Prisma__InvoiceClient<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1725,6 +1902,7 @@ export interface RenewalOrderFieldRefs {
   readonly gymId: Prisma.FieldRef<"RenewalOrder", 'Int'>
   readonly memberId: Prisma.FieldRef<"RenewalOrder", 'Int'>
   readonly membershipId: Prisma.FieldRef<"RenewalOrder", 'Int'>
+  readonly kind: Prisma.FieldRef<"RenewalOrder", 'String'>
   readonly amount: Prisma.FieldRef<"RenewalOrder", 'Decimal'>
   readonly status: Prisma.FieldRef<"RenewalOrder", 'RenewalOrderStatus'>
   readonly provider: Prisma.FieldRef<"RenewalOrder", 'String'>
@@ -2155,6 +2333,25 @@ export type RenewalOrder$paymentsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * RenewalOrder.invoice
+ */
+export type RenewalOrder$invoiceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invoice
+   */
+  select?: Prisma.InvoiceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invoice
+   */
+  omit?: Prisma.InvoiceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceInclude<ExtArgs> | null
+  where?: Prisma.InvoiceWhereInput
 }
 
 /**

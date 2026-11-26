@@ -2,6 +2,11 @@ const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
   `http://${window.location.hostname}:5000`;
 
+export function getAssetUrl(url: string | null | undefined): string {
+  if (!url) return "";
+  return url.startsWith("http") ? url : `${API_BASE_URL}${url}`;
+}
+
 export function getGymId(): number | null {
   const storedGym = localStorage.getItem("gymflow_gym");
 
@@ -27,7 +32,7 @@ export async function apiFetch(
 
   const headers = new Headers(options.headers);
 
-  headers.set("Content-Type", "application/json");
+  if (!(options.body instanceof FormData)) headers.set("Content-Type", "application/json");
 
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);

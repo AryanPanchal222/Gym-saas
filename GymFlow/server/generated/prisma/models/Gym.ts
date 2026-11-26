@@ -40,6 +40,10 @@ export type GymMinAggregateOutputType = {
   email: string | null
   phone: string | null
   address: string | null
+  logoUrl: string | null
+  primaryColor: string | null
+  accentColor: string | null
+  theme: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +54,10 @@ export type GymMaxAggregateOutputType = {
   email: string | null
   phone: string | null
   address: string | null
+  logoUrl: string | null
+  primaryColor: string | null
+  accentColor: string | null
+  theme: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +68,10 @@ export type GymCountAggregateOutputType = {
   email: number
   phone: number
   address: number
+  logoUrl: number
+  primaryColor: number
+  accentColor: number
+  theme: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -80,6 +92,10 @@ export type GymMinAggregateInputType = {
   email?: true
   phone?: true
   address?: true
+  logoUrl?: true
+  primaryColor?: true
+  accentColor?: true
+  theme?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -90,6 +106,10 @@ export type GymMaxAggregateInputType = {
   email?: true
   phone?: true
   address?: true
+  logoUrl?: true
+  primaryColor?: true
+  accentColor?: true
+  theme?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +120,10 @@ export type GymCountAggregateInputType = {
   email?: true
   phone?: true
   address?: true
+  logoUrl?: true
+  primaryColor?: true
+  accentColor?: true
+  theme?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -197,6 +221,10 @@ export type GymGroupByOutputType = {
   email: string | null
   phone: string | null
   address: string | null
+  logoUrl: string | null
+  primaryColor: string | null
+  accentColor: string | null
+  theme: string
   createdAt: Date
   updatedAt: Date
   _count: GymCountAggregateOutputType | null
@@ -230,6 +258,10 @@ export type GymWhereInput = {
   email?: Prisma.StringNullableFilter<"Gym"> | string | null
   phone?: Prisma.StringNullableFilter<"Gym"> | string | null
   address?: Prisma.StringNullableFilter<"Gym"> | string | null
+  logoUrl?: Prisma.StringNullableFilter<"Gym"> | string | null
+  primaryColor?: Prisma.StringNullableFilter<"Gym"> | string | null
+  accentColor?: Prisma.StringNullableFilter<"Gym"> | string | null
+  theme?: Prisma.StringFilter<"Gym"> | string
   createdAt?: Prisma.DateTimeFilter<"Gym"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Gym"> | Date | string
   users?: Prisma.UserListRelationFilter
@@ -241,6 +273,11 @@ export type GymWhereInput = {
   followUps?: Prisma.FollowUpListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
+  reminderLogs?: Prisma.RenewalReminderListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  classes?: Prisma.GymClassListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type GymOrderByWithRelationInput = {
@@ -249,6 +286,10 @@ export type GymOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  accentColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  theme?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
@@ -260,6 +301,11 @@ export type GymOrderByWithRelationInput = {
   followUps?: Prisma.FollowUpOrderByRelationAggregateInput
   renewalOrders?: Prisma.RenewalOrderOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  reminderLogs?: Prisma.RenewalReminderOrderByRelationAggregateInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  classes?: Prisma.GymClassOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type GymWhereUniqueInput = Prisma.AtLeast<{
@@ -271,6 +317,10 @@ export type GymWhereUniqueInput = Prisma.AtLeast<{
   email?: Prisma.StringNullableFilter<"Gym"> | string | null
   phone?: Prisma.StringNullableFilter<"Gym"> | string | null
   address?: Prisma.StringNullableFilter<"Gym"> | string | null
+  logoUrl?: Prisma.StringNullableFilter<"Gym"> | string | null
+  primaryColor?: Prisma.StringNullableFilter<"Gym"> | string | null
+  accentColor?: Prisma.StringNullableFilter<"Gym"> | string | null
+  theme?: Prisma.StringFilter<"Gym"> | string
   createdAt?: Prisma.DateTimeFilter<"Gym"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Gym"> | Date | string
   users?: Prisma.UserListRelationFilter
@@ -282,6 +332,11 @@ export type GymWhereUniqueInput = Prisma.AtLeast<{
   followUps?: Prisma.FollowUpListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
+  reminderLogs?: Prisma.RenewalReminderListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  classes?: Prisma.GymClassListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id">
 
 export type GymOrderByWithAggregationInput = {
@@ -290,6 +345,10 @@ export type GymOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  accentColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  theme?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.GymCountOrderByAggregateInput
@@ -308,6 +367,10 @@ export type GymScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"Gym"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Gym"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Gym"> | string | null
+  logoUrl?: Prisma.StringNullableWithAggregatesFilter<"Gym"> | string | null
+  primaryColor?: Prisma.StringNullableWithAggregatesFilter<"Gym"> | string | null
+  accentColor?: Prisma.StringNullableWithAggregatesFilter<"Gym"> | string | null
+  theme?: Prisma.StringWithAggregatesFilter<"Gym"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Gym"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Gym"> | Date | string
 }
@@ -317,6 +380,10 @@ export type GymCreateInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -328,6 +395,11 @@ export type GymCreateInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateInput = {
@@ -336,6 +408,10 @@ export type GymUncheckedCreateInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -347,6 +423,11 @@ export type GymUncheckedCreateInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymUpdateInput = {
@@ -354,6 +435,10 @@ export type GymUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -365,6 +450,11 @@ export type GymUpdateInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateInput = {
@@ -373,6 +463,10 @@ export type GymUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -384,6 +478,11 @@ export type GymUncheckedUpdateInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateManyInput = {
@@ -392,6 +491,10 @@ export type GymCreateManyInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -401,6 +504,10 @@ export type GymUpdateManyMutationInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -411,6 +518,10 @@ export type GymUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -426,6 +537,10 @@ export type GymCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -440,6 +555,10 @@ export type GymMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -450,12 +569,21 @@ export type GymMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type GymSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+}
+
+export type GymNullableScalarRelationFilter = {
+  is?: Prisma.GymWhereInput | null
+  isNot?: Prisma.GymWhereInput | null
 }
 
 export type GymCreateNestedOneWithoutRenewalOrdersInput = {
@@ -486,8 +614,32 @@ export type GymUpdateOneRequiredWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutPaymentsInput, Prisma.GymUpdateWithoutPaymentsInput>, Prisma.GymUncheckedUpdateWithoutPaymentsInput>
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type GymCreateNestedOneWithoutInvoicesInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutInvoicesInput, Prisma.GymUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutInvoicesInput
+  connect?: Prisma.GymWhereUniqueInput
+}
+
+export type GymUpdateOneRequiredWithoutInvoicesNestedInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutInvoicesInput, Prisma.GymUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutInvoicesInput
+  upsert?: Prisma.GymUpsertWithoutInvoicesInput
+  connect?: Prisma.GymWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutInvoicesInput, Prisma.GymUpdateWithoutInvoicesInput>, Prisma.GymUncheckedUpdateWithoutInvoicesInput>
+}
+
+export type GymCreateNestedOneWithoutReminderLogsInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutReminderLogsInput, Prisma.GymUncheckedCreateWithoutReminderLogsInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutReminderLogsInput
+  connect?: Prisma.GymWhereUniqueInput
+}
+
+export type GymUpdateOneRequiredWithoutReminderLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutReminderLogsInput, Prisma.GymUncheckedCreateWithoutReminderLogsInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutReminderLogsInput
+  upsert?: Prisma.GymUpsertWithoutReminderLogsInput
+  connect?: Prisma.GymWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutReminderLogsInput, Prisma.GymUpdateWithoutReminderLogsInput>, Prisma.GymUncheckedUpdateWithoutReminderLogsInput>
 }
 
 export type GymCreateNestedOneWithoutUsersInput = {
@@ -496,10 +648,12 @@ export type GymCreateNestedOneWithoutUsersInput = {
   connect?: Prisma.GymWhereUniqueInput
 }
 
-export type GymUpdateOneRequiredWithoutUsersNestedInput = {
+export type GymUpdateOneWithoutUsersNestedInput = {
   create?: Prisma.XOR<Prisma.GymCreateWithoutUsersInput, Prisma.GymUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.GymCreateOrConnectWithoutUsersInput
   upsert?: Prisma.GymUpsertWithoutUsersInput
+  disconnect?: Prisma.GymWhereInput | boolean
+  delete?: Prisma.GymWhereInput | boolean
   connect?: Prisma.GymWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutUsersInput, Prisma.GymUpdateWithoutUsersInput>, Prisma.GymUncheckedUpdateWithoutUsersInput>
 }
@@ -530,6 +684,48 @@ export type GymUpdateOneRequiredWithoutPlansNestedInput = {
   upsert?: Prisma.GymUpsertWithoutPlansInput
   connect?: Prisma.GymWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutPlansInput, Prisma.GymUpdateWithoutPlansInput>, Prisma.GymUncheckedUpdateWithoutPlansInput>
+}
+
+export type GymCreateNestedOneWithoutExpensesInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutExpensesInput, Prisma.GymUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutExpensesInput
+  connect?: Prisma.GymWhereUniqueInput
+}
+
+export type GymUpdateOneRequiredWithoutExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutExpensesInput, Prisma.GymUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutExpensesInput
+  upsert?: Prisma.GymUpsertWithoutExpensesInput
+  connect?: Prisma.GymWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutExpensesInput, Prisma.GymUpdateWithoutExpensesInput>, Prisma.GymUncheckedUpdateWithoutExpensesInput>
+}
+
+export type GymCreateNestedOneWithoutClassesInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutClassesInput, Prisma.GymUncheckedCreateWithoutClassesInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutClassesInput
+  connect?: Prisma.GymWhereUniqueInput
+}
+
+export type GymUpdateOneRequiredWithoutClassesNestedInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutClassesInput, Prisma.GymUncheckedCreateWithoutClassesInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutClassesInput
+  upsert?: Prisma.GymUpsertWithoutClassesInput
+  connect?: Prisma.GymWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutClassesInput, Prisma.GymUpdateWithoutClassesInput>, Prisma.GymUncheckedUpdateWithoutClassesInput>
+}
+
+export type GymCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutNotificationsInput, Prisma.GymUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.GymWhereUniqueInput
+}
+
+export type GymUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.GymCreateWithoutNotificationsInput, Prisma.GymUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.GymCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.GymUpsertWithoutNotificationsInput
+  connect?: Prisma.GymWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GymUpdateToOneWithWhereWithoutNotificationsInput, Prisma.GymUpdateWithoutNotificationsInput>, Prisma.GymUncheckedUpdateWithoutNotificationsInput>
 }
 
 export type GymCreateNestedOneWithoutMembershipsInput = {
@@ -593,6 +789,10 @@ export type GymCreateWithoutRenewalOrdersInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -603,6 +803,11 @@ export type GymCreateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutRenewalOrdersInput = {
@@ -611,6 +816,10 @@ export type GymUncheckedCreateWithoutRenewalOrdersInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -621,6 +830,11 @@ export type GymUncheckedCreateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutRenewalOrdersInput = {
@@ -644,6 +858,10 @@ export type GymUpdateWithoutRenewalOrdersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -654,6 +872,11 @@ export type GymUpdateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutRenewalOrdersInput = {
@@ -662,6 +885,10 @@ export type GymUncheckedUpdateWithoutRenewalOrdersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -672,6 +899,11 @@ export type GymUncheckedUpdateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutPaymentsInput = {
@@ -679,6 +911,10 @@ export type GymCreateWithoutPaymentsInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -689,6 +925,11 @@ export type GymCreateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutPaymentsInput = {
@@ -697,6 +938,10 @@ export type GymUncheckedCreateWithoutPaymentsInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -707,6 +952,11 @@ export type GymUncheckedCreateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutPaymentsInput = {
@@ -730,6 +980,10 @@ export type GymUpdateWithoutPaymentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -740,6 +994,11 @@ export type GymUpdateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutPaymentsInput = {
@@ -748,6 +1007,10 @@ export type GymUncheckedUpdateWithoutPaymentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -758,6 +1021,255 @@ export type GymUncheckedUpdateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
+}
+
+export type GymCreateWithoutInvoicesInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
+}
+
+export type GymUncheckedCreateWithoutInvoicesInput = {
+  id?: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanUncheckedCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
+}
+
+export type GymCreateOrConnectWithoutInvoicesInput = {
+  where: Prisma.GymWhereUniqueInput
+  create: Prisma.XOR<Prisma.GymCreateWithoutInvoicesInput, Prisma.GymUncheckedCreateWithoutInvoicesInput>
+}
+
+export type GymUpsertWithoutInvoicesInput = {
+  update: Prisma.XOR<Prisma.GymUpdateWithoutInvoicesInput, Prisma.GymUncheckedUpdateWithoutInvoicesInput>
+  create: Prisma.XOR<Prisma.GymCreateWithoutInvoicesInput, Prisma.GymUncheckedCreateWithoutInvoicesInput>
+  where?: Prisma.GymWhereInput
+}
+
+export type GymUpdateToOneWithWhereWithoutInvoicesInput = {
+  where?: Prisma.GymWhereInput
+  data: Prisma.XOR<Prisma.GymUpdateWithoutInvoicesInput, Prisma.GymUncheckedUpdateWithoutInvoicesInput>
+}
+
+export type GymUpdateWithoutInvoicesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
+}
+
+export type GymUncheckedUpdateWithoutInvoicesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUncheckedUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
+}
+
+export type GymCreateWithoutReminderLogsInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
+}
+
+export type GymUncheckedCreateWithoutReminderLogsInput = {
+  id?: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanUncheckedCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
+}
+
+export type GymCreateOrConnectWithoutReminderLogsInput = {
+  where: Prisma.GymWhereUniqueInput
+  create: Prisma.XOR<Prisma.GymCreateWithoutReminderLogsInput, Prisma.GymUncheckedCreateWithoutReminderLogsInput>
+}
+
+export type GymUpsertWithoutReminderLogsInput = {
+  update: Prisma.XOR<Prisma.GymUpdateWithoutReminderLogsInput, Prisma.GymUncheckedUpdateWithoutReminderLogsInput>
+  create: Prisma.XOR<Prisma.GymCreateWithoutReminderLogsInput, Prisma.GymUncheckedCreateWithoutReminderLogsInput>
+  where?: Prisma.GymWhereInput
+}
+
+export type GymUpdateToOneWithWhereWithoutReminderLogsInput = {
+  where?: Prisma.GymWhereInput
+  data: Prisma.XOR<Prisma.GymUpdateWithoutReminderLogsInput, Prisma.GymUncheckedUpdateWithoutReminderLogsInput>
+}
+
+export type GymUpdateWithoutReminderLogsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
+}
+
+export type GymUncheckedUpdateWithoutReminderLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUncheckedUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutUsersInput = {
@@ -765,6 +1277,10 @@ export type GymCreateWithoutUsersInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.MemberCreateNestedManyWithoutGymInput
@@ -775,6 +1291,11 @@ export type GymCreateWithoutUsersInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutUsersInput = {
@@ -783,6 +1304,10 @@ export type GymUncheckedCreateWithoutUsersInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGymInput
@@ -793,6 +1318,11 @@ export type GymUncheckedCreateWithoutUsersInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutUsersInput = {
@@ -816,6 +1346,10 @@ export type GymUpdateWithoutUsersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.MemberUpdateManyWithoutGymNestedInput
@@ -826,6 +1360,11 @@ export type GymUpdateWithoutUsersInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutUsersInput = {
@@ -834,6 +1373,10 @@ export type GymUncheckedUpdateWithoutUsersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
@@ -844,6 +1387,11 @@ export type GymUncheckedUpdateWithoutUsersInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutMembersInput = {
@@ -851,6 +1399,10 @@ export type GymCreateWithoutMembersInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -861,6 +1413,11 @@ export type GymCreateWithoutMembersInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutMembersInput = {
@@ -869,6 +1426,10 @@ export type GymUncheckedCreateWithoutMembersInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -879,6 +1440,11 @@ export type GymUncheckedCreateWithoutMembersInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutMembersInput = {
@@ -902,6 +1468,10 @@ export type GymUpdateWithoutMembersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -912,6 +1482,11 @@ export type GymUpdateWithoutMembersInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutMembersInput = {
@@ -920,6 +1495,10 @@ export type GymUncheckedUpdateWithoutMembersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -930,6 +1509,11 @@ export type GymUncheckedUpdateWithoutMembersInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutPlansInput = {
@@ -937,6 +1521,10 @@ export type GymCreateWithoutPlansInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -947,6 +1535,11 @@ export type GymCreateWithoutPlansInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutPlansInput = {
@@ -955,6 +1548,10 @@ export type GymUncheckedCreateWithoutPlansInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -965,6 +1562,11 @@ export type GymUncheckedCreateWithoutPlansInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutPlansInput = {
@@ -988,6 +1590,10 @@ export type GymUpdateWithoutPlansInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -998,6 +1604,11 @@ export type GymUpdateWithoutPlansInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutPlansInput = {
@@ -1006,6 +1617,10 @@ export type GymUncheckedUpdateWithoutPlansInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -1016,6 +1631,377 @@ export type GymUncheckedUpdateWithoutPlansInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
+}
+
+export type GymCreateWithoutExpensesInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
+}
+
+export type GymUncheckedCreateWithoutExpensesInput = {
+  id?: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanUncheckedCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
+}
+
+export type GymCreateOrConnectWithoutExpensesInput = {
+  where: Prisma.GymWhereUniqueInput
+  create: Prisma.XOR<Prisma.GymCreateWithoutExpensesInput, Prisma.GymUncheckedCreateWithoutExpensesInput>
+}
+
+export type GymUpsertWithoutExpensesInput = {
+  update: Prisma.XOR<Prisma.GymUpdateWithoutExpensesInput, Prisma.GymUncheckedUpdateWithoutExpensesInput>
+  create: Prisma.XOR<Prisma.GymCreateWithoutExpensesInput, Prisma.GymUncheckedCreateWithoutExpensesInput>
+  where?: Prisma.GymWhereInput
+}
+
+export type GymUpdateToOneWithWhereWithoutExpensesInput = {
+  where?: Prisma.GymWhereInput
+  data: Prisma.XOR<Prisma.GymUpdateWithoutExpensesInput, Prisma.GymUncheckedUpdateWithoutExpensesInput>
+}
+
+export type GymUpdateWithoutExpensesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
+}
+
+export type GymUncheckedUpdateWithoutExpensesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUncheckedUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
+}
+
+export type GymCreateWithoutClassesInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
+}
+
+export type GymUncheckedCreateWithoutClassesInput = {
+  id?: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanUncheckedCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
+}
+
+export type GymCreateOrConnectWithoutClassesInput = {
+  where: Prisma.GymWhereUniqueInput
+  create: Prisma.XOR<Prisma.GymCreateWithoutClassesInput, Prisma.GymUncheckedCreateWithoutClassesInput>
+}
+
+export type GymUpsertWithoutClassesInput = {
+  update: Prisma.XOR<Prisma.GymUpdateWithoutClassesInput, Prisma.GymUncheckedUpdateWithoutClassesInput>
+  create: Prisma.XOR<Prisma.GymCreateWithoutClassesInput, Prisma.GymUncheckedCreateWithoutClassesInput>
+  where?: Prisma.GymWhereInput
+}
+
+export type GymUpdateToOneWithWhereWithoutClassesInput = {
+  where?: Prisma.GymWhereInput
+  data: Prisma.XOR<Prisma.GymUpdateWithoutClassesInput, Prisma.GymUncheckedUpdateWithoutClassesInput>
+}
+
+export type GymUpdateWithoutClassesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
+}
+
+export type GymUncheckedUpdateWithoutClassesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUncheckedUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
+}
+
+export type GymCreateWithoutNotificationsInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+}
+
+export type GymUncheckedCreateWithoutNotificationsInput = {
+  id?: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutGymInput
+  plans?: Prisma.PlanUncheckedCreateNestedManyWithoutGymInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutGymInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutGymInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+}
+
+export type GymCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.GymWhereUniqueInput
+  create: Prisma.XOR<Prisma.GymCreateWithoutNotificationsInput, Prisma.GymUncheckedCreateWithoutNotificationsInput>
+}
+
+export type GymUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.GymUpdateWithoutNotificationsInput, Prisma.GymUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.GymCreateWithoutNotificationsInput, Prisma.GymUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.GymWhereInput
+}
+
+export type GymUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.GymWhereInput
+  data: Prisma.XOR<Prisma.GymUpdateWithoutNotificationsInput, Prisma.GymUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type GymUpdateWithoutNotificationsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+}
+
+export type GymUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutGymNestedInput
+  plans?: Prisma.PlanUncheckedUpdateManyWithoutGymNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutGymNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutGymNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutMembershipsInput = {
@@ -1023,6 +2009,10 @@ export type GymCreateWithoutMembershipsInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -1033,6 +2023,11 @@ export type GymCreateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutMembershipsInput = {
@@ -1041,6 +2036,10 @@ export type GymUncheckedCreateWithoutMembershipsInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -1051,6 +2050,11 @@ export type GymUncheckedCreateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutMembershipsInput = {
@@ -1074,6 +2078,10 @@ export type GymUpdateWithoutMembershipsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -1084,6 +2092,11 @@ export type GymUpdateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutMembershipsInput = {
@@ -1092,6 +2105,10 @@ export type GymUncheckedUpdateWithoutMembershipsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -1102,6 +2119,11 @@ export type GymUncheckedUpdateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutAttendancesInput = {
@@ -1109,6 +2131,10 @@ export type GymCreateWithoutAttendancesInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -1119,6 +2145,11 @@ export type GymCreateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutAttendancesInput = {
@@ -1127,6 +2158,10 @@ export type GymUncheckedCreateWithoutAttendancesInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -1137,6 +2172,11 @@ export type GymUncheckedCreateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutAttendancesInput = {
@@ -1160,6 +2200,10 @@ export type GymUpdateWithoutAttendancesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -1170,6 +2214,11 @@ export type GymUpdateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutAttendancesInput = {
@@ -1178,6 +2227,10 @@ export type GymUncheckedUpdateWithoutAttendancesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -1188,6 +2241,11 @@ export type GymUncheckedUpdateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutNoShowCasesInput = {
@@ -1195,6 +2253,10 @@ export type GymCreateWithoutNoShowCasesInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -1205,6 +2267,11 @@ export type GymCreateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutNoShowCasesInput = {
@@ -1213,6 +2280,10 @@ export type GymUncheckedCreateWithoutNoShowCasesInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -1223,6 +2294,11 @@ export type GymUncheckedCreateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutNoShowCasesInput = {
@@ -1246,6 +2322,10 @@ export type GymUpdateWithoutNoShowCasesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -1256,6 +2336,11 @@ export type GymUpdateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutNoShowCasesInput = {
@@ -1264,6 +2349,10 @@ export type GymUncheckedUpdateWithoutNoShowCasesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -1274,6 +2363,11 @@ export type GymUncheckedUpdateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 export type GymCreateWithoutFollowUpsInput = {
@@ -1281,6 +2375,10 @@ export type GymCreateWithoutFollowUpsInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutGymInput
@@ -1291,6 +2389,11 @@ export type GymCreateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutGymInput
 }
 
 export type GymUncheckedCreateWithoutFollowUpsInput = {
@@ -1299,6 +2402,10 @@ export type GymUncheckedCreateWithoutFollowUpsInput = {
   email?: string | null
   phone?: string | null
   address?: string | null
+  logoUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  theme?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutGymInput
@@ -1309,6 +2416,11 @@ export type GymUncheckedCreateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutGymInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutGymInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutGymInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutGymInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutGymInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutGymInput
+  classes?: Prisma.GymClassUncheckedCreateNestedManyWithoutGymInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutGymInput
 }
 
 export type GymCreateOrConnectWithoutFollowUpsInput = {
@@ -1332,6 +2444,10 @@ export type GymUpdateWithoutFollowUpsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutGymNestedInput
@@ -1342,6 +2458,11 @@ export type GymUpdateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutGymNestedInput
 }
 
 export type GymUncheckedUpdateWithoutFollowUpsInput = {
@@ -1350,6 +2471,10 @@ export type GymUncheckedUpdateWithoutFollowUpsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutGymNestedInput
@@ -1360,6 +2485,11 @@ export type GymUncheckedUpdateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutGymNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutGymNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutGymNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutGymNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutGymNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutGymNestedInput
+  classes?: Prisma.GymClassUncheckedUpdateManyWithoutGymNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutGymNestedInput
 }
 
 
@@ -1377,6 +2507,11 @@ export type GymCountOutputType = {
   followUps: number
   renewalOrders: number
   payments: number
+  invoices: number
+  reminderLogs: number
+  expenses: number
+  classes: number
+  notifications: number
 }
 
 export type GymCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1389,6 +2524,11 @@ export type GymCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.In
   followUps?: boolean | GymCountOutputTypeCountFollowUpsArgs
   renewalOrders?: boolean | GymCountOutputTypeCountRenewalOrdersArgs
   payments?: boolean | GymCountOutputTypeCountPaymentsArgs
+  invoices?: boolean | GymCountOutputTypeCountInvoicesArgs
+  reminderLogs?: boolean | GymCountOutputTypeCountReminderLogsArgs
+  expenses?: boolean | GymCountOutputTypeCountExpensesArgs
+  classes?: boolean | GymCountOutputTypeCountClassesArgs
+  notifications?: boolean | GymCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -1464,6 +2604,41 @@ export type GymCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.PaymentWhereInput
 }
 
+/**
+ * GymCountOutputType without action
+ */
+export type GymCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvoiceWhereInput
+}
+
+/**
+ * GymCountOutputType without action
+ */
+export type GymCountOutputTypeCountReminderLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RenewalReminderWhereInput
+}
+
+/**
+ * GymCountOutputType without action
+ */
+export type GymCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
+/**
+ * GymCountOutputType without action
+ */
+export type GymCountOutputTypeCountClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GymClassWhereInput
+}
+
+/**
+ * GymCountOutputType without action
+ */
+export type GymCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type GymSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1471,6 +2646,10 @@ export type GymSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   email?: boolean
   phone?: boolean
   address?: boolean
+  logoUrl?: boolean
+  primaryColor?: boolean
+  accentColor?: boolean
+  theme?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   users?: boolean | Prisma.Gym$usersArgs<ExtArgs>
@@ -1482,6 +2661,11 @@ export type GymSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   followUps?: boolean | Prisma.Gym$followUpsArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Gym$renewalOrdersArgs<ExtArgs>
   payments?: boolean | Prisma.Gym$paymentsArgs<ExtArgs>
+  invoices?: boolean | Prisma.Gym$invoicesArgs<ExtArgs>
+  reminderLogs?: boolean | Prisma.Gym$reminderLogsArgs<ExtArgs>
+  expenses?: boolean | Prisma.Gym$expensesArgs<ExtArgs>
+  classes?: boolean | Prisma.Gym$classesArgs<ExtArgs>
+  notifications?: boolean | Prisma.Gym$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.GymCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gym"]>
 
@@ -1491,6 +2675,10 @@ export type GymSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   email?: boolean
   phone?: boolean
   address?: boolean
+  logoUrl?: boolean
+  primaryColor?: boolean
+  accentColor?: boolean
+  theme?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["gym"]>
@@ -1501,6 +2689,10 @@ export type GymSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   email?: boolean
   phone?: boolean
   address?: boolean
+  logoUrl?: boolean
+  primaryColor?: boolean
+  accentColor?: boolean
+  theme?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["gym"]>
@@ -1511,11 +2703,15 @@ export type GymSelectScalar = {
   email?: boolean
   phone?: boolean
   address?: boolean
+  logoUrl?: boolean
+  primaryColor?: boolean
+  accentColor?: boolean
+  theme?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type GymOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["gym"]>
+export type GymOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "address" | "logoUrl" | "primaryColor" | "accentColor" | "theme" | "createdAt" | "updatedAt", ExtArgs["result"]["gym"]>
 export type GymInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Gym$usersArgs<ExtArgs>
   members?: boolean | Prisma.Gym$membersArgs<ExtArgs>
@@ -1526,6 +2722,11 @@ export type GymInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   followUps?: boolean | Prisma.Gym$followUpsArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Gym$renewalOrdersArgs<ExtArgs>
   payments?: boolean | Prisma.Gym$paymentsArgs<ExtArgs>
+  invoices?: boolean | Prisma.Gym$invoicesArgs<ExtArgs>
+  reminderLogs?: boolean | Prisma.Gym$reminderLogsArgs<ExtArgs>
+  expenses?: boolean | Prisma.Gym$expensesArgs<ExtArgs>
+  classes?: boolean | Prisma.Gym$classesArgs<ExtArgs>
+  notifications?: boolean | Prisma.Gym$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.GymCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GymIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1543,6 +2744,11 @@ export type $GymPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     followUps: Prisma.$FollowUpPayload<ExtArgs>[]
     renewalOrders: Prisma.$RenewalOrderPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    reminderLogs: Prisma.$RenewalReminderPayload<ExtArgs>[]
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
+    classes: Prisma.$GymClassPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1550,6 +2756,10 @@ export type $GymPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     email: string | null
     phone: string | null
     address: string | null
+    logoUrl: string | null
+    primaryColor: string | null
+    accentColor: string | null
+    theme: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["gym"]>
@@ -1955,6 +3165,11 @@ export interface Prisma__GymClient<T, Null = never, ExtArgs extends runtime.Type
   followUps<T extends Prisma.Gym$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   renewalOrders<T extends Prisma.Gym$renewalOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$renewalOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenewalOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.Gym$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invoices<T extends Prisma.Gym$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminderLogs<T extends Prisma.Gym$reminderLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$reminderLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenewalReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenses<T extends Prisma.Gym$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classes<T extends Prisma.Gym$classesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$classesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GymClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Gym$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gym$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1989,6 +3204,10 @@ export interface GymFieldRefs {
   readonly email: Prisma.FieldRef<"Gym", 'String'>
   readonly phone: Prisma.FieldRef<"Gym", 'String'>
   readonly address: Prisma.FieldRef<"Gym", 'String'>
+  readonly logoUrl: Prisma.FieldRef<"Gym", 'String'>
+  readonly primaryColor: Prisma.FieldRef<"Gym", 'String'>
+  readonly accentColor: Prisma.FieldRef<"Gym", 'String'>
+  readonly theme: Prisma.FieldRef<"Gym", 'String'>
   readonly createdAt: Prisma.FieldRef<"Gym", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Gym", 'DateTime'>
 }
@@ -2597,6 +3816,126 @@ export type Gym$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * Gym.invoices
+ */
+export type Gym$invoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invoice
+   */
+  select?: Prisma.InvoiceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invoice
+   */
+  omit?: Prisma.InvoiceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceInclude<ExtArgs> | null
+  where?: Prisma.InvoiceWhereInput
+  orderBy?: Prisma.InvoiceOrderByWithRelationInput | Prisma.InvoiceOrderByWithRelationInput[]
+  cursor?: Prisma.InvoiceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
+}
+
+/**
+ * Gym.reminderLogs
+ */
+export type Gym$reminderLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RenewalReminder
+   */
+  select?: Prisma.RenewalReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RenewalReminder
+   */
+  omit?: Prisma.RenewalReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RenewalReminderInclude<ExtArgs> | null
+  where?: Prisma.RenewalReminderWhereInput
+  orderBy?: Prisma.RenewalReminderOrderByWithRelationInput | Prisma.RenewalReminderOrderByWithRelationInput[]
+  cursor?: Prisma.RenewalReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RenewalReminderScalarFieldEnum | Prisma.RenewalReminderScalarFieldEnum[]
+}
+
+/**
+ * Gym.expenses
+ */
+export type Gym$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
+}
+
+/**
+ * Gym.classes
+ */
+export type Gym$classesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GymClass
+   */
+  select?: Prisma.GymClassSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GymClass
+   */
+  omit?: Prisma.GymClassOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GymClassInclude<ExtArgs> | null
+  where?: Prisma.GymClassWhereInput
+  orderBy?: Prisma.GymClassOrderByWithRelationInput | Prisma.GymClassOrderByWithRelationInput[]
+  cursor?: Prisma.GymClassWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GymClassScalarFieldEnum | Prisma.GymClassScalarFieldEnum[]
+}
+
+/**
+ * Gym.notifications
+ */
+export type Gym$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

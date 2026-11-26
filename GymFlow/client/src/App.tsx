@@ -10,7 +10,8 @@ import Memberships from "./pages/Memberships";
 import Plans from "./pages/Plans";
 import Settings from "./pages/Settings";
 import RetentionAnalytics from "./pages/RetentionAnalytics";
-import { apiFetch, getGymId } from "./services/api";
+import Operations from "./pages/Operations";
+import { apiFetch, getAssetUrl, getGymId } from "./services/api";
 
 type UserData = {
   id: number;
@@ -25,6 +26,9 @@ type DashboardData = {
   gym: {
     id: number;
     name: string;
+    logoUrl?: string | null;
+    primaryColor?: string | null;
+    accentColor?: string | null;
   };
 
   stats: {
@@ -63,7 +67,8 @@ type Page =
   | "memberships"
   | "plans"
   | "settings"
-  | "retention";
+  | "retention"
+  | "operations";
 
 function getInitials(name: string) {
   return name
@@ -395,7 +400,7 @@ function App() {
   /* ================= MAIN APP ================= */
 
   return (
-    <div className="app">
+    <div className="app" style={{ "--brand-primary": dashboard.gym.primaryColor || "#6d63ff", "--brand-accent": dashboard.gym.accentColor || "#111827" } as React.CSSProperties}>
 
       {/* ================= SIDEBAR ================= */}
 
@@ -406,7 +411,7 @@ function App() {
         <div className="brand">
 
           <div className="brand-icon">
-            G
+            {dashboard.gym.logoUrl ? <img src={getAssetUrl(dashboard.gym.logoUrl)} alt="Gym logo" /> : "G"}
           </div>
 
           <div>
@@ -536,6 +541,11 @@ function App() {
             Retention Analytics
           </button>
 
+          <button type="button" className={currentPage === "operations" ? "nav-item active" : "nav-item"} onClick={() => setCurrentPage("operations")}>
+            <span>⚙️</span>
+            Business Tools
+          </button>
+
         </nav>
 
         {/* SIDEBAR BOTTOM */}
@@ -564,9 +574,7 @@ function App() {
           <div className="gym-profile">
 
             <div className="profile-avatar">
-              {getInitials(
-                dashboard.gym.name,
-              )}
+              {dashboard.gym.logoUrl ? <img src={getAssetUrl(dashboard.gym.logoUrl)} alt="Gym logo" /> : getInitials(dashboard.gym.name)}
             </div>
 
             <div>
@@ -710,6 +718,8 @@ function App() {
                               ? "Settings"
                               : currentPage === "retention"
                                 ? "Retention Analytics"
+                              : currentPage === "operations"
+                                ? "Business Tools"
                               : "Management"}
             </h2>
 
@@ -787,6 +797,8 @@ function App() {
         )}
 
         {currentPage === "retention" && <RetentionAnalytics />}
+
+        {currentPage === "operations" && <Operations />}
 
         {/* ================= DASHBOARD ================= */}
 

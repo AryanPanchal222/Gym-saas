@@ -1,6 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import path from "node:path";
 
 import prisma from "./lib/prisma.js";
 
@@ -15,6 +16,9 @@ import followUpRoutes from "./routes/followUp.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 import renewalRoutes from "./routes/renewal.routes.js";
 import memberPortalRoutes from "./routes/memberPortal.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
+import operationsRoutes from "./routes/operations.routes.js";
+import { startRenewalReminderScheduler } from "./services/renewal.scheduler.js";
 
 import {
   requireAuth,
@@ -29,6 +33,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
 
 /* ================= HEALTH ================= */
 
@@ -63,6 +68,7 @@ app.get("/api/db-test", async (_req, res) => {
 /* ================= AUTH ================= */
 
 app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/member-portal", memberPortalRoutes);
 
 /* ================= GYM ROUTES ================= */
@@ -127,6 +133,11 @@ app.use(
   renewalRoutes,
 );
 
+app.use(
+  "/api/gyms/:gymId/operations",
+  operationsRoutes,
+);
+
 
 
 
@@ -136,5 +147,6 @@ app.listen(PORT, () => {
   console.log(
     `GymFlow API running on http://localhost:${PORT}`,
   );
+  startRenewalReminderScheduler();
 });
 

@@ -28,6 +28,16 @@ export type RenewalOrder = Prisma.RenewalOrderModel
  */
 export type Payment = Prisma.PaymentModel
 /**
+ * Model Invoice
+ * 
+ */
+export type Invoice = Prisma.InvoiceModel
+/**
+ * Model RenewalReminder
+ * 
+ */
+export type RenewalReminder = Prisma.RenewalReminderModel
+/**
  * Model Gym
  * 
  */
@@ -47,6 +57,26 @@ export type Member = Prisma.MemberModel
  * 
  */
 export type Plan = Prisma.PlanModel
+/**
+ * Model Expense
+ * 
+ */
+export type Expense = Prisma.ExpenseModel
+/**
+ * Model GymClass
+ * 
+ */
+export type GymClass = Prisma.GymClassModel
+/**
+ * Model ClassBooking
+ * 
+ */
+export type ClassBooking = Prisma.ClassBookingModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
 /**
  * Model Membership
  * 

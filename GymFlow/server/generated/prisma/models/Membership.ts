@@ -265,6 +265,7 @@ export type MembershipWhereInput = {
   plan?: Prisma.XOR<Prisma.PlanScalarRelationFilter, Prisma.PlanWhereInput>
   attendances?: Prisma.AttendanceListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
+  reminderLogs?: Prisma.RenewalReminderListRelationFilter
 }
 
 export type MembershipOrderByWithRelationInput = {
@@ -282,6 +283,7 @@ export type MembershipOrderByWithRelationInput = {
   plan?: Prisma.PlanOrderByWithRelationInput
   attendances?: Prisma.AttendanceOrderByRelationAggregateInput
   renewalOrders?: Prisma.RenewalOrderOrderByRelationAggregateInput
+  reminderLogs?: Prisma.RenewalReminderOrderByRelationAggregateInput
 }
 
 export type MembershipWhereUniqueInput = Prisma.AtLeast<{
@@ -302,6 +304,7 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   plan?: Prisma.XOR<Prisma.PlanScalarRelationFilter, Prisma.PlanWhereInput>
   attendances?: Prisma.AttendanceListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
+  reminderLogs?: Prisma.RenewalReminderListRelationFilter
 }, "id">
 
 export type MembershipOrderByWithAggregationInput = {
@@ -347,6 +350,7 @@ export type MembershipCreateInput = {
   plan: Prisma.PlanCreateNestedOneWithoutMembershipsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipUncheckedCreateInput = {
@@ -361,6 +365,7 @@ export type MembershipUncheckedCreateInput = {
   updatedAt?: Date | string
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipUpdateInput = {
@@ -374,6 +379,7 @@ export type MembershipUpdateInput = {
   plan?: Prisma.PlanUpdateOneRequiredWithoutMembershipsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateInput = {
@@ -388,6 +394,7 @@ export type MembershipUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipCreateManyInput = {
@@ -499,6 +506,20 @@ export type MembershipUpdateOneRequiredWithoutRenewalOrdersNestedInput = {
   upsert?: Prisma.MembershipUpsertWithoutRenewalOrdersInput
   connect?: Prisma.MembershipWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MembershipUpdateToOneWithWhereWithoutRenewalOrdersInput, Prisma.MembershipUpdateWithoutRenewalOrdersInput>, Prisma.MembershipUncheckedUpdateWithoutRenewalOrdersInput>
+}
+
+export type MembershipCreateNestedOneWithoutReminderLogsInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutReminderLogsInput, Prisma.MembershipUncheckedCreateWithoutReminderLogsInput>
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutReminderLogsInput
+  connect?: Prisma.MembershipWhereUniqueInput
+}
+
+export type MembershipUpdateOneRequiredWithoutReminderLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutReminderLogsInput, Prisma.MembershipUncheckedCreateWithoutReminderLogsInput>
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutReminderLogsInput
+  upsert?: Prisma.MembershipUpsertWithoutReminderLogsInput
+  connect?: Prisma.MembershipWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MembershipUpdateToOneWithWhereWithoutReminderLogsInput, Prisma.MembershipUpdateWithoutReminderLogsInput>, Prisma.MembershipUncheckedUpdateWithoutReminderLogsInput>
 }
 
 export type MembershipCreateNestedManyWithoutGymInput = {
@@ -655,6 +676,7 @@ export type MembershipCreateWithoutRenewalOrdersInput = {
   member: Prisma.MemberCreateNestedOneWithoutMembershipsInput
   plan: Prisma.PlanCreateNestedOneWithoutMembershipsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutRenewalOrdersInput = {
@@ -668,6 +690,7 @@ export type MembershipUncheckedCreateWithoutRenewalOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutRenewalOrdersInput = {
@@ -696,6 +719,7 @@ export type MembershipUpdateWithoutRenewalOrdersInput = {
   member?: Prisma.MemberUpdateOneRequiredWithoutMembershipsNestedInput
   plan?: Prisma.PlanUpdateOneRequiredWithoutMembershipsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutRenewalOrdersInput = {
@@ -709,6 +733,77 @@ export type MembershipUncheckedUpdateWithoutRenewalOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMembershipNestedInput
+}
+
+export type MembershipCreateWithoutReminderLogsInput = {
+  startDate: Date | string
+  endDate: Date | string
+  status?: $Enums.MembershipStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gym: Prisma.GymCreateNestedOneWithoutMembershipsInput
+  member: Prisma.MemberCreateNestedOneWithoutMembershipsInput
+  plan: Prisma.PlanCreateNestedOneWithoutMembershipsInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutMembershipInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMembershipInput
+}
+
+export type MembershipUncheckedCreateWithoutReminderLogsInput = {
+  id?: number
+  gymId: number
+  memberId: number
+  planId: number
+  startDate: Date | string
+  endDate: Date | string
+  status?: $Enums.MembershipStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMembershipInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMembershipInput
+}
+
+export type MembershipCreateOrConnectWithoutReminderLogsInput = {
+  where: Prisma.MembershipWhereUniqueInput
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutReminderLogsInput, Prisma.MembershipUncheckedCreateWithoutReminderLogsInput>
+}
+
+export type MembershipUpsertWithoutReminderLogsInput = {
+  update: Prisma.XOR<Prisma.MembershipUpdateWithoutReminderLogsInput, Prisma.MembershipUncheckedUpdateWithoutReminderLogsInput>
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutReminderLogsInput, Prisma.MembershipUncheckedCreateWithoutReminderLogsInput>
+  where?: Prisma.MembershipWhereInput
+}
+
+export type MembershipUpdateToOneWithWhereWithoutReminderLogsInput = {
+  where?: Prisma.MembershipWhereInput
+  data: Prisma.XOR<Prisma.MembershipUpdateWithoutReminderLogsInput, Prisma.MembershipUncheckedUpdateWithoutReminderLogsInput>
+}
+
+export type MembershipUpdateWithoutReminderLogsInput = {
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMembershipStatusFieldUpdateOperationsInput | $Enums.MembershipStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gym?: Prisma.GymUpdateOneRequiredWithoutMembershipsNestedInput
+  member?: Prisma.MemberUpdateOneRequiredWithoutMembershipsNestedInput
+  plan?: Prisma.PlanUpdateOneRequiredWithoutMembershipsNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutMembershipNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMembershipNestedInput
+}
+
+export type MembershipUncheckedUpdateWithoutReminderLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gymId?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  planId?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMembershipStatusFieldUpdateOperationsInput | $Enums.MembershipStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMembershipNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipCreateWithoutGymInput = {
@@ -721,6 +816,7 @@ export type MembershipCreateWithoutGymInput = {
   plan: Prisma.PlanCreateNestedOneWithoutMembershipsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutGymInput = {
@@ -734,6 +830,7 @@ export type MembershipUncheckedCreateWithoutGymInput = {
   updatedAt?: Date | string
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutGymInput = {
@@ -787,6 +884,7 @@ export type MembershipCreateWithoutMemberInput = {
   plan: Prisma.PlanCreateNestedOneWithoutMembershipsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutMemberInput = {
@@ -800,6 +898,7 @@ export type MembershipUncheckedCreateWithoutMemberInput = {
   updatedAt?: Date | string
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutMemberInput = {
@@ -838,6 +937,7 @@ export type MembershipCreateWithoutPlanInput = {
   member: Prisma.MemberCreateNestedOneWithoutMembershipsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutPlanInput = {
@@ -851,6 +951,7 @@ export type MembershipUncheckedCreateWithoutPlanInput = {
   updatedAt?: Date | string
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMembershipInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutPlanInput = {
@@ -889,6 +990,7 @@ export type MembershipCreateWithoutAttendancesInput = {
   member: Prisma.MemberCreateNestedOneWithoutMembershipsInput
   plan: Prisma.PlanCreateNestedOneWithoutMembershipsInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutAttendancesInput = {
@@ -902,6 +1004,7 @@ export type MembershipUncheckedCreateWithoutAttendancesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMembershipInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutAttendancesInput = {
@@ -930,6 +1033,7 @@ export type MembershipUpdateWithoutAttendancesInput = {
   member?: Prisma.MemberUpdateOneRequiredWithoutMembershipsNestedInput
   plan?: Prisma.PlanUpdateOneRequiredWithoutMembershipsNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutAttendancesInput = {
@@ -943,6 +1047,7 @@ export type MembershipUncheckedUpdateWithoutAttendancesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipCreateManyGymInput = {
@@ -966,6 +1071,7 @@ export type MembershipUpdateWithoutGymInput = {
   plan?: Prisma.PlanUpdateOneRequiredWithoutMembershipsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutGymInput = {
@@ -979,6 +1085,7 @@ export type MembershipUncheckedUpdateWithoutGymInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutGymInput = {
@@ -1013,6 +1120,7 @@ export type MembershipUpdateWithoutMemberInput = {
   plan?: Prisma.PlanUpdateOneRequiredWithoutMembershipsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutMemberInput = {
@@ -1026,6 +1134,7 @@ export type MembershipUncheckedUpdateWithoutMemberInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutMemberInput = {
@@ -1060,6 +1169,7 @@ export type MembershipUpdateWithoutPlanInput = {
   member?: Prisma.MemberUpdateOneRequiredWithoutMembershipsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutPlanInput = {
@@ -1073,6 +1183,7 @@ export type MembershipUncheckedUpdateWithoutPlanInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMembershipNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMembershipNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutPlanInput = {
@@ -1094,11 +1205,13 @@ export type MembershipUncheckedUpdateManyWithoutPlanInput = {
 export type MembershipCountOutputType = {
   attendances: number
   renewalOrders: number
+  reminderLogs: number
 }
 
 export type MembershipCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attendances?: boolean | MembershipCountOutputTypeCountAttendancesArgs
   renewalOrders?: boolean | MembershipCountOutputTypeCountRenewalOrdersArgs
+  reminderLogs?: boolean | MembershipCountOutputTypeCountReminderLogsArgs
 }
 
 /**
@@ -1125,6 +1238,13 @@ export type MembershipCountOutputTypeCountRenewalOrdersArgs<ExtArgs extends runt
   where?: Prisma.RenewalOrderWhereInput
 }
 
+/**
+ * MembershipCountOutputType without action
+ */
+export type MembershipCountOutputTypeCountReminderLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RenewalReminderWhereInput
+}
+
 
 export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1141,6 +1261,7 @@ export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   plan?: boolean | Prisma.PlanDefaultArgs<ExtArgs>
   attendances?: boolean | Prisma.Membership$attendancesArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Membership$renewalOrdersArgs<ExtArgs>
+  reminderLogs?: boolean | Prisma.Membership$reminderLogsArgs<ExtArgs>
   _count?: boolean | Prisma.MembershipCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
@@ -1193,6 +1314,7 @@ export type MembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   plan?: boolean | Prisma.PlanDefaultArgs<ExtArgs>
   attendances?: boolean | Prisma.Membership$attendancesArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Membership$renewalOrdersArgs<ExtArgs>
+  reminderLogs?: boolean | Prisma.Membership$reminderLogsArgs<ExtArgs>
   _count?: boolean | Prisma.MembershipCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MembershipIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1214,6 +1336,7 @@ export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.Internal
     plan: Prisma.$PlanPayload<ExtArgs>
     attendances: Prisma.$AttendancePayload<ExtArgs>[]
     renewalOrders: Prisma.$RenewalOrderPayload<ExtArgs>[]
+    reminderLogs: Prisma.$RenewalReminderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1624,6 +1747,7 @@ export interface Prisma__MembershipClient<T, Null = never, ExtArgs extends runti
   plan<T extends Prisma.PlanDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlanDefaultArgs<ExtArgs>>): Prisma.Prisma__PlanClient<runtime.Types.Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   attendances<T extends Prisma.Membership$attendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   renewalOrders<T extends Prisma.Membership$renewalOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$renewalOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenewalOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminderLogs<T extends Prisma.Membership$reminderLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$reminderLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenewalReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2108,6 +2232,30 @@ export type Membership$renewalOrdersArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.RenewalOrderScalarFieldEnum | Prisma.RenewalOrderScalarFieldEnum[]
+}
+
+/**
+ * Membership.reminderLogs
+ */
+export type Membership$reminderLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RenewalReminder
+   */
+  select?: Prisma.RenewalReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RenewalReminder
+   */
+  omit?: Prisma.RenewalReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RenewalReminderInclude<ExtArgs> | null
+  where?: Prisma.RenewalReminderWhereInput
+  orderBy?: Prisma.RenewalReminderOrderByWithRelationInput | Prisma.RenewalReminderOrderByWithRelationInput[]
+  cursor?: Prisma.RenewalReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RenewalReminderScalarFieldEnum | Prisma.RenewalReminderScalarFieldEnum[]
 }
 
 /**

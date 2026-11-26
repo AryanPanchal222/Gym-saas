@@ -8,6 +8,7 @@ datasource db {
 }
 
 enum UserRole {
+  SUPER_ADMIN
   OWNER
   STAFF
   TRAINER
@@ -58,11 +59,42 @@ enum PaymentStatus {
   REFUNDED
 }
 
+enum InvoiceStatus {
+  ISSUED
+  PAID
+  VOID
+  OVERDUE
+}
+
+enum ExpenseCategory {
+  RENT
+  SALARIES
+  EQUIPMENT
+  UTILITIES
+  MARKETING
+  OTHER
+}
+
+enum ClassBookingStatus {
+  BOOKED
+  ATTENDED
+  CANCELLED
+  NO_SHOW
+}
+
+enum NotificationType {
+  PAYMENT
+  RENEWAL
+  ATTENDANCE
+  SYSTEM
+}
+
 model RenewalOrder {
   id           Int               @id @default(autoincrement())
   gymId        Int
   memberId     Int
   membershipId Int
+  kind         String            @default("RENEWAL")
   amount       Decimal           @db.Decimal(10, 2)
   status       RenewalOrderStatus @default(PENDING)
   provider     String?
@@ -76,6 +108,7 @@ model RenewalOrder {
   member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
   membership Membership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
   payments   Payment[]
+  invoice    Invoice?
 
   @@index([gymId])
   @@index([memberId])
@@ -108,12 +141,57 @@ model Payment {
   @@index([status])
 }
 
+model Invoice {
+  id             Int           @id @default(autoincrement())
+  gymId          Int
+  memberId       Int
+  renewalOrderId Int           @unique
+  invoiceNumber  String        @unique
+  amount         Decimal       @db.Decimal(10, 2)
+  status         InvoiceStatus @default(ISSUED)
+  dueDate        DateTime?
+  issuedAt       DateTime      @default(now())
+  paidAt         DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  gym          Gym          @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member       Member       @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  renewalOrder RenewalOrder @relation(fields: [renewalOrderId], references: [id], onDelete: Cascade)
+
+  @@index([gymId])
+  @@index([memberId])
+  @@index([status])
+  @@index([dueDate])
+}
+
+model RenewalReminder {
+  id           Int      @id @default(autoincrement())
+  gymId        Int
+  memberId     Int
+  membershipId Int
+  reminderType String
+  sentAt       DateTime @default(now())
+
+  gym        Gym        @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  membership Membership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+
+  @@unique([membershipId, reminderType])
+  @@index([gymId])
+  @@index([memberId])
+}
+
 model Gym {
   id        Int      @id @default(autoincrement())
   name      String
   email     String?
   phone     String?
   address   String?
+  logoUrl   String?
+  primaryColor String? @default("#6d63ff")
+  accentColor String? @default("#111827")
+  theme String @default("violet")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
@@ -127,19 +205,31 @@ model Gym {
   followUps    FollowUp[]
   renewalOrders RenewalOrder[]
   payments      Payment[]
+  invoices      Invoice[]
+  reminderLogs  RenewalReminder[]
+  expenses      Expense[]
+  classes       GymClass[]
+  notifications Notification[]
 }
 
 model User {
   id           Int      @id @default(autoincrement())
-  gymId        Int
+  gymId        Int?
   name         String
   email        String   @unique
-  passwordHash String
+  passwordHash String   @default("")
   role         UserRole @default(OWNER)
+  phone        String?
+  isActive     Boolean  @default(true)
+  inviteTokenHash String?
+  inviteExpiresAt DateTime?
+  resetTokenHash String?
+  resetExpiresAt DateTime?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  gym Gym @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  gym Gym? @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  classes GymClass[]
 
   @@index([gymId])
 }
@@ -165,6 +255,10 @@ model Member {
   followUps    FollowUp[]
   renewalOrders RenewalOrder[]
   payments      Payment[]
+  invoices      Invoice[]
+  reminderLogs  RenewalReminder[]
+  classBookings ClassBooking[]
+  notifications Notification[]
 
   @@index([gymId])
   @@index([phone])
@@ -186,6 +280,67 @@ model Plan {
   @@index([gymId])
 }
 
+model Expense {
+  id          Int             @id @default(autoincrement())
+  gymId       Int
+  title       String
+  category    ExpenseCategory @default(OTHER)
+  amount      Decimal         @db.Decimal(10, 2)
+  expenseDate DateTime        @default(now())
+  notes       String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  gym         Gym             @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  @@index([gymId])
+  @@index([expenseDate])
+}
+
+model GymClass {
+  id          Int            @id @default(autoincrement())
+  gymId       Int
+  trainerId   Int?
+  name        String
+  description String?
+  startsAt    DateTime
+  endsAt      DateTime
+  capacity    Int            @default(20)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  gym         Gym            @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  trainer     User?          @relation(fields: [trainerId], references: [id], onDelete: SetNull)
+  bookings    ClassBooking[]
+  @@index([gymId, startsAt])
+  @@index([trainerId])
+}
+
+model ClassBooking {
+  id        Int                @id @default(autoincrement())
+  classId   Int
+  memberId  Int
+  status    ClassBookingStatus @default(BOOKED)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  class     GymClass           @relation(fields: [classId], references: [id], onDelete: Cascade)
+  member    Member             @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  @@unique([classId, memberId])
+  @@index([memberId])
+}
+
+model Notification {
+  id        Int              @id @default(autoincrement())
+  gymId     Int
+  memberId  Int?
+  type      NotificationType @default(SYSTEM)
+  title     String
+  message   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  gym       Gym              @relation(fields: [gymId], references: [id], onDelete: Cascade)
+  member    Member?          @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  @@index([gymId, isRead])
+  @@index([createdAt])
+}
+
 model Membership {
   id        Int              @id @default(autoincrement())
   gymId     Int
@@ -202,6 +357,7 @@ model Membership {
   plan        Plan         @relation(fields: [planId], references: [id], onDelete: Restrict)
   attendances Attendance[]
   renewalOrders RenewalOrder[]
+  reminderLogs  RenewalReminder[]
 
   @@index([gymId])
   @@index([memberId])

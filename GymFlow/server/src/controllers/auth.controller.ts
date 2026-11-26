@@ -1,7 +1,9 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import crypto from "node:crypto";
 import prisma from "../lib/prisma.js";
+import { passwordResetEmail } from "../services/email.service.js";
 
 function getJwtSecret() {
   const secret = process.env.JWT_SECRET;
@@ -15,7 +17,7 @@ function getJwtSecret() {
 
 function createToken(user: {
   id: number;
-  gymId: number;
+  gymId: number | null;
   role: string;
 }) {
   return jwt.sign(
@@ -32,13 +34,10 @@ function createToken(user: {
 }
 
 export async function signup(req: Request, res: Response) {
+  return res.status(403).json({ success: false, message: "Public registration is disabled. Contact GymFlow support." });
+  /* istanbul ignore next */
   try {
-    const {
-      gymName,
-      ownerName,
-      email,
-      password,
-    } = req.body;
+    const { gymName, ownerName, email, password } = req.body;
 
     if (
       !gymName ||
@@ -191,6 +190,14 @@ export async function login(req: Request, res: Response) {
       });
     }
 
+    if (!user.isActive) {
+      return res.status(403).json({ success: false, message: "Your account has been deactivated. Please contact GymFlow support." });
+    }
+
+    if (!user.passwordHash) {
+      return res.status(403).json({ success: false, message: "Activate your account before signing in." });
+    }
+
     const passwordMatches = await bcrypt.compare(
       password,
       user.passwordHash,
@@ -225,6 +232,59 @@ export async function login(req: Request, res: Response) {
       success: false,
       message: "Failed to login",
     });
+  }
+}
+
+export async function activateAccount(req: Request, res: Response) {
+  try {
+    const { token, password } = req.body;
+    if (typeof token !== "string" || !token || typeof password !== "string" || password.length < 8) {
+      return res.status(400).json({ success: false, message: "A valid invitation token and password of at least 8 characters are required" });
+    }
+    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+    const user = await prisma.user.findFirst({ where: { inviteTokenHash: tokenHash } });
+    if (!user || !user.inviteExpiresAt || user.inviteExpiresAt < new Date()) {
+      return res.status(400).json({ success: false, message: "This invitation is invalid or expired" });
+    }
+    if (user.passwordHash) return res.status(409).json({ success: false, message: "This account has already been activated" });
+    const passwordHash = await bcrypt.hash(password, 12);
+    await prisma.user.update({ where: { id: user.id }, data: { passwordHash, inviteTokenHash: null, inviteExpiresAt: null } });
+    return res.json({ success: true, message: "Account activated successfully" });
+  } catch (error) {
+    console.error("Account activation error:", error);
+    return res.status(500).json({ success: false, message: "Failed to activate account" });
+  }
+}
+
+export async function forgotPassword(req: Request, res: Response) {
+  try {
+    const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+    const user = email ? await prisma.user.findUnique({ where: { email } }) : null;
+    if (user && user.isActive) {
+      const rawToken = crypto.randomBytes(32).toString("hex");
+      const resetUrl = `${process.env.FRONTEND_URL || "http://localhost:5173"}/reset-password?token=${rawToken}`;
+      await prisma.user.update({ where: { id: user.id }, data: { resetTokenHash: crypto.createHash("sha256").update(rawToken).digest("hex"), resetExpiresAt: new Date(Date.now() + 30 * 60 * 1000) } });
+      const emailSent = await passwordResetEmail(user.email, user.name, resetUrl);
+      if (!emailSent && process.env.NODE_ENV === "development") return res.json({ success: true, message: "If that email exists, a reset link has been created", resetUrl });
+    }
+    return res.json({ success: true, message: "If that email exists, a password reset link has been sent" });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    return res.json({ success: true, message: "If that email exists, a password reset link has been sent" });
+  }
+}
+
+export async function resetPassword(req: Request, res: Response) {
+  try {
+    const { token, password } = req.body || {};
+    if (typeof token !== "string" || !token || typeof password !== "string" || password.length < 8) return res.status(400).json({ success: false, message: "A valid token and password of at least 8 characters are required" });
+    const user = await prisma.user.findFirst({ where: { resetTokenHash: crypto.createHash("sha256").update(token).digest("hex") } });
+    if (!user || !user.resetExpiresAt || user.resetExpiresAt < new Date()) return res.status(400).json({ success: false, message: "This reset link is invalid or expired" });
+    await prisma.user.update({ where: { id: user.id }, data: { passwordHash: await bcrypt.hash(password, 12), resetTokenHash: null, resetExpiresAt: null } });
+    return res.json({ success: true, message: "Password reset successfully" });
+  } catch (error) {
+    console.error("Reset password error:", error);
+    return res.status(500).json({ success: false, message: "Failed to reset password" });
   }
 }
 

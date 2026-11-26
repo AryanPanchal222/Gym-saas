@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 
 type AuthPayload = {
   userId?: number;
-  gymId: number;
+  gymId: number | null;
   role: string;
   portal?: boolean;
 };
@@ -55,7 +55,7 @@ export function requireAuth(
       getJwtSecret(),
     ) as AuthPayload;
 
-    if (payload.portal || !Number.isInteger(payload.userId)) {
+    if (payload.portal || !Number.isInteger(payload.userId) || (!Number.isInteger(payload.gymId) && payload.gymId !== null)) {
       return res.status(401).json({
         success: false,
         message: "Staff authentication required",
@@ -76,6 +76,15 @@ export function requireAuth(
         "Invalid or expired authentication token",
     });
   }
+}
+
+export function requireSuperAdmin(req: Request, res: Response, next: NextFunction) {
+  const user = (req as Request & { user?: AuthPayload }).user;
+  if (!user) return res.status(401).json({ success: false, message: "Authentication required" });
+  if (user.role !== "SUPER_ADMIN") {
+    return res.status(403).json({ success: false, message: "Only Super Admin can perform this action" });
+  }
+  next();
 }
 
 export function requireMemberAuth(
@@ -138,7 +147,7 @@ export function requireGymAccess(
     });
   }
 
-  if (user.gymId !== gymId) {
+  if (user.role === "SUPER_ADMIN" || user.gymId !== gymId) {
     return res.status(403).json({
       success: false,
       message:

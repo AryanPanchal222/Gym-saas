@@ -98,9 +98,6 @@ export default function Members() {
   const [memberActionError, setMemberActionError] = useState("");
   const [memberActionSuccess, setMemberActionSuccess] = useState("");
   const [deletingMemberId, setDeletingMemberId] = useState<number | null>(null);
-  const [portalInvite, setPortalInvite] = useState<{ code: string; expiresAt: string; url: string } | null>(null);
-  const [portalInviteLoading, setPortalInviteLoading] = useState(false);
-  const [portalInviteError, setPortalInviteError] = useState("");
 
   const [showAddMember, setShowAddMember] = useState(false);
 
@@ -195,8 +192,6 @@ export default function Members() {
     setSelectedMemberId(memberId);
     setSelectedMember(null);
     setProfileError("");
-    setPortalInvite(null);
-    setPortalInviteError("");
     setProfileLoading(true);
 
     try {
@@ -229,47 +224,6 @@ export default function Members() {
       );
     } finally {
       setProfileLoading(false);
-    }
-  }
-
-  async function createMemberPortalInvite() {
-    if (!selectedMember) return;
-    if (selectedMember.hasPortalAccess && !window.confirm("Reset this member's portal password? Their current password will stop working.")) return;
-
-    try {
-      setPortalInviteLoading(true);
-      setPortalInviteError("");
-      const gymId = getGymId();
-      if (!gymId) throw new Error("Gym information is missing");
-
-      const response = await apiFetch(`/api/gyms/${gymId}/members/${selectedMember.id}/portal-invite`, {
-        method: "POST",
-      });
-      const data = await response.json();
-      if (!response.ok || !data.success) throw new Error(data.message || "Could not create member portal invite");
-
-      setSelectedMember((current) => current ? { ...current, hasPortalAccess: false } : current);
-      setPortalInvite({
-        code: data.inviteCode,
-        expiresAt: data.inviteExpiresAt,
-        url: `${window.location.origin}/member-portal?activate=1&gymId=${gymId}&memberId=${selectedMember.id}`,
-      });
-    } catch (err) {
-      setPortalInviteError(err instanceof Error ? err.message : "Could not create member portal invite");
-    } finally {
-      setPortalInviteLoading(false);
-    }
-  }
-
-  async function copyMemberPortalInvite() {
-    if (!portalInvite || !selectedMember) return;
-    try {
-      await navigator.clipboard.writeText(
-        `GymFlow Member Portal\nActivation link: ${portalInvite.url}\nGym code: ${getGymId()}\nMember number: ${selectedMember.id}\nOne-time code: ${portalInvite.code}`,
-      );
-      setMemberActionSuccess("Portal invite copied. Share it with the member using a private channel.");
-    } catch {
-      setPortalInviteError("Could not copy the invite. You can copy the link and code separately.");
     }
   }
 
@@ -765,33 +719,6 @@ export default function Members() {
                   </div>
                 )}
               </div>
-            </div>
-
-            <div className="profile-card portal-access-card">
-              <div className="profile-card-title">
-                <div>
-                  <h3>Member Portal</h3>
-                  <span>{selectedMember.hasPortalAccess ? "Portal access active" : "Portal access not activated"}</span>
-                </div>
-              </div>
-              <p>Give this member secure access to their membership and attendance history.</p>
-              {!selectedMember.email && <p className="portal-access-hint">Add an email address to this member first.</p>}
-              <button
-                type="button"
-                className="secondary-button"
-                onClick={() => void createMemberPortalInvite()}
-                disabled={!selectedMember.email || portalInviteLoading}
-              >
-                {portalInviteLoading ? "Creating invite..." : selectedMember.hasPortalAccess ? "Reset portal access" : "Create portal invite"}
-              </button>
-              {portalInviteError && <div className="form-message error">{portalInviteError}</div>}
-              {portalInvite && <div className="portal-invite-details">
-                <strong>One-time activation code</strong>
-                <code>{portalInvite.code}</code>
-                <span>Expires {new Date(portalInvite.expiresAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</span>
-                <a href={portalInvite.url}>{portalInvite.url}</a>
-                <button type="button" className="small-button" onClick={() => void copyMemberPortalInvite()}>Copy invite details</button>
-              </div>}
             </div>
 
             <FaceCheckIn

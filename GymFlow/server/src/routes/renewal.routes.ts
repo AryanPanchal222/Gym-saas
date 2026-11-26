@@ -6,6 +6,8 @@ import {
   getRenewalOrder,
   markRenewalPaid,
   cancelRenewal,
+  getInvoices,
+  sendRenewalReminder,
 } from "../controllers/renewal.controller.js";
 
 import {
@@ -20,6 +22,8 @@ router.use(requireGymAccess);
 
 router.get("/", getRenewals);
 
+router.get("/invoices", getInvoices);
+
 router.post("/", createRenewalOrder);
 
 router.get("/:renewalId", getRenewalOrder);
@@ -27,5 +31,7 @@ router.get("/:renewalId", getRenewalOrder);
 router.post("/:renewalId/mark-paid", markRenewalPaid);
 
 router.post("/:renewalId/cancel", cancelRenewal);
+
+router.post("/membership/:membershipId/send-reminder", sendRenewalReminder);
 
 export default router;

@@ -1,6 +1,10 @@
 import type { Request, Response } from "express";
 import prisma from "../lib/prisma.js";
+import { invoiceIssuedEmail } from "../services/email.service.js";
 
+function invoiceNumber(gymId: number) {
+  return `INV-${gymId}-${Date.now()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
+}
 
 
 export async function createMembership(req: Request, res: Response) {
@@ -94,25 +98,32 @@ export async function createMembership(req: Request, res: Response) {
     const endDate = new Date(parsedStartDate);
     endDate.setDate(endDate.getDate() + plan.durationDays);
 
-    const membership = await prisma.membership.create({
-      data: {
-        gymId,
-        memberId,
-        planId: numericPlanId,
-        startDate: parsedStartDate,
-        endDate,
-        status: "ACTIVE",
-      },
-      include: {
-        member: true,
-        plan: true,
-      },
+    const result = await prisma.$transaction(async (tx) => {
+      const membership = await tx.membership.create({
+        data: { gymId, memberId, planId: numericPlanId, startDate: parsedStartDate, endDate, status: "ACTIVE" },
+        include: { member: true, plan: true },
+      });
+
+      const renewalOrder = await tx.renewalOrder.create({
+        data: { gymId, memberId, membershipId: membership.id, amount: plan.price, status: "PENDING", kind: "INITIAL" },
+      });
+
+      const invoice = await tx.invoice.create({
+        data: { gymId, memberId, renewalOrderId: renewalOrder.id, invoiceNumber: invoiceNumber(gymId), amount: plan.price, dueDate: parsedStartDate },
+      });
+
+      return { membership, renewalOrder, invoice };
     });
+
+    const emailSent = result.membership.member.email
+      ? await invoiceIssuedEmail(result.membership.member.email, result.membership.member.name, gym.name, gym.email, result.invoice.invoiceNumber, `₹${Number(result.invoice.amount).toLocaleString("en-IN")}`, parsedStartDate.toLocaleDateString("en-IN"), "INITIAL")
+      : false;
 
     return res.status(201).json({
       success: true,
-      message: "Membership created successfully",
-      membership,
+      message: "Membership and initial invoice created successfully",
+      ...result,
+      emailSent,
     });
   } catch (error) {
     console.error("Create membership error:", error);

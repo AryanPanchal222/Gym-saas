@@ -101,6 +101,10 @@ export async function getGym(
         email: true,
         phone: true,
         address: true,
+        logoUrl: true,
+        primaryColor: true,
+        accentColor: true,
+        theme: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -148,6 +152,10 @@ export async function updateGym(
       phone,
       address,
       ownerName,
+      logoUrl,
+      primaryColor,
+      accentColor,
+      theme,
     } = req.body;
 
     /* ---------- VALIDATE GYM NAME ---------- */
@@ -198,6 +206,10 @@ export async function updateGym(
           typeof address === "string"
             ? address.trim() || null
             : null,
+        logoUrl: typeof logoUrl === "string" ? logoUrl.trim() || null : undefined,
+        primaryColor: typeof primaryColor === "string" ? primaryColor.trim() || null : undefined,
+        accentColor: typeof accentColor === "string" ? accentColor.trim() || null : undefined,
+        theme: typeof theme === "string" && ["violet", "ocean", "emerald", "sunset", "midnight"].includes(theme) ? theme : undefined,
       },
 
       select: {
@@ -206,6 +218,10 @@ export async function updateGym(
         email: true,
         phone: true,
         address: true,
+        logoUrl: true,
+        primaryColor: true,
+        accentColor: true,
+        theme: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -239,5 +255,18 @@ export async function updateGym(
       success: false,
       message: "Unable to update gym profile.",
     });
+  }
+}
+
+export async function uploadGymLogo(req: Request, res: Response) {
+  try {
+    const gymId = Number(req.params.gymId);
+    if (!req.file || !Number.isInteger(gymId) || gymId <= 0) return res.status(400).json({ success: false, message: "A valid image file is required." });
+    const logoUrl = `/uploads/logos/${req.file.filename}`;
+    const gym = await prisma.gym.update({ where: { id: gymId }, data: { logoUrl } });
+    return res.json({ success: true, logoUrl, gym });
+  } catch (error) {
+    console.error("Upload gym logo error:", error);
+    return res.status(500).json({ success: false, message: "Unable to upload gym logo." });
   }
 }

@@ -5,12 +5,14 @@ import {
   getGyms,
   getGym,
   updateGym,
+  uploadGymLogo,
 } from "../controllers/gym.controller.js";
 
 import {
   requireAuth,
   requireGymAccess,
 } from "../middleware/auth.middleware.js";
+import { logoUpload } from "../middleware/upload.middleware.js";
 
 const router = Router({
   mergeParams: true,
@@ -30,5 +32,6 @@ router.get("/", getGym);
 
 /* Update the authenticated gym */
 router.put("/", updateGym);
+router.post("/logo", logoUpload.single("logo"), uploadGymLogo);
 
 export default router;

@@ -279,6 +279,10 @@ export type MemberWhereInput = {
   followUps?: Prisma.FollowUpListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
+  reminderLogs?: Prisma.RenewalReminderListRelationFilter
+  classBookings?: Prisma.ClassBookingListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
@@ -301,6 +305,10 @@ export type MemberOrderByWithRelationInput = {
   followUps?: Prisma.FollowUpOrderByRelationAggregateInput
   renewalOrders?: Prisma.RenewalOrderOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  reminderLogs?: Prisma.RenewalReminderOrderByRelationAggregateInput
+  classBookings?: Prisma.ClassBookingOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -326,6 +334,10 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   followUps?: Prisma.FollowUpListRelationFilter
   renewalOrders?: Prisma.RenewalOrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
+  reminderLogs?: Prisma.RenewalReminderListRelationFilter
+  classBookings?: Prisma.ClassBookingListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id">
 
 export type MemberOrderByWithAggregationInput = {
@@ -384,6 +396,10 @@ export type MemberCreateInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateInput = {
@@ -405,6 +421,10 @@ export type MemberUncheckedCreateInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUpdateInput = {
@@ -425,6 +445,10 @@ export type MemberUpdateInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
@@ -446,6 +470,10 @@ export type MemberUncheckedUpdateInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyInput = {
@@ -559,6 +587,11 @@ export type MemberSumOrderByAggregateInput = {
   gymId?: Prisma.SortOrder
 }
 
+export type MemberNullableScalarRelationFilter = {
+  is?: Prisma.MemberWhereInput | null
+  isNot?: Prisma.MemberWhereInput | null
+}
+
 export type MemberCreateNestedOneWithoutRenewalOrdersInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutRenewalOrdersInput, Prisma.MemberUncheckedCreateWithoutRenewalOrdersInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutRenewalOrdersInput
@@ -585,6 +618,34 @@ export type MemberUpdateOneRequiredWithoutPaymentsNestedInput = {
   upsert?: Prisma.MemberUpsertWithoutPaymentsInput
   connect?: Prisma.MemberWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutPaymentsInput, Prisma.MemberUpdateWithoutPaymentsInput>, Prisma.MemberUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type MemberCreateNestedOneWithoutInvoicesInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutInvoicesInput, Prisma.MemberUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutInvoicesInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutInvoicesNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutInvoicesInput, Prisma.MemberUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutInvoicesInput
+  upsert?: Prisma.MemberUpsertWithoutInvoicesInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutInvoicesInput, Prisma.MemberUpdateWithoutInvoicesInput>, Prisma.MemberUncheckedUpdateWithoutInvoicesInput>
+}
+
+export type MemberCreateNestedOneWithoutReminderLogsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReminderLogsInput, Prisma.MemberUncheckedCreateWithoutReminderLogsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReminderLogsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutReminderLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReminderLogsInput, Prisma.MemberUncheckedCreateWithoutReminderLogsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReminderLogsInput
+  upsert?: Prisma.MemberUpsertWithoutReminderLogsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutReminderLogsInput, Prisma.MemberUpdateWithoutReminderLogsInput>, Prisma.MemberUncheckedUpdateWithoutReminderLogsInput>
 }
 
 export type MemberCreateNestedManyWithoutGymInput = {
@@ -627,6 +688,36 @@ export type MemberUncheckedUpdateManyWithoutGymNestedInput = {
   update?: Prisma.MemberUpdateWithWhereUniqueWithoutGymInput | Prisma.MemberUpdateWithWhereUniqueWithoutGymInput[]
   updateMany?: Prisma.MemberUpdateManyWithWhereWithoutGymInput | Prisma.MemberUpdateManyWithWhereWithoutGymInput[]
   deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberCreateNestedOneWithoutClassBookingsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutClassBookingsInput, Prisma.MemberUncheckedCreateWithoutClassBookingsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutClassBookingsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutClassBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutClassBookingsInput, Prisma.MemberUncheckedCreateWithoutClassBookingsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutClassBookingsInput
+  upsert?: Prisma.MemberUpsertWithoutClassBookingsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutClassBookingsInput, Prisma.MemberUpdateWithoutClassBookingsInput>, Prisma.MemberUncheckedUpdateWithoutClassBookingsInput>
+}
+
+export type MemberCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutNotificationsInput, Prisma.MemberUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutNotificationsInput, Prisma.MemberUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.MemberUpsertWithoutNotificationsInput
+  disconnect?: Prisma.MemberWhereInput | boolean
+  delete?: Prisma.MemberWhereInput | boolean
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutNotificationsInput, Prisma.MemberUpdateWithoutNotificationsInput>, Prisma.MemberUncheckedUpdateWithoutNotificationsInput>
 }
 
 export type MemberCreateNestedOneWithoutMembershipsInput = {
@@ -702,6 +793,10 @@ export type MemberCreateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutMemberInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutRenewalOrdersInput = {
@@ -722,6 +817,10 @@ export type MemberUncheckedCreateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutMemberInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutRenewalOrdersInput = {
@@ -757,6 +856,10 @@ export type MemberUpdateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutMemberNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutRenewalOrdersInput = {
@@ -777,6 +880,10 @@ export type MemberUncheckedUpdateWithoutRenewalOrdersInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutMemberNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPaymentsInput = {
@@ -796,6 +903,10 @@ export type MemberCreateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutMemberInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPaymentsInput = {
@@ -816,6 +927,10 @@ export type MemberUncheckedCreateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutMemberInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPaymentsInput = {
@@ -851,6 +966,10 @@ export type MemberUpdateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutMemberNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPaymentsInput = {
@@ -871,6 +990,230 @@ export type MemberUncheckedUpdateWithoutPaymentsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutMemberNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutInvoicesInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gym: Prisma.GymCreateNestedOneWithoutMembersInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutInvoicesInput = {
+  id?: number
+  gymId: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutInvoicesInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutInvoicesInput, Prisma.MemberUncheckedCreateWithoutInvoicesInput>
+}
+
+export type MemberUpsertWithoutInvoicesInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutInvoicesInput, Prisma.MemberUncheckedUpdateWithoutInvoicesInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutInvoicesInput, Prisma.MemberUncheckedCreateWithoutInvoicesInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutInvoicesInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutInvoicesInput, Prisma.MemberUncheckedUpdateWithoutInvoicesInput>
+}
+
+export type MemberUpdateWithoutInvoicesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gym?: Prisma.GymUpdateOneRequiredWithoutMembersNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutInvoicesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gymId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutReminderLogsInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gym: Prisma.GymCreateNestedOneWithoutMembersInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutReminderLogsInput = {
+  id?: number
+  gymId: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutReminderLogsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReminderLogsInput, Prisma.MemberUncheckedCreateWithoutReminderLogsInput>
+}
+
+export type MemberUpsertWithoutReminderLogsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutReminderLogsInput, Prisma.MemberUncheckedUpdateWithoutReminderLogsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReminderLogsInput, Prisma.MemberUncheckedCreateWithoutReminderLogsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutReminderLogsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutReminderLogsInput, Prisma.MemberUncheckedUpdateWithoutReminderLogsInput>
+}
+
+export type MemberUpdateWithoutReminderLogsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gym?: Prisma.GymUpdateOneRequiredWithoutMembersNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutReminderLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gymId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutGymInput = {
@@ -890,6 +1233,10 @@ export type MemberCreateWithoutGymInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutGymInput = {
@@ -910,6 +1257,10 @@ export type MemberUncheckedCreateWithoutGymInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutGymInput = {
@@ -956,6 +1307,226 @@ export type MemberScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
 }
 
+export type MemberCreateWithoutClassBookingsInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gym: Prisma.GymCreateNestedOneWithoutMembersInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutClassBookingsInput = {
+  id?: number
+  gymId: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutClassBookingsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutClassBookingsInput, Prisma.MemberUncheckedCreateWithoutClassBookingsInput>
+}
+
+export type MemberUpsertWithoutClassBookingsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutClassBookingsInput, Prisma.MemberUncheckedUpdateWithoutClassBookingsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutClassBookingsInput, Prisma.MemberUncheckedCreateWithoutClassBookingsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutClassBookingsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutClassBookingsInput, Prisma.MemberUncheckedUpdateWithoutClassBookingsInput>
+}
+
+export type MemberUpdateWithoutClassBookingsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gym?: Prisma.GymUpdateOneRequiredWithoutMembersNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutClassBookingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gymId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutNotificationsInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gym: Prisma.GymCreateNestedOneWithoutMembersInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutNotificationsInput = {
+  id?: number
+  gymId: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: string | null
+  portalInviteHash?: string | null
+  portalInviteExpiresAt?: Date | string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutMemberInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutMemberInput
+  noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutMemberInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutNotificationsInput, Prisma.MemberUncheckedCreateWithoutNotificationsInput>
+}
+
+export type MemberUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutNotificationsInput, Prisma.MemberUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutNotificationsInput, Prisma.MemberUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutNotificationsInput, Prisma.MemberUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type MemberUpdateWithoutNotificationsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gym?: Prisma.GymUpdateOneRequiredWithoutMembersNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gymId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faceDescriptor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portalPasswordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalInviteExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutMemberNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutMemberNestedInput
+  noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutMemberNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
+  renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+}
+
 export type MemberCreateWithoutMembershipsInput = {
   name: string
   email?: string | null
@@ -973,6 +1544,10 @@ export type MemberCreateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutMembershipsInput = {
@@ -993,6 +1568,10 @@ export type MemberUncheckedCreateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutMembershipsInput = {
@@ -1028,6 +1607,10 @@ export type MemberUpdateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMembershipsInput = {
@@ -1048,6 +1631,10 @@ export type MemberUncheckedUpdateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutAttendancesInput = {
@@ -1067,6 +1654,10 @@ export type MemberCreateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutAttendancesInput = {
@@ -1087,6 +1678,10 @@ export type MemberUncheckedCreateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutAttendancesInput = {
@@ -1122,6 +1717,10 @@ export type MemberUpdateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutAttendancesInput = {
@@ -1142,6 +1741,10 @@ export type MemberUncheckedUpdateWithoutAttendancesInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutNoShowCasesInput = {
@@ -1161,6 +1764,10 @@ export type MemberCreateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutNoShowCasesInput = {
@@ -1181,6 +1788,10 @@ export type MemberUncheckedCreateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutNoShowCasesInput = {
@@ -1216,6 +1827,10 @@ export type MemberUpdateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutNoShowCasesInput = {
@@ -1236,6 +1851,10 @@ export type MemberUncheckedUpdateWithoutNoShowCasesInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutFollowUpsInput = {
@@ -1255,6 +1874,10 @@ export type MemberCreateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutFollowUpsInput = {
@@ -1275,6 +1898,10 @@ export type MemberUncheckedCreateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedCreateNestedManyWithoutMemberInput
   renewalOrders?: Prisma.RenewalOrderUncheckedCreateNestedManyWithoutMemberInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMemberInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutMemberInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedCreateNestedManyWithoutMemberInput
+  classBookings?: Prisma.ClassBookingUncheckedCreateNestedManyWithoutMemberInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutFollowUpsInput = {
@@ -1310,6 +1937,10 @@ export type MemberUpdateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutFollowUpsInput = {
@@ -1330,6 +1961,10 @@ export type MemberUncheckedUpdateWithoutFollowUpsInput = {
   noShowCases?: Prisma.NoShowCaseUncheckedUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyGymInput = {
@@ -1363,6 +1998,10 @@ export type MemberUpdateWithoutGymInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutGymInput = {
@@ -1383,6 +2022,10 @@ export type MemberUncheckedUpdateWithoutGymInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutMemberNestedInput
   renewalOrders?: Prisma.RenewalOrderUncheckedUpdateManyWithoutMemberNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMemberNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutMemberNestedInput
+  reminderLogs?: Prisma.RenewalReminderUncheckedUpdateManyWithoutMemberNestedInput
+  classBookings?: Prisma.ClassBookingUncheckedUpdateManyWithoutMemberNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateManyWithoutGymInput = {
@@ -1411,6 +2054,10 @@ export type MemberCountOutputType = {
   followUps: number
   renewalOrders: number
   payments: number
+  invoices: number
+  reminderLogs: number
+  classBookings: number
+  notifications: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1420,6 +2067,10 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   followUps?: boolean | MemberCountOutputTypeCountFollowUpsArgs
   renewalOrders?: boolean | MemberCountOutputTypeCountRenewalOrdersArgs
   payments?: boolean | MemberCountOutputTypeCountPaymentsArgs
+  invoices?: boolean | MemberCountOutputTypeCountInvoicesArgs
+  reminderLogs?: boolean | MemberCountOutputTypeCountReminderLogsArgs
+  classBookings?: boolean | MemberCountOutputTypeCountClassBookingsArgs
+  notifications?: boolean | MemberCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -1474,6 +2125,34 @@ export type MemberCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types
   where?: Prisma.PaymentWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvoiceWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountReminderLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RenewalReminderWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountClassBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassBookingWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1495,6 +2174,10 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   followUps?: boolean | Prisma.Member$followUpsArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Member$renewalOrdersArgs<ExtArgs>
   payments?: boolean | Prisma.Member$paymentsArgs<ExtArgs>
+  invoices?: boolean | Prisma.Member$invoicesArgs<ExtArgs>
+  reminderLogs?: boolean | Prisma.Member$reminderLogsArgs<ExtArgs>
+  classBookings?: boolean | Prisma.Member$classBookingsArgs<ExtArgs>
+  notifications?: boolean | Prisma.Member$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
@@ -1554,6 +2237,10 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   followUps?: boolean | Prisma.Member$followUpsArgs<ExtArgs>
   renewalOrders?: boolean | Prisma.Member$renewalOrdersArgs<ExtArgs>
   payments?: boolean | Prisma.Member$paymentsArgs<ExtArgs>
+  invoices?: boolean | Prisma.Member$invoicesArgs<ExtArgs>
+  reminderLogs?: boolean | Prisma.Member$reminderLogsArgs<ExtArgs>
+  classBookings?: boolean | Prisma.Member$classBookingsArgs<ExtArgs>
+  notifications?: boolean | Prisma.Member$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1573,6 +2260,10 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     followUps: Prisma.$FollowUpPayload<ExtArgs>[]
     renewalOrders: Prisma.$RenewalOrderPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    reminderLogs: Prisma.$RenewalReminderPayload<ExtArgs>[]
+    classBookings: Prisma.$ClassBookingPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1988,6 +2679,10 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   followUps<T extends Prisma.Member$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   renewalOrders<T extends Prisma.Member$renewalOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$renewalOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenewalOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.Member$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invoices<T extends Prisma.Member$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminderLogs<T extends Prisma.Member$reminderLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$reminderLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenewalReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classBookings<T extends Prisma.Member$classBookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$classBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassBookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Member$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2571,6 +3266,102 @@ export type Member$paymentsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * Member.invoices
+ */
+export type Member$invoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invoice
+   */
+  select?: Prisma.InvoiceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invoice
+   */
+  omit?: Prisma.InvoiceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceInclude<ExtArgs> | null
+  where?: Prisma.InvoiceWhereInput
+  orderBy?: Prisma.InvoiceOrderByWithRelationInput | Prisma.InvoiceOrderByWithRelationInput[]
+  cursor?: Prisma.InvoiceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
+}
+
+/**
+ * Member.reminderLogs
+ */
+export type Member$reminderLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RenewalReminder
+   */
+  select?: Prisma.RenewalReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RenewalReminder
+   */
+  omit?: Prisma.RenewalReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RenewalReminderInclude<ExtArgs> | null
+  where?: Prisma.RenewalReminderWhereInput
+  orderBy?: Prisma.RenewalReminderOrderByWithRelationInput | Prisma.RenewalReminderOrderByWithRelationInput[]
+  cursor?: Prisma.RenewalReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RenewalReminderScalarFieldEnum | Prisma.RenewalReminderScalarFieldEnum[]
+}
+
+/**
+ * Member.classBookings
+ */
+export type Member$classBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassBooking
+   */
+  select?: Prisma.ClassBookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassBooking
+   */
+  omit?: Prisma.ClassBookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassBookingInclude<ExtArgs> | null
+  where?: Prisma.ClassBookingWhereInput
+  orderBy?: Prisma.ClassBookingOrderByWithRelationInput | Prisma.ClassBookingOrderByWithRelationInput[]
+  cursor?: Prisma.ClassBookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClassBookingScalarFieldEnum | Prisma.ClassBookingScalarFieldEnum[]
+}
+
+/**
+ * Member.notifications
+ */
+export type Member$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**
