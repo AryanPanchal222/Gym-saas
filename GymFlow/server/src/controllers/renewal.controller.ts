@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import prisma from "../lib/prisma.js";
 import { invoiceIssuedEmail, paymentReceiptEmail, renewalReminderEmail } from "../services/email.service.js";
+import { getRazorpayClient, verifyPaymentSignature, verifyWebhookSignature } from "../services/razorpay.service.js";
 
 const RENEWAL_WINDOW_DAYS = 14;
 
@@ -21,6 +22,115 @@ function daysUntil(date: Date) {
 
 function invoiceNumber(gymId: number) {
   return `INV-${gymId}-${Date.now()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
+}
+
+async function completeRazorpayRenewal(gymId: number, renewalId: number, providerPaymentId: string, metadata: Record<string, unknown>) {
+  return prisma.$transaction(async (tx) => {
+    const renewalOrder = await tx.renewalOrder.findFirst({
+      where: { id: renewalId, gymId },
+      include: { membership: { include: { plan: true } } },
+    });
+    if (!renewalOrder) throw new Error("RENEWAL_NOT_FOUND");
+
+    if (renewalOrder.status === "PAID") {
+      const payment = await tx.payment.findFirst({ where: { renewalOrderId: renewalId, status: "SUCCESS" }, orderBy: { createdAt: "desc" } });
+      return { renewalOrder, payment, membership: renewalOrder.membership, alreadyProcessed: true };
+    }
+    if (renewalOrder.status !== "PENDING") throw new Error("RENEWAL_NOT_PENDING");
+
+    const now = new Date();
+    const payment = await tx.payment.create({
+      data: {
+        gymId,
+        memberId: renewalOrder.memberId,
+        renewalOrderId: renewalId,
+        amount: renewalOrder.amount,
+        status: "SUCCESS",
+        provider: "RAZORPAY",
+        providerPaymentId,
+        paidAt: now,
+        metadata: JSON.parse(JSON.stringify(metadata)),
+      },
+    });
+
+    const currentEnd = renewalOrder.membership.endDate;
+    const extensionStart = currentEnd > now ? currentEnd : now;
+    const newEndDate = new Date(extensionStart);
+    newEndDate.setDate(newEndDate.getDate() + renewalOrder.membership.plan.durationDays);
+    const membership = renewalOrder.kind === "INITIAL"
+      ? renewalOrder.membership
+      : await tx.membership.update({ where: { id: renewalOrder.membershipId }, data: { endDate: newEndDate, status: "ACTIVE" }, include: { member: true, plan: true } });
+
+    const updatedRenewalOrder = await tx.renewalOrder.update({
+      where: { id: renewalId },
+      data: { status: "PAID", paidAt: now, provider: "RAZORPAY" },
+      include: { member: true, membership: { include: { plan: true } }, payments: true, invoice: true },
+    });
+    await tx.invoice.updateMany({ where: { renewalOrderId: renewalId }, data: { status: "PAID", paidAt: now } });
+    return { renewalOrder: updatedRenewalOrder, payment, membership, alreadyProcessed: false };
+  });
+}
+
+export async function createRazorpayOrder(req: Request, res: Response) {
+  try {
+    const gymId = Number(req.params.gymId);
+    const renewalId = Number(req.params.renewalId);
+    const renewalOrder = await prisma.renewalOrder.findFirst({ where: { id: renewalId, gymId }, include: { member: true, invoice: true } });
+    if (!renewalOrder) return res.status(404).json({ success: false, message: "Renewal order not found" });
+    if (renewalOrder.status !== "PENDING") return res.status(400).json({ success: false, message: "Renewal order is not pending" });
+
+    const razorpayOrder = await getRazorpayClient().orders.create({
+      amount: Math.round(Number(renewalOrder.amount) * 100),
+      currency: "INR",
+      receipt: `renewal_${renewalId}`,
+      notes: { gymId: String(gymId), renewalId: String(renewalId), invoiceNumber: renewalOrder.invoice?.invoiceNumber || "" },
+    });
+    await prisma.renewalOrder.update({ where: { id: renewalId }, data: { provider: "RAZORPAY", providerOrderId: razorpayOrder.id, expiresAt: new Date(Date.now() + 30 * 60 * 1000) } });
+    return res.json({ success: true, keyId: process.env.RAZORPAY_KEY_ID, razorpayOrder, member: renewalOrder.member });
+  } catch (error) {
+    if (error instanceof Error && error.message === "RAZORPAY_NOT_CONFIGURED") return res.status(503).json({ success: false, message: "Razorpay is not configured on the server" });
+    console.error("Create Razorpay order error:", error);
+    return res.status(500).json({ success: false, message: "Failed to create Razorpay order" });
+  }
+}
+
+export async function verifyRazorpayPayment(req: Request, res: Response) {
+  try {
+    const gymId = Number(req.params.gymId);
+    const renewalId = Number(req.params.renewalId);
+    const { razorpay_order_id: orderId, razorpay_payment_id: paymentId, razorpay_signature: signature } = req.body as Record<string, string>;
+    const renewalOrder = await prisma.renewalOrder.findFirst({ where: { id: renewalId, gymId } });
+    if (!renewalOrder || renewalOrder.providerOrderId !== orderId) return res.status(400).json({ success: false, message: "Invalid Razorpay order" });
+    if (!orderId || !paymentId || !signature || !verifyPaymentSignature(orderId, paymentId, signature)) return res.status(400).json({ success: false, message: "Payment signature verification failed" });
+
+    const payment = await getRazorpayClient().payments.fetch(paymentId);
+    if (payment.order_id !== orderId || payment.status !== "captured" || Number(payment.amount) !== Math.round(Number(renewalOrder.amount) * 100)) return res.status(400).json({ success: false, message: "Razorpay payment was not captured for this renewal" });
+    const result = await completeRazorpayRenewal(gymId, renewalId, paymentId, { orderId, signature });
+    return res.json({ success: true, message: result.alreadyProcessed ? "Payment was already processed" : "Payment verified and membership extended", ...result });
+  } catch (error) {
+    if (error instanceof Error && error.message === "RAZORPAY_NOT_CONFIGURED") return res.status(503).json({ success: false, message: "Razorpay is not configured on the server" });
+    console.error("Verify Razorpay payment error:", error);
+    return res.status(500).json({ success: false, message: "Failed to verify Razorpay payment" });
+  }
+}
+
+export async function razorpayWebhook(req: Request, res: Response) {
+  try {
+    const signature = req.headers["x-razorpay-signature"];
+    if (typeof signature !== "string" || !verifyWebhookSignature(req.body as Buffer, signature)) return res.status(400).json({ success: false, message: "Invalid webhook signature" });
+    const event = JSON.parse((req.body as Buffer).toString("utf8")) as { event?: string; payload?: { payment?: { entity?: { id?: string; order_id?: string } } } };
+    if (event.event === "payment.captured") {
+      const paymentEntity = event.payload?.payment?.entity;
+      if (paymentEntity?.id && paymentEntity.order_id) {
+        const renewalOrder = await prisma.renewalOrder.findFirst({ where: { providerOrderId: paymentEntity.order_id } });
+        if (renewalOrder) await completeRazorpayRenewal(renewalOrder.gymId, renewalOrder.id, paymentEntity.id, { source: "webhook" });
+      }
+    }
+    return res.json({ success: true });
+  } catch (error) {
+    console.error("Razorpay webhook error:", error);
+    return res.status(400).json({ success: false, message: "Invalid Razorpay webhook" });
+  }
 }
 
 export async function getInvoices(req: Request, res: Response) {

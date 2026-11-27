@@ -8,6 +8,8 @@ import {
   cancelRenewal,
   getInvoices,
   sendRenewalReminder,
+  createRazorpayOrder,
+  verifyRazorpayPayment,
 } from "../controllers/renewal.controller.js";
 
 import {
@@ -29,6 +31,10 @@ router.post("/", createRenewalOrder);
 router.get("/:renewalId", getRenewalOrder);
 
 router.post("/:renewalId/mark-paid", markRenewalPaid);
+
+router.post("/:renewalId/razorpay/order", createRazorpayOrder);
+
+router.post("/:renewalId/razorpay/verify", verifyRazorpayPayment);
 
 router.post("/:renewalId/cancel", cancelRenewal);
 

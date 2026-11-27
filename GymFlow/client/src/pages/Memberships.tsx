@@ -50,6 +50,22 @@ type RenewalOrder = {
   } | null;
 };
 
+type RazorpayCheckout = new (options: {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  prefill?: { name?: string; email?: string; contact?: string };
+  handler: (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => void;
+  modal?: { ondismiss?: () => void };
+}) => { open: () => void };
+
+declare global {
+  interface Window { Razorpay?: RazorpayCheckout }
+}
+
 type Invoice = {
   id: number;
   invoiceNumber: string;
@@ -251,54 +267,47 @@ export default function Memberships() {
     }
   }
 
-  async function markRenewalPaid(
-    order: RenewalOrder,
-  ) {
+  async function payWithRazorpay(order: RenewalOrder) {
     try {
       setRenewalActionLoading(true);
       setRenewalError("");
       setRenewalMessage("");
-
       const gymId = getGymId();
+      if (!gymId) throw new Error("Gym information is missing");
+      if (!window.Razorpay) throw new Error("Razorpay checkout could not be loaded");
 
-      if (!gymId) {
-        throw new Error("Gym information is missing");
-      }
+      const orderResponse = await apiFetch(`/api/gyms/${gymId}/renewals/${order.id}/razorpay/order`, { method: "POST" });
+      const orderData = await orderResponse.json();
+      if (!orderResponse.ok || !orderData.success) throw new Error(orderData.message || "Could not start payment");
 
-      const response = await apiFetch(
-        `/api/gyms/${gymId}/renewals/${order.id}/mark-paid`,
-        {
-          method: "POST",
+      const checkout = new window.Razorpay({
+        key: orderData.keyId,
+        amount: orderData.razorpayOrder.amount,
+        currency: orderData.razorpayOrder.currency,
+        name: "GymFlow",
+        description: `Membership renewal #${order.id}`,
+        order_id: orderData.razorpayOrder.id,
+        prefill: { name: orderData.member.name, email: orderData.member.email || undefined, contact: orderData.member.phone || undefined },
+        handler: async (payment) => {
+          try {
+            const verifyResponse = await apiFetch(`/api/gyms/${gymId}/renewals/${order.id}/razorpay/verify`, { method: "POST", body: JSON.stringify(payment) });
+            const verifyData = await verifyResponse.json();
+            if (!verifyResponse.ok || !verifyData.success) throw new Error(verifyData.message || "Payment verification failed");
+            setRenewalMessage(verifyData.message || "Payment successful.");
+            setRenewalOrder(null);
+            setSelectedRenewal(null);
+            await Promise.all([loadMemberships(), loadRenewals(), loadInvoices()]);
+          } catch (err) {
+            setRenewalError(err instanceof Error ? err.message : "Payment verification failed");
+          } finally {
+            setRenewalActionLoading(false);
+          }
         },
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "Failed to process payment",
-        );
-      }
-
-      setRenewalMessage(
-        data.message ||
-          "Renewal payment successful.",
-      );
-
-      setRenewalOrder(null);
-      setSelectedRenewal(null);
-
-      await Promise.all([
-        loadMemberships(),
-        loadRenewals(),
-      ]);
+        modal: { ondismiss: () => setRenewalActionLoading(false) },
+      });
+      checkout.open();
     } catch (err) {
-      setRenewalError(
-        err instanceof Error
-          ? err.message
-          : "Failed to process payment",
-      );
-    } finally {
+      setRenewalError(err instanceof Error ? err.message : "Could not start payment");
       setRenewalActionLoading(false);
     }
   }
@@ -1098,18 +1107,14 @@ export default function Memberships() {
                       width: "100%",
                       marginTop: "16px",
                     }}
-                    onClick={() =>
-                      markRenewalPaid(
-                        renewalOrder,
-                      )
-                    }
+                    onClick={() => payWithRazorpay(renewalOrder)}
                     disabled={
                       renewalActionLoading
                     }
                   >
                     {renewalActionLoading
                       ? "Processing..."
-                      : "✓ Mark Paid"}
+                      : "Pay securely with Razorpay"}
                   </button>
 
                   <p
@@ -1121,10 +1126,7 @@ export default function Memberships() {
                       opacity: 0.65,
                     }}
                   >
-                    Development mode:
-                    this simulates a
-                    verified successful
-                    payment.
+                    Payment is verified on the server before the membership is extended.
                   </p>
                 </div>
               ) : (

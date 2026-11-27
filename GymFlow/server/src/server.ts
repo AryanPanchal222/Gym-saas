@@ -19,6 +19,7 @@ import memberPortalRoutes from "./routes/memberPortal.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import operationsRoutes from "./routes/operations.routes.js";
 import { startRenewalReminderScheduler } from "./services/renewal.scheduler.js";
+import { razorpayWebhook } from "./controllers/renewal.controller.js";
 
 import {
   requireAuth,
@@ -30,6 +31,8 @@ dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+
+app.post("/api/payments/razorpay/webhook", express.raw({ type: "application/json" }), razorpayWebhook);
 
 app.use(cors());
 app.use(express.json());
